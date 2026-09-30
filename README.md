@@ -34,6 +34,18 @@ It does not enable anything: no hooks and no daemon until you run `ist setup`. T
 
 To update later: `ist upgrade`, or run the installer again.
 
+### With npm or Bun
+
+```bash
+npm install -g istari-ai
+```
+
+```bash
+bun install -g istari-ai
+```
+
+The same release binaries, delivered through the npm registry: `istari-ai` is a small launcher, and npm installs the binary for your platform from one of the `@istari-ai/<platform>` packages. There is no install script. Update with `npm install -g istari-ai@latest` (or the Bun equivalent) rather than `ist upgrade`.
+
 ### Platform support
 
 | Platform | Status |
