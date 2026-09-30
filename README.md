@@ -39,8 +39,9 @@ To update later: `ist upgrade`, or run the installer again.
 | Platform | Status |
 |---|---|
 | macOS, Apple Silicon | Supported |
-| macOS Intel, Linux x64/arm64 | Not offered by the installer yet |
-| Windows | Not supported |
+| Linux x64 and arm64 | Supported |
+| Windows | Supported through WSL2 - run `wsl --install`, then the install command inside your Linux distribution |
+| macOS Intel | Not offered by the installer yet |
 
 ---
 

@@ -186,7 +186,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 10px 24px; }
       <code><span class="p">$</span><span id="cmd">curl -fsSL https://istari-ai.dev/install.sh | bash</span></code>
       <button class="copy" id="copy" type="button">Copy</button>
     </div>
-    <p class="meta">macOS on Apple Silicon. Checksum-verified. Enables nothing until you run <code>ist setup</code>.</p>
+    <p class="meta">macOS on Apple Silicon, Linux, and Windows via WSL2. Checksum-verified. Enables nothing until you run <code>ist setup</code>.</p>
     <div class="engines" aria-label="Works with">
       <span class="chip">Claude Code</span><span class="chip">Codex CLI</span><span class="chip">Cursor</span><span class="chip">Ollama</span>
     </div>
@@ -274,7 +274,7 @@ footer .row { display: flex; flex-wrap: wrap; gap: 10px 24px; }
   <div class="faq">
     <div><h3>Is it free?</h3><p>Yes. Istari itself is free. You pay only for the AI engines and services you already use.</p></div>
     <div><h3>Is it open source?</h3><p>Not yet. The source code will be published under the Apache 2.0 licence once it is ready. Releases, issues and security reports are public today.</p></div>
-    <div><h3>Which platforms?</h3><p>macOS on Apple Silicon. Linux and Intel Mac builds exist but are not offered by the installer yet. Windows is not supported.</p></div>
+    <div><h3>Which platforms?</h3><p>macOS on Apple Silicon, and Linux on x64 and arm64. On Windows, run it inside WSL2: <code>wsl --install</code>, then the same install command in your Linux shell. Intel Mac builds exist but are not offered by the installer yet.</p></div>
     <div><h3>Which tickets and engines?</h3><p>Claude Code has the deepest integration; Codex, Cursor and Ollama are supported. Ticket integration targets JIRA today.</p></div>
   </div>
 </section>
