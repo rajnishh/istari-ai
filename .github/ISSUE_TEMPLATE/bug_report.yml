@@ -1,0 +1,63 @@
+name: Bug report
+description: Something in Istari does not work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please check existing issues first.
+        **Security problems:** do not report them here - follow SECURITY.md instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ist setup
+        2. ist pick PROJ-123
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Istari version
+      description: Output of `ist --version`
+      placeholder: istari 2.0.2
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - macOS (Apple Silicon)
+        - macOS (Intel)
+        - Linux x64
+        - Linux arm64
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: engine
+    attributes:
+      label: AI engine involved
+      multiple: true
+      options:
+        - Claude Code
+        - Codex CLI
+        - Cursor
+        - Ollama
+        - Not engine-related
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or output
+      description: Paste relevant output, or attach the file from `ist support-bundle` (it redacts secrets). Please check for anything private before posting.
+      render: shell
