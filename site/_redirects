@@ -1,0 +1,3 @@
+# Backup for the Cloudflare Redirect Rule on /install.sh. The zone rule runs
+# first; this only applies if that rule is ever removed.
+/install.sh  https://github.com/rajnishh/istari-ai/releases/latest/download/install.sh  302

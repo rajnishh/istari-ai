@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Istari - memory and supervision for AI coding agents</title>
+<meta name="description" content="Istari sits on top of Claude Code, Codex, Cursor and Ollama and adds memory across sessions, a supervised ticket-to-PR pipeline, safety limits and background PR review. Free early access.">
+<meta property="og:title" content="Istari">
+<meta property="og:description" content="The memory and supervision layer for AI coding agents.">
+<meta property="og:url" content="https://istari-ai.dev/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E1726">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #F3F5F7;
+  --surface: #FFFFFF;
+  --ink: #0E1726;
+  --muted: #5A6B80;
+  --line: #D9E0E8;
+  --accent: #B7701A;
+  --accent-soft: #F6E9D6;
+  --accent-ink: #FFFFFF;
+  --term-bg: #0E1726;
+  --term-ink: #D8E1EC;
+  --term-dim: #7F90A6;
+  --term-ok: #7BC8A4;
+  --term-amber: #F2A93B;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0A111D;
+    --surface: #111B2B;
+    --ink: #E6ECF4;
+    --muted: #93A3B8;
+    --line: #22304A;
+    --accent: #F2A93B;
+    --accent-soft: #2A2214;
+    --accent-ink: #1A1206;
+    --term-bg: #060B14;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  padding-inline: 20px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+code, pre { font-family: var(--mono); }
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+/* ─── Nav ─────────────────────────── */
+nav.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--serif); font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
+.brand svg { width: 28px; height: 28px; }
+.navlinks { display: flex; gap: 22px; font-size: 15px; color: var(--muted); }
+.navlinks a { text-decoration: none; }
+
+/* ─── Hero ────────────────────────── */
+.hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: center; padding-block: 48px 72px; }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 16px; }
+h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(40px, 5.4vw, 64px); line-height: 1.02; letter-spacing: -0.025em; margin: 0 0 20px; text-wrap: balance; }
+.lede { font-size: 19px; color: var(--muted); max-width: 54ch; margin: 0 0 28px; }
+.install { display: flex; align-items: stretch; max-width: 560px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.install code { flex: 1; padding: 14px 16px; font-size: 14.5px; white-space: nowrap; overflow-x: auto; }
+.install code .p { color: var(--accent); user-select: none; margin-right: 8px; }
+.copy { border: 0; border-left: 1px solid var(--line); background: transparent; color: var(--ink); font: 500 14px var(--sans); padding: 0 18px; cursor: pointer; }
+.copy:hover { background: var(--accent-soft); }
+.meta { margin-top: 14px; font-size: 14px; color: var(--muted); }
+.engines { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.chip { font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; color: var(--muted); background: var(--surface); }
+
+.term { background: var(--term-bg); color: var(--term-ink); border-radius: 14px; padding: 18px 20px 22px; font-family: var(--mono); font-size: 13.5px; line-height: 1.75; box-shadow: 0 30px 60px -30px rgba(14, 23, 38, 0.45); overflow-x: auto; }
+.term .bar { display: flex; gap: 7px; margin-bottom: 14px; }
+.term .bar i { width: 11px; height: 11px; border-radius: 50%; background: #2A3850; display: block; }
+.term .dim { color: var(--term-dim); }
+.term .ok { color: var(--term-ok); }
+.term .amber { color: var(--term-amber); }
+.term .line { white-space: pre; }
+.term-caption { font-size: 13px; color: var(--muted); margin-top: 10px; text-align: right; }
+
+/* ─── Sections ────────────────────── */
+section { padding-block: 72px; border-top: 1px solid var(--line); }
+.kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 3.6vw, 42px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 14px; text-wrap: balance; max-width: 22ch; }
+.sub { color: var(--muted); max-width: 62ch; margin: 0 0 40px; }
+
+/* Pipeline: the one real sequence on the page */
+.pipeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; counter-reset: step; }
+.pipeline li { position: relative; padding: 20px 16px 0 0; }
+.pipeline li::before { counter-increment: step; content: counter(step, decimal-leading-zero); display: block; font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 10px; }
+.pipeline li::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--line); }
+.pipeline li:first-child::after { background: var(--accent); }
+.pipeline li.gate::after { background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 10px); }
+.pipeline h3 { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
+.pipeline p { font-size: 14px; color: var(--muted); margin: 0; }
+.pipeline .tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-top: 8px; }
+.legend { margin-top: 28px; font-size: 14px; color: var(--muted); display: flex; gap: 20px; flex-wrap: wrap; }
+.legend span::before { content: ""; display: inline-block; width: 22px; height: 3px; margin-right: 8px; vertical-align: middle; background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 10px); }
+
+/* Features */
+.features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 44px; }
+.feature h3 { font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+.feature p { color: var(--muted); margin: 0; font-size: 15.5px; }
+.feature code { font-size: 13.5px; background: var(--accent-soft); padding: 1px 6px; border-radius: 5px; color: var(--ink); }
+
+/* Machine */
+.machine { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.touch { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.touch div { padding: 18px 22px; border-bottom: 1px solid var(--line); }
+.touch div:last-child { border-bottom: 0; }
+.touch strong { display: block; font-size: 15px; margin-bottom: 4px; }
+.touch span { font-size: 14.5px; color: var(--muted); }
+.touch code { font-size: 13px; }
+
+/* Quick start */
+.steps { display: grid; gap: 14px; max-width: 760px; }
+.step { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; align-items: baseline; }
+.step p { margin: 0; color: var(--muted); font-size: 15px; }
+.step pre { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 14px; overflow-x: auto; }
+
+/* FAQ */
+.faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px; }
+.faq h3 { font-size: 17px; font-weight: 600; margin: 0 0 6px; }
+.faq p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+footer { border-top: 1px solid var(--line); padding-block: 36px 48px; font-size: 14px; color: var(--muted); display: grid; gap: 14px; }
+footer .row { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-block: 24px 56px; }
+  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .machine { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 620px) {
+  body { font-size: 16px; padding-inline: 16px; }
+  .navlinks a.hide-sm { display: none; }
+  .features, .faq { grid-template-columns: minmax(0, 1fr); }
+  .pipeline { grid-template-columns: minmax(0, 1fr); }
+  .step { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  section { padding-block: 56px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="top" aria-label="Main">
+  <a class="brand" href="/" aria-label="Istari home">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 L25 27 H7 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="16" cy="18" r="2.6" fill="#B7701A"/><path d="M4 29 H28" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    Istari
+  </a>
+  <div class="navlinks">
+    <a class="hide-sm" href="#how">How it works</a>
+    <a class="hide-sm" href="#features">Features</a>
+    <a href="https://github.com/rajnishh/istari-ai">GitHub</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <p class="eyebrow">Free early access</p>
+    <h1>Your AI coding agents, with a memory and a supervisor.</h1>
+    <p class="lede">Istari sits on top of the agents you already use and adds what a single session lacks: memory that carries across sessions, a supervised pipeline from ticket to pull request, and limits that keep it safe to leave running.</p>
+    <div class="install" role="group" aria-label="Install command">
+      <code><span class="p">$</span><span id="cmd">curl -fsSL https://istari-ai.dev/install.sh | bash</span></code>
+      <button class="copy" id="copy" type="button">Copy</button>
+    </div>
+    <p class="meta">macOS on Apple Silicon. Checksum-verified. Enables nothing until you run <code>ist setup</code>.</p>
+    <div class="engines" aria-label="Works with">
+      <span class="chip">Claude Code</span><span class="chip">Codex CLI</span><span class="chip">Cursor</span><span class="chip">Ollama</span>
+    </div>
+  </div>
+  <div>
+    <div class="term" role="img" aria-label="Example terminal session: ist pick takes a ticket through planning, implementation, verification and review to an open pull request">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="line"><span class="amber">$</span> ist pick PROJ-123</div>
+      <div class="line dim">  readiness 82/100 · claude-code · $4.20 budget</div>
+      <div class="line">  <span class="ok">✓</span> enriched   <span class="dim">ticket, epic, related past work</span></div>
+      <div class="line">  <span class="ok">✓</span> planned    <span class="dim">plan critiqued, approved</span></div>
+      <div class="line">  <span class="ok">✓</span> implemented</div>
+      <div class="line">  <span class="ok">✓</span> verified   <span class="dim">build, lint, 214 tests</span></div>
+      <div class="line">  <span class="ok">✓</span> reviewed   <span class="dim">1 fix applied</span></div>
+      <div class="line">  <span class="amber">→</span> PR opened  <span class="dim">waiting on CI</span></div>
+      <div class="line dim">  remembered for next time</div>
+    </div>
+    <p class="term-caption">Example run</p>
+  </div>
+</header>
+
+<section id="how" aria-labelledby="how-title">
+  <p class="kicker">How it works</p>
+  <h2 id="how-title">From ticket to pull request, with a supervisor in the loop</h2>
+  <p class="sub">The agent writes the code. Istari runs the process around it: it gathers context first, checks the work itself instead of trusting the agent, and stops for you where it matters.</p>
+  <ol class="pipeline">
+    <li><h3>Enrich</h3><p>Ticket, comments, parent epic, attachments and related past work.</p></li>
+    <li class="gate"><h3>Plan</h3><p>A plan, pressure-tested by a critique pass.</p><span class="tag">Optional approval</span></li>
+    <li><h3>Implement</h3><p>In an isolated git worktree with its own ports.</p></li>
+    <li><h3>Verify</h3><p>Istari runs build, lint and tests itself, and loops on failures.</p></li>
+    <li><h3>Review</h3><p>A second pass reviews the diff; concerns go back for fixes.</p></li>
+    <li class="gate"><h3>Deliver</h3><p>Secret scan, scope check, then push and open the PR.</p><span class="tag">Optional approval</span></li>
+    <li><h3>Watch</h3><p>Follows CI to green. Never merges on its own.</p></li>
+  </ol>
+  <p class="legend"><span>Where you can make it stop and ask</span></p>
+</section>
+
+<section id="features" aria-labelledby="features-title">
+  <p class="kicker">What you get</p>
+  <h2 id="features-title">Built for the work around the code</h2>
+  <div class="features">
+    <div class="feature"><h3>Memory across sessions</h3><p>Decisions, lessons and past work are captured as you go and brought back at the start of the next session, whichever engine you use.</p></div>
+    <div class="feature"><h3>Recall that cites its sources</h3><p><code>ist recall "what did we decide about auth?"</code> searches sessions, decisions, PR reviews and meeting notes, and refuses when nothing relevant exists.</p></div>
+    <div class="feature"><h3>Safety limits</h3><p>Budgets with a kill switch, loop detection, trust levels, approval gates and a mutation gate on automated writes to GitHub and JIRA.</p></div>
+    <div class="feature"><h3>Parallel agents, no collisions</h3><p>Each task gets its own git worktree, ports and environment, so several agents can work side by side.</p></div>
+    <div class="feature"><h3>Background PR review</h3><p>Reviews pull requests where your review is requested, with code, security and architecture passes, and learns your review style.</p></div>
+    <div class="feature"><h3>Local review first</h3><p><code>ist review</code> reviews the branch in front of you, on your machine, and posts nothing anywhere.</p></div>
+    <div class="feature"><h3>Automation you describe</h3><p>"When this, then that" workflows in YAML: PR watchers, CI monitors, daily standups, bug patrol.</p></div>
+    <div class="feature"><h3>An inbox for engineers</h3><p>PR requests, reviews, merges and assigned tickets in one feed, in your terminal and your editor's status line.</p></div>
+    <div class="feature"><h3>Control from your phone</h3><p>An optional Discord bot to check agents, answer approvals and search memory while you are away.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="machine-title">
+  <div class="machine">
+    <div>
+      <p class="kicker">Trust</p>
+      <h2 id="machine-title">Exactly what it changes on your machine</h2>
+      <p class="sub">Istari hooks into your AI tools, so it tells you up front what it touches, asks before it writes into config you own, and can put everything back.</p>
+    </div>
+    <div class="touch">
+      <div><strong>Its own folder</strong><span>Everything it stores lives in <code>~/.istari/</code>: a SQLite database, config and logs.</span></div>
+      <div><strong>Hooks, only if you say yes</strong><span><code>ist setup</code> lists every file it would write, such as <code>~/.claude/settings.json</code>, and asks before installing.</span></div>
+      <div><strong>Reversible</strong><span><code>ist hooks off</code> pauses everything. <code>ist uninstall</code> shows a dry run, then removes exactly what it added.</span></div>
+      <div><strong>No telemetry</strong><span>It sends nothing to its authors. It only talks to the services you connect.</span></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="start-title">
+  <p class="kicker">Quick start</p>
+  <h2 id="start-title">Running in a few minutes</h2>
+  <div class="steps">
+    <div class="step"><p>Install</p><pre>curl -fsSL https://istari-ai.dev/install.sh | bash</pre></div>
+    <div class="step"><p>Three questions: role, engines, hooks</p><pre>ist setup</pre></div>
+    <div class="step"><p>Review your branch locally</p><pre>ist review</pre></div>
+    <div class="step"><p>Ask your memory</p><pre>ist recall "why did we pick this approach?"</pre></div>
+    <div class="step"><p>Hand over a ticket</p><pre>ist pick PROJ-123 --follow</pre></div>
+  </div>
+</section>
+
+<section aria-labelledby="faq-title">
+  <p class="kicker">Questions</p>
+  <h2 id="faq-title">Good to know</h2>
+  <div class="faq">
+    <div><h3>Is it free?</h3><p>Yes. Istari itself is free. You pay only for the AI engines and services you already use.</p></div>
+    <div><h3>Is it open source?</h3><p>Not yet. The source code will be published under the Apache 2.0 licence once it is ready. Releases, issues and security reports are public today.</p></div>
+    <div><h3>Which platforms?</h3><p>macOS on Apple Silicon. Linux and Intel Mac builds exist but are not offered by the installer yet. Windows is not supported.</p></div>
+    <div><h3>Which tickets and engines?</h3><p>Claude Code has the deepest integration; Codex, Cursor and Ollama are supported. Ticket integration targets JIRA today.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <a href="https://github.com/rajnishh/istari-ai/releases">Releases</a>
+    <a href="https://github.com/rajnishh/istari-ai/issues">Issues</a>
+    <a href="https://github.com/rajnishh/istari-ai/blob/main/SECURITY.md">Security</a>
+    <a href="https://github.com/rajnishh/istari-ai/blob/main/LICENSE.md">Licence</a>
+    <span>security@istari-ai.dev</span>
+  </div>
+  <p>The name comes from the wizards of J.R.R. Tolkien's legendarium. Istari is an independent project and is not affiliated with or endorsed by the Tolkien Estate or Middle-earth Enterprises.</p>
+</footer>
+
+</div>
+<script>
+(function () {
+  var btn = document.getElementById('copy');
+  var cmd = document.getElementById('cmd');
+  btn.addEventListener('click', function () {
+    var text = cmd.textContent;
+    function done(ok) {
+      btn.textContent = ok ? 'Copied' : 'Select';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 1800);
+    }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(cmd);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      done(false);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, fallback);
+    } else { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
