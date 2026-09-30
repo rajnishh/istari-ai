@@ -47,7 +47,7 @@ To update later: `ist upgrade`, or run the installer again.
 ## Quick start
 
 ```bash
-# 1. Configure: pick your role, detect engines, choose what to connect (about 3 minutes)
+# 1. Configure: three questions - your role, your engines, and whether to install hooks
 ist setup
 
 # 2. Review the work on your current branch - locally, posts nothing
