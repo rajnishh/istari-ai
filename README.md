@@ -34,6 +34,14 @@ It does not enable anything: no hooks and no daemon until you run `ist setup`. T
 
 To update later: `ist upgrade`, or run the installer again.
 
+### Homebrew
+
+```bash
+brew install rajnishh/istari/istari
+```
+
+Installs the same release binary as `ist`, with an `istari` alias, on macOS (Apple Silicon and Intel) and Linux (x64 and arm64). Update with `brew upgrade istari`.
+
 ### Platform support
 
 | Platform | Status |
@@ -41,7 +49,7 @@ To update later: `ist upgrade`, or run the installer again.
 | macOS, Apple Silicon | Supported |
 | Linux x64 and arm64 | Supported |
 | Windows | Supported through WSL2 - run `wsl --install`, then the install command inside your Linux distribution |
-| macOS Intel | Not offered by the installer yet |
+| macOS Intel | Through Homebrew only; not offered by the installer yet |
 
 ---
 
