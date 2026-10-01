@@ -40,7 +40,7 @@ To update later: `ist upgrade`, or run the installer again.
 brew install rajnishh/istari/istari
 ```
 
-Installs the same release binary as `ist`, with an `istari` alias, on macOS (Apple Silicon and Intel) and Linux (x64 and arm64). Update with `brew upgrade istari`.
+Installs the same release binary as `ist`, with an `istari` alias, on the same platforms as the installer: macOS on Apple Silicon, and Linux x64 and arm64. Update with `brew upgrade istari`.
 
 ### Platform support
 
@@ -49,7 +49,7 @@ Installs the same release binary as `ist`, with an `istari` alias, on macOS (App
 | macOS, Apple Silicon | Supported |
 | Linux x64 and arm64 | Supported |
 | Windows | Supported through WSL2 - run `wsl --install`, then the install command inside your Linux distribution |
-| macOS Intel | Through Homebrew only; not offered by the installer yet |
+| macOS Intel | Not offered by the installer or Homebrew yet |
 
 ---
 
