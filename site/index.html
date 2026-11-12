@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Istari AI: Small tools that think ahead.</title>
-<meta name="description" content="Istari AI is an independent studio making focused AI products for creators, developers and anyone watching their money. Each does one job well, keeps your data close and leaves you in charge.">
+<meta name="description" content="Istari AI is an independent lab building focused AI products for money, code, creators and the Mac. Each does one job well, keeps your data close and leaves you in charge.">
 <meta name="theme-color" content="#F3F5F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0A111D" media="(prefers-color-scheme: dark)">
 <meta name="color-scheme" content="light dark">
@@ -205,6 +205,19 @@ section{scroll-margin-top:16px}
 /* Star lights up when its product tile is hovered or focused */
 .sky-svg .st{transition:transform .25s ease;transform-box:fill-box;transform-origin:center}
 .sky-svg .st .glow{transition:opacity .25s ease}
+.t-kind .cat,.kind .cat{color:var(--ink)}
+/* In the lab */
+.lab{list-style:none;margin:0;padding:0;display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media (min-width:760px){.lab{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lab>li{display:flex}
+.lab .tile{flex:1;display:flex;flex-direction:column;gap:8px;min-height:0;padding:24px;background:transparent;border-style:dashed;border-color:var(--line-strong)}
+.l-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.l-ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--star) 16%,transparent);color:var(--amber)}
+.l-ico svg{width:20px;height:20px}
+.l-note{font-family:var(--mono);font-size:12.5px;color:var(--muted);border:1px dashed var(--line-strong);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.lab h3{font-size:26px;margin:0}
+.l-tag{margin:0;font-size:17px;font-weight:500}
+.l-body{margin:0;font-size:15px;color:var(--muted)}
 /* Trust strip */
 .trust{display:grid;gap:var(--gap);grid-template-columns:1fr}
 @media (min-width:640px){.trust{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -250,9 +263,9 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
   <section class="hero" aria-labelledby="h1">
     <div class="tile night h-main">
       <div>
-        <p class="eyebrow">Istari AI · independent product studio</p>
+        <p class="eyebrow">Istari AI · independent product lab</p>
         <h1 id="h1">Small tools that <em>think ahead.</em></h1>
-        <p class="lede">Istari AI is an independent studio making focused AI products for creators, developers and anyone watching their money. Each does one job well, keeps your data close and leaves you in charge.</p>
+        <p class="lede">Istari AI is an independent lab building focused AI products for money, code, creators and the Mac. Each does one job well, keeps your data close and leaves you in charge.</p>
       </div>
       <div class="cta">
         <a class="btn primary" href="#products">Explore the products</a>
@@ -276,20 +289,21 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
         <h2 id="ph">Products</h2>
         <p>One job each, done properly.</p>
       </div>
-      <div class="filters" id="filters" role="group" aria-label="Filter products by status" hidden>
+      <div class="filters" id="filters" role="group" aria-label="Filter products by category" hidden>
         <button type="button" data-f="all" aria-pressed="true">All <span>4</span></button>
-        <button type="button" data-f="live" aria-pressed="false">Live <span>2</span></button>
-        <button type="button" data-f="beta" aria-pressed="false">Beta <span>1</span></button>
-        <button type="button" data-f="early" aria-pressed="false">Early access <span>1</span></button>
+        <button type="button" data-f="money" aria-pressed="false">Finance <span>1</span></button>
+        <button type="button" data-f="developers" aria-pressed="false">Developer tools <span>1</span></button>
+        <button type="button" data-f="mac" aria-pressed="false">Mac utilities <span>1</span></button>
+        <button type="button" data-f="creators" aria-pressed="false">Creators <span>1</span></button>
       </div>
     </div>
     <ul class="grid" id="grid">
-<li class="s-feat m-wide feat" data-s="reelkar" data-stage="beta">
+<li class="s-feat m-wide feat" data-s="reelkar" data-stage="beta" data-cat="creators">
   <article class="tile lift tint" style="--pc-l:#E2543F;--pc-d:#FF8A73" aria-labelledby="t-reelkar">
     <span class="ghost-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span>
     <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
     <div class="t-body">
-      <p class="t-kind">AI creator studio</p>
+      <p class="t-kind"><span class="cat">Creators</span> · AI creator studio</p>
       <h3 class="t-name" id="t-reelkar"><a class="stretch" href="/reelkar/">Reelkar</a></h3>
       <p class="t-tag">From an idea to a finished reel.</p>
       <p class="t-pitch">Turn an idea, a few photos, a song or a clip you filmed into a finished short reel, with captions, voice and music, ready to post anywhere.</p>
@@ -298,12 +312,12 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
     <div class="t-foot"><span class="chip" data-stage="beta"><i aria-hidden="true"></i>Private beta</span><span class="t-plat">iPhone · Android · Web</span></div>
   </article>
 </li>
-<li class="s-6" data-s="warden" data-stage="live">
+<li class="s-6" data-s="warden" data-stage="live" data-cat="mac">
   <article class="tile lift" style="--pc-l:#2F8F68;--pc-d:#7BC8A4" aria-labelledby="t-warden">
     
     <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z'/><path d='M9 12l2 2 4-4'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
     <div class="t-body">
-      <p class="t-kind">Mac helper for developers</p>
+      <p class="t-kind"><span class="cat">Mac utilities</span> · Mac helper for developers</p>
       <h3 class="t-name" id="t-warden"><a class="stretch" href="/warden/">Warden</a></h3>
       <p class="t-tag">Keeps your Mac fast and cool.</p>
       <p class="t-pitch">A small Mac app that keeps your background services running, calms programs that run hot, and stops idle AI servers and simulators before they slow you down.</p>
@@ -312,12 +326,12 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
     <div class="t-foot"><span class="chip" data-stage="live"><i aria-hidden="true"></i>Download for Mac</span></div>
   </article>
 </li>
-<li class="s-3" data-s="bachat" data-stage="live">
+<li class="s-3" data-s="bachat" data-stage="live" data-cat="money">
   <article class="tile lift" style="--pc-l:#2F74C0;--pc-d:#82B8F2" aria-labelledby="t-bachat">
     
     <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M4 7h13a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z'/><path d='M4 7l10-3v3'/><circle cx='16' cy='14' r='1.3' fill='currentColor'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
     <div class="t-body">
-      <p class="t-kind">AI money saver</p>
+      <p class="t-kind"><span class="cat">Finance</span> · AI money saver</p>
       <h3 class="t-name" id="t-bachat"><a class="stretch" href="/bachat/">Bachat</a></h3>
       <p class="t-tag">Every spend, counted once. On your phone.</p>
       <p class="t-pitch">Captures your spends automatically from what your phone already receives, counts each one once, and turns them into budgets and goals, while your data stays on your phone.</p>
@@ -326,12 +340,12 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
     <div class="t-foot"><span class="chip" data-stage="live"><i aria-hidden="true"></i>On the App Store</span></div>
   </article>
 </li>
-<li class="s-3 m-wide" data-s="istari" data-stage="early">
+<li class="s-3 m-wide" data-s="istari" data-stage="early" data-cat="developers">
   <article class="tile lift" style="--pc-l:#B7701A;--pc-d:#F2A93B" aria-labelledby="t-istari">
     
     <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M12 3l7.5 18h-15z'/><circle cx='12' cy='14' r='1.6' fill='currentColor'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
     <div class="t-body">
-      <p class="t-kind">Orchestrator for AI coding agents</p>
+      <p class="t-kind"><span class="cat">Developer tools</span> · Orchestrator for AI coding agents</p>
       <h3 class="t-name" id="t-istari"><a class="stretch" href="/istari/">Istari</a></h3>
       <p class="t-tag">Memory and supervision for coding agents.</p>
       <p class="t-pitch">Istari sits on top of Claude Code, Codex, Cursor and Ollama and gives them memory that lasts across sessions, a supervised path from ticket to pull request, and safety limits.</p>
@@ -342,6 +356,26 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
 </li>
     </ul>
     <p class="count" id="count" role="status" aria-live="polite"></p>
+  </section>
+
+  <section id="lab" aria-labelledby="lh">
+    <div class="sec-head"><div><h2 id="lh">In the lab</h2><p>Ideas we&#39;re building now. Nothing here is ready to use yet.</p></div></div>
+    <ul class="lab">
+      <li><article class="tile" aria-labelledby="lab-0">
+        <div class="l-top"><span class="l-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9"/></svg></span><span class="l-note">Name coming soon</span></div>
+        <p class="t-kind"><span class="cat">Careers</span></p>
+        <h3 id="lab-0">Job agent</h3>
+        <p class="l-tag">Real jobs in the UAE, checked before you apply.</p>
+        <p class="l-body">Finds openings, checks that each one is real and still open, and tells you which ones are worth your time.</p>
+      </article></li>
+      <li><article class="tile" aria-labelledby="lab-1">
+        <div class="l-top"><span class="l-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9"/></svg></span><span class="l-note">Built on Reelkar</span></div>
+        <p class="t-kind"><span class="cat">Creators</span></p>
+        <h3 id="lab-1">Reelkar for brands</h3>
+        <p class="l-tag">A launch kit for every product.</p>
+        <p class="l-body">Brand kits, launch reels, tutorials and songs for a product, ready for each platform. We&#39;re trying it on our own products first.</p>
+      </article></li>
+    </ul>
   </section>
 
   <section id="trust" aria-labelledby="trh">
@@ -424,7 +458,7 @@ var spans=function bentoSpans(n) {
 var items=[].slice.call(g.children),btns=[].slice.call(f.querySelectorAll('button'));
 var K=['s-feat','s-6t','s-12','s-6','s-4','s-3','m-wide','feat'];
 function apply(stage){
-  var vis=items.filter(function(li){return stage==='all'||li.getAttribute('data-stage')===stage;});
+  var vis=items.filter(function(li){return stage==='all'||li.getAttribute('data-cat')===stage;});
   var sp=spans(vis.length);
   items.forEach(function(li){li.hidden=vis.indexOf(li)<0;K.forEach(function(k){li.classList.remove(k);});var t=li.querySelector('.tile');t.classList.remove('tint');});
   vis.forEach(function(li,i){li.classList.add(sp[i][0]);if(sp[i][1])li.classList.add('m-wide');if(i===0){li.classList.add('feat');li.querySelector('.tile').classList.add('tint');}});
