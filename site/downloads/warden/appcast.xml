@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Warden</title>
+        <item>
+            <title>1.0.0</title>
+            <pubDate>Thu, 12 Nov 2026 08:30:23 +0400</pubDate>
+            <sparkle:version>202611111800</sparkle:version>
+            <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://istari-ai.dev/downloads/warden/Warden-1.0.0.dmg" length="4112804" type="application/octet-stream" sparkle:edSignature="4/+Whs1XyPEjHu9k2izUcRsk9nA2pJ47Wu4/82fTqIkSyRQgF5Iy9lcgKP6fSKpkoR5qQTSnHBtoeueMUxV+BQ=="/>
+        </item>
+    </channel>
+</rss>
