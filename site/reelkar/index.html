@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reelkar: From an idea to a finished reel. | Istari AI</title>
+<meta name="description" content="Turn an idea, a few photos, a song or a clip you filmed into a finished short reel, with captions, voice and music, ready to post anywhere.">
+<meta name="theme-color" content="#F3F5F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A111D" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%230E1726%22%2F%3E%3Cpath%20d%3D%22M16%205%20L23.5%2025%20H8.5%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23E6ECF4%22%20stroke-width%3D%222.4%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2217.5%22%20r%3D%222.6%22%20fill%3D%22%23F2A93B%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --night:#0A111D;--night-2:#111B2B;--night-line:#22304A;--star:#F2A93B;--starlight:#E6ECF4;--dusk:#A3B2C5;
+  --bg:#F3F5F7;--surface:#FFFFFF;--surface-2:#F8FAFB;--ink:#0E1726;--muted:#4E5E73;--line:#DCE2EA;--line-strong:#C3CCD8;
+  --amber:#8F5410;--focus:#8F5410;--shadow:0 1px 0 rgba(14,23,38,.04),0 12px 32px -14px rgba(14,23,38,.22);
+  --live:#2F8F68;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:22px;--gap:14px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0A111D;--surface:#111B2B;--surface-2:#0E1726;--ink:#E6ECF4;--muted:#A3B2C5;--line:#22304A;--line-strong:#33445F;
+    --amber:#F2A93B;--focus:#F2A93B;--shadow:0 1px 0 rgba(0,0,0,.2),0 16px 40px -18px rgba(0,0,0,.7);
+    --live:#7BC8A4;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}
+h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin:0}
+p{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:8px}
+.night :focus-visible,.night:focus-visible{--focus:#F2A93B}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-9999px;top:10px;z-index:20;background:#F2A93B;color:#0A111D;font-weight:600;padding:10px 16px;border-radius:12px;text-decoration:none}
+.skip:focus{left:12px}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px}
+@media (min-width:640px){.wrap{padding-inline:28px}}
+
+/* Top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;min-height:44px;border-radius:12px}
+.brand svg{width:34px;height:34px;flex:none}
+.word{font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:-.01em;line-height:1}
+.word b{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.18em;color:var(--amber);margin-left:4px;vertical-align:4px}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;font-size:15px;font-weight:500;color:var(--muted);text-decoration:none}
+.nav a:hover{color:var(--ink);background:var(--surface)}
+@media (max-width:520px){.nav .opt{display:none}}
+
+/* Tiles */
+.tile{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;min-width:0}
+@media (min-width:640px){.tile{padding:26px}}
+.night{background:radial-gradient(120% 90% at 85% 0%,rgba(242,169,59,.14),transparent 55%),radial-gradient(100% 90% at 0% 100%,rgba(47,116,192,.2),transparent 60%),var(--night);border-color:var(--night-line);color:var(--starlight)}
+.night .muted{color:var(--dusk)}
+.muted{color:var(--muted)}
+.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.night .eyebrow{color:var(--star)}
+.mono{font-family:var(--mono);font-weight:500}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .2s,background-color .2s,border-color .2s}
+.btn.primary{background:#F2A93B;color:#0A111D}
+.btn.primary:hover{background:#F7BC60}
+.btn.ghost{border-color:var(--line-strong);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--ink)}
+.night .btn.ghost{border-color:#3A4C69;color:var(--starlight)}
+.night .btn.ghost:hover{border-color:var(--starlight)}
+.btn svg{width:18px;height:18px}
+
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;line-height:1.2;padding:6px 12px 6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.chip i{width:8px;height:8px;border-radius:50%;flex:none;background:var(--muted)}
+.chip[data-stage=live] i{background:var(--live);box-shadow:0 0 0 3px color-mix(in srgb,var(--live) 25%,transparent)}
+.chip[data-stage=beta] i{background:#F2A93B}
+.chip[data-stage=early] i{background:transparent;border:2px solid #F2A93B}
+.chip[data-stage=soon] i{background:transparent;border:2px solid var(--muted)}
+
+/* Per-product colour */
+[style*="--pc-l"]{--pc:var(--pc-l)}
+@media (prefers-color-scheme:dark){[style*="--pc-l"]{--pc:var(--pc-d)}}
+.night,.night [style*="--pc-l"]{--pc:var(--pc-d,#F2A93B)}
+.ico{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:16px;color:var(--pc);background:color-mix(in srgb,var(--pc) 13%,var(--surface));border:1px solid color-mix(in srgb,var(--pc) 30%,var(--line));flex:none}
+.ico svg{width:26px;height:26px}
+
+/* Lift */
+.lift{transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s,border-color .25s}
+.lift:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--pc,var(--amber)) 55%,var(--line))}
+.lift .arrow{transition:transform .25s}
+.lift:hover .arrow{transform:translate(3px,-3px)}
+.stretch{text-decoration:none}
+.stretch::after{content:"";position:absolute;inset:0;border-radius:var(--r);z-index:1}
+.stretch:focus-visible{outline:none}
+.stretch:focus-visible::after{outline:3px solid var(--focus);outline-offset:3px}
+.arrow{width:22px;height:22px}
+.go{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);color:var(--ink);flex:none}
+
+section{scroll-margin-top:16px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 24px;margin:64px 0 18px}
+.sec-head h2{font-size:clamp(30px,4vw,44px)}
+.sec-head p{color:var(--muted);max-width:46ch}
+
+/* Footer */
+.foot{margin-top:64px;border-top:1px solid var(--line);padding-block:28px 40px}
+.foot-in{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between}
+.foot .brand svg{width:28px;height:28px}
+.foot .word{font-size:19px}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:0 4px}
+.foot ul a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;color:var(--muted);font-size:15px;text-decoration:none;border-radius:10px}
+.foot ul a:hover{color:var(--ink);text-decoration:underline}
+.foot small{color:var(--muted);font-size:14px}
+
+@keyframes tw{50%{opacity:.25}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(123,200,164,.55)}70%{box-shadow:0 0 0 9px rgba(123,200,164,0)}100%{box-shadow:0 0 0 0 rgba(123,200,164,0)}}
+@keyframes halo{50%{opacity:.08;transform:scale(1.25)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .lift:hover,.lift:hover .arrow{transform:none}
+}
+
+.crumb{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--muted);margin:4px 0 12px}
+.crumb a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding-right:8px;text-decoration:none;color:var(--muted);font-weight:500}
+.crumb a:hover{color:var(--ink)}
+.crumb svg{width:18px;height:18px}
+
+.bento{display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media (min-width:960px){.bento{grid-template-columns:repeat(12,minmax(0,1fr))}}
+@media (min-width:960px){.ph{grid-column:span 8;grid-row:span 2}.pi{grid-column:span 4}.ps{grid-column:span 4}}
+.ph{overflow:hidden;padding:28px 22px;display:flex;flex-direction:column;gap:20px;min-height:440px;background:linear-gradient(150deg,color-mix(in srgb,var(--pc) 24%,var(--surface)) 0%,color-mix(in srgb,var(--pc) 8%,var(--surface)) 55%,var(--surface) 100%);border-color:color-mix(in srgb,var(--pc) 45%,var(--line))}
+@media (min-width:640px){.ph{padding:44px}}
+.ph .kind{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.ph .kind i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--pc);margin-right:10px;vertical-align:1px}
+.ph h1{font-size:clamp(54px,9vw,112px);line-height:.92}
+.ph .tag{font-family:var(--serif);font-weight:500;font-style:italic;font-size:clamp(23px,2.8vw,34px);line-height:1.15;letter-spacing:-.02em;max-width:24ch}
+.ph .pitch{color:var(--muted);max-width:58ch;font-size:18px}
+.ph .act{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.ph .chip{font-size:15px;padding:10px 16px 10px 14px;min-height:44px}
+.ph .bigico{position:absolute;right:-40px;top:-40px;width:300px;height:300px;color:var(--pc);opacity:.13;pointer-events:none}
+.ph .bigico svg{width:100%;height:100%;stroke-width:1}
+.ph>*{position:relative}
+.ph .bigico{position:absolute}
+
+.pi{display:grid;place-items:center;min-height:220px;overflow:hidden}
+.pi .glow{position:absolute;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--pc) 45%,transparent),transparent 70%);opacity:.55}
+.pi .ico{position:relative;width:108px;height:108px;border-radius:30px;background:rgba(17,27,43,.85);border-color:color-mix(in srgb,var(--pc) 55%,#22304A)}
+.pi .ico svg{width:52px;height:52px}
+.pi .by{position:absolute;left:20px;bottom:16px;font-size:13.5px;color:var(--dusk)}
+.pi .by b{color:var(--starlight);font-weight:600}
+.pi .stars circle{fill:#E6ECF4}
+.pi .stars .tw{animation:tw 4.5s ease-in-out infinite}
+.pi .stars .tw:nth-child(2n){animation-delay:-2s}
+.pi .stars{position:absolute;inset:0;width:100%;height:100%}
+
+.ps h2{font-size:13px;font-family:var(--sans);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.track{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.track li{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted);line-height:1.25}
+.track li::before{content:"";height:8px;border-radius:99px;background:var(--line)}
+.track li.done::before{background:color-mix(in srgb,var(--pc) 55%,var(--line))}
+.track li[aria-current]::before{background:var(--pc)}
+.track li[aria-current]{color:var(--ink);font-weight:600}
+.ps .now{margin-top:16px;font-size:15px}
+
+.stats{display:grid;gap:var(--gap);grid-template-columns:1fr;margin-top:var(--gap)}
+@media (min-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:960px){.stats{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}}
+.stat{display:flex;flex-direction:column;gap:10px;min-height:150px;padding:22px}
+.stat dt{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stat dd{margin:0;font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.25;letter-spacing:-.015em;margin-top:auto}
+.stat ul{list-style:none;margin:auto 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.stat ul li{font-size:14px;font-weight:500;border:1px solid color-mix(in srgb,var(--pc) 40%,var(--line));background:color-mix(in srgb,var(--pc) 9%,var(--surface));border-radius:10px;padding:5px 10px}
+.stat dd.lst{font-family:var(--sans);font-size:inherit;font-weight:inherit;letter-spacing:0}
+
+.fgrid{list-style:none;margin:0;padding:0;display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media (min-width:760px){.fgrid{grid-template-columns:repeat(12,minmax(0,1fr))}.f-7{grid-column:span 7}.f-5{grid-column:span 5}.f-12{grid-column:span 12}.f-6{grid-column:span 6}}
+.fgrid .tile{height:100%;display:flex;flex-direction:column;gap:12px;min-height:210px}
+.fgrid .n{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.fgrid h3{font-size:clamp(24px,2.4vw,30px);margin-top:auto}
+.fgrid p{color:var(--muted);max-width:56ch}
+.fgrid .tint{background:linear-gradient(160deg,color-mix(in srgb,var(--pc) 14%,var(--surface)),var(--surface) 75%);border-color:color-mix(in srgb,var(--pc) 35%,var(--line))}
+.fgrid .tint .n{color:var(--ink)}
+.fgrid .night p{color:var(--dusk)}
+.fgrid .night .n{color:var(--star)}
+
+.term{margin-top:var(--gap);padding:0;overflow:hidden;background:#0A111D;border-color:#22304A;color:#E6ECF4}
+.term-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px 8px 18px;border-bottom:1px solid #22304A;font-size:13.5px;color:#A3B2C5}
+.dots{display:inline-flex;gap:6px;margin-right:10px;vertical-align:-1px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#33445F}
+.dots i:first-child{background:var(--pc-d,#F2A93B)}
+.term pre{margin:0;padding:22px 18px 26px;overflow-x:auto;font:500 15px/1.6 var(--mono)}
+.term pre .p{color:#F2A93B;user-select:none}
+.copy{font:inherit;font-size:14px;font-weight:600;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #3A4C69;background:transparent;color:#E6ECF4;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.copy:hover{border-color:#E6ECF4}
+.copy[hidden]{display:none}
+.copy svg{width:16px;height:16px}
+.term :focus-visible{outline-color:#F2A93B}
+
+.more{list-style:none;margin:0;padding:0;display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media (min-width:640px){.more{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
+.more .tile{display:flex;align-items:center;gap:16px;padding:18px;min-height:96px;height:100%}
+.more .ico{width:46px;height:46px;border-radius:14px}
+.more .ico svg{width:23px;height:23px}
+.more .mt{flex:1;min-width:0;display:flex;flex-direction:column}
+.more h3{font-size:21px}
+.more p{font-size:15px;color:var(--muted)}
+.more .arrow{color:var(--muted);flex:none}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap top">
+  <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x=".5" y=".5" width="31" height="31" rx="8" fill="#111B2B" stroke="#22304A"/><path d="M16 5 L23.5 25 H8.5 Z" fill="none" stroke="#E6ECF4" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="17.5" r="2.4" fill="#F2A93B"/><circle cx="26.2" cy="6.6" r="1.1" fill="#F2A93B"/></svg><span class="word">Istari<b>AI</b></span><span class="sr-only">, home</span></a>
+  <nav class="nav" aria-label="Main">
+    <a href="/#products">Products</a>
+    <a class="opt" href="/#principles">How we build</a>
+    <a href="https://github.com/rajnishh" rel="noopener">GitHub</a>
+  </nav>
+</header>
+<main id="main" class="wrap" style="--pc-l:#E2543F;--pc-d:#FF8A73">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/#products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>All products</a></nav>
+
+  <div class="bento">
+    <section class="tile ph" aria-labelledby="h1">
+      <span class="bigico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span>
+      <p class="kind"><i aria-hidden="true"></i>AI creator studio</p>
+      <h1 id="h1">Reelkar</h1>
+      <p class="tag">From an idea to a finished reel.</p>
+      <p class="pitch">Turn an idea, a few photos, a song or a clip you filmed into a finished short reel, with captions, voice and music, ready to post anywhere.</p>
+      <div class="act"><a class="btn primary" href="https://reelkar.istari-ai.dev" rel="noopener">Open Reelkar<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a><span class="chip" data-stage="beta"><i aria-hidden="true"></i>Private beta</span></div>
+    </section>
+    <div class="tile night pi" aria-hidden="true">
+      <svg class="stars" viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice"><circle cx="143.0" cy="206.4" r="1.17" opacity="0.45"/><circle class="tw" cx="261.4" cy="40.4" r="1.11" opacity="0.67"/><circle cx="202.3" cy="204.8" r="0.99" opacity="0.42"/><circle class="tw" cx="203.1" cy="104.6" r="0.65" opacity="0.68"/><circle cx="179.1" cy="182.4" r="0.71" opacity="0.60"/><circle class="tw" cx="299.7" cy="143.1" r="0.79" opacity="0.40"/><circle cx="82.2" cy="98.9" r="0.87" opacity="0.59"/><circle class="tw" cx="2.4" cy="74.3" r="0.78" opacity="0.63"/><circle cx="93.8" cy="181.8" r="0.57" opacity="0.50"/><circle class="tw" cx="286.9" cy="99.2" r="1.09" opacity="0.51"/><circle cx="107.8" cy="50.8" r="0.83" opacity="0.43"/><circle class="tw" cx="239.1" cy="51.4" r="0.69" opacity="0.69"/><circle cx="112.7" cy="165.5" r="1.07" opacity="0.46"/><circle class="tw" cx="185.1" cy="192.1" r="1.07" opacity="0.47"/><circle cx="218.0" cy="96.4" r="0.55" opacity="0.74"/><circle class="tw" cx="263.4" cy="148.3" r="0.77" opacity="0.45"/><circle cx="24.3" cy="0.4" r="0.90" opacity="0.54"/><circle class="tw" cx="143.0" cy="174.5" r="0.70" opacity="0.33"/><circle cx="37.1" cy="19.3" r="0.94" opacity="0.37"/><circle class="tw" cx="183.6" cy="118.6" r="0.83" opacity="0.59"/><circle cx="24.2" cy="22.7" r="0.50" opacity="0.63"/><circle class="tw" cx="139.9" cy="51.6" r="1.12" opacity="0.80"/></svg>
+      <span class="glow"></span>
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span>
+      <span class="by">Reelkar <b>by Istari AI</b></span>
+    </div>
+    <section class="tile ps" aria-labelledby="sth">
+      <h2 id="sth">Where it is</h2>
+      <ol class="track">
+        <li class="done">Coming soon</li><li class="done">Early access</li><li aria-current="step">Beta</li><li>Live</li>
+      </ol>
+      <p class="now">Private beta</p>
+    </section>
+  </div>
+
+  <section aria-label="At a glance">
+    <dl class="stats">
+      <div class="tile stat"><dt>Made for</dt><dd>Short-video creators</dd></div>
+      <div class="tile stat"><dt>Every reel</dt><dd>Labelled as AI, with Content Credentials</dd></div>
+      <div class="tile stat"><dt>Platforms</dt><dd class="lst"><ul><li>iPhone</li><li>Android</li><li>Web</li></ul></dd></div>
+    </dl>
+  </section>
+
+  
+
+  <section aria-labelledby="fh">
+    <div class="sec-head"><div><h2 id="fh">What it does</h2></div></div>
+    <ul class="fgrid">
+      <li class="f-7"><article class="tile tint"><span class="n">01</span><h3>Edit my video</h3><p>Upload a clip and get punch-in zooms, word-by-word captions, effects around you and sound on every key moment.</p></article></li>
+      <li class="f-5"><article class="tile"><span class="n">02</span><h3>Songs and music videos</h3><p>Write a song in your language, have it sung, then turn it into a vertical music video with synced lyrics.</p></article></li>
+      <li class="f-5"><article class="tile"><span class="n">03</span><h3>Many languages and styles</h3><p>Scripts, narration and captions in English, Hindi, Arabic and more, in looks from cinematic to hand-drawn art.</p></article></li>
+      <li class="f-7"><article class="tile night"><span class="n">04</span><h3>Plan and post</h3><p>One tap writes captions and hashtags; schedule reels to YouTube and Instagram from a calendar.</p></article></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="mh">
+    <div class="sec-head"><div><h2 id="mh">More from Istari AI</h2></div></div>
+    <ul class="more">
+      <li><article class="tile lift" style="--pc-l:#2F8F68;--pc-d:#7BC8A4"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z'/><path d='M9 12l2 2 4-4'/></svg></span><div class="mt"><h3><a class="stretch" href="/warden/">Warden</a></h3><p>Keeps your Mac fast and cool.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
+      <li><article class="tile lift" style="--pc-l:#2F74C0;--pc-d:#82B8F2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M4 7h13a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z'/><path d='M4 7l10-3v3'/><circle cx='16' cy='14' r='1.3' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/bachat/">Bachat</a></h3><p>Every spend, counted once. On your phone.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
+      <li><article class="tile lift" style="--pc-l:#B7701A;--pc-d:#F2A93B"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M12 3l7.5 18h-15z'/><circle cx='12' cy='14' r='1.6' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/istari/">Istari</a></h3><p>Memory and supervision for coding agents.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
+    </ul>
+  </section>
+</main>
+<footer class="wrap foot">
+  <div class="foot-in">
+    <div>
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x=".5" y=".5" width="31" height="31" rx="8" fill="#111B2B" stroke="#22304A"/><path d="M16 5 L23.5 25 H8.5 Z" fill="none" stroke="#E6ECF4" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="17.5" r="2.4" fill="#F2A93B"/></svg><span class="word">Istari<b>AI</b></span><span class="sr-only">, home</span></a>
+      <p><small>Small tools that think ahead. &copy; 2026 Istari AI</small></p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/reelkar/">Reelkar</a></li><li><a href="/warden/">Warden</a></li><li><a href="/bachat/">Bachat</a></li><li><a href="/istari/">Istari</a></li>
+        <li><a href="https://github.com/rajnishh" rel="noopener">GitHub</a></li>
+        <li><a href="mailto:security@istari-ai.dev">Report a security issue</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
