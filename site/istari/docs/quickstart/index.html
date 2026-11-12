@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick start · Istari docs</title>
+<meta name="description" content="Your first review, recall and ticket.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A111D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230E1726%22%2F%3E%3Cpath%20d%3D%22M16%205%20L23.5%2025%20H8.5%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23E6ECF4%22%20stroke-width%3D%222.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2217.5%22%20r%3D%222.4%22%20fill%3D%22%23F2A93B%22%2F%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:light dark;
+--bg:#FFFFFF;--surface:#F3F5F7;--surface2:#E9EDF2;--line:#DCE2EA;--text:#0E1726;--muted:#4E5E73;
+--link:#8F5410;--star:#F2A93B;--focus:#B7701A;--code-bg:#0E1726;--code-text:#E6ECF4;--code-line:#22304A;
+--inline-code:#EEF1F5;--note:#FBF4E8;
+--get:#1F6F4E;--post:#1E5FA8;--put:#8F5410;--patch:#6B4BA8;--delete:#B3322A;
+--sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+--serif:Fraunces,Georgia,"Times New Roman",serif;
+--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+--bg:#0A111D;--surface:#111B2B;--surface2:#17243A;--line:#22304A;--text:#E6ECF4;--muted:#A3B2C5;
+--link:#F2A93B;--focus:#F2A93B;--code-bg:#111B2B;--code-line:#22304A;--inline-code:#17243A;--note:#151F2F;
+--get:#7BC8A4;--post:#82B8F2;--put:#F2A93B;--patch:#C3A6F0;--delete:#FF8A73}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 var(--sans);overflow-wrap:break-word}
+a{color:var(--link);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+main:focus{outline:none}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:16px;top:-100px;z-index:100;background:var(--star);color:#0E1726;padding:12px 16px;border-radius:8px;font-weight:600;text-decoration:none}
+.skip:focus{top:12px}
+.muted{color:var(--muted)}
+
+/* top bar */
+.top{border-bottom:1px solid var(--line);background:var(--bg)}
+@media (min-width:900px){.top{position:sticky;top:0;z-index:20}}
+.top-in{max-width:1440px;margin:0 auto;padding:6px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px}
+.brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--text);text-decoration:none;font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:-.02em}
+.brand b{font-family:var(--sans);font-size:11px;letter-spacing:.18em;color:var(--link);font-weight:600;vertical-align:2px;margin-left:2px}
+.product{display:inline-flex;align-items:center;min-height:44px;color:var(--text);text-decoration:none;font-weight:600;padding-left:16px;border-left:1px solid var(--line)}
+.topnav{display:flex;gap:4px}
+.topnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500}
+.topnav a:hover{color:var(--text);background:var(--surface)}
+.topnav a{position:relative}
+.topnav a[aria-current]{color:var(--text)}
+.topnav a[aria-current]::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:2px;border-radius:2px;background:var(--star)}
+.search{position:relative;margin-left:auto;flex:0 1 320px}
+.search input{width:100%;min-height:44px;padding:0 40px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font:inherit;font-size:16px}
+.search input::placeholder{color:var(--muted)}
+.search input:focus~kbd,.search input:not(:placeholder-shown)~kbd{display:none}
+.search input:focus-visible{outline-offset:0}
+.search kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font:500 12px var(--mono);color:var(--muted);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;pointer-events:none}
+.results{position:absolute;right:0;top:calc(100% + 6px);width:min(520px,calc(100vw - 32px));max-height:70vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 40px rgba(10,17,29,.18);padding:8px;z-index:30}
+.results-status{margin:4px 8px 8px;color:var(--muted);font-size:14px}
+.results ul{list-style:none;margin:0;padding:0}
+.results a{display:grid;gap:2px;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--text);min-height:44px}
+.results a:hover,.results a:focus-visible{background:var(--surface)}
+.results .r-h{font-weight:600}
+.results .r-p{font-size:13px;color:var(--muted)}
+.results .r-x{font-size:14px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.results mark{background:transparent;color:var(--link);font-weight:600}
+@media (max-width:719px){
+.product{padding-left:12px}
+.wordmark{display:none}
+.topnav{order:3;width:100%;margin:0 -12px}
+.search{order:4;flex:1 1 100%;margin:0 0 6px}
+.results{left:0;right:auto;width:100%}}
+
+/* page grid */
+.shell{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:0 48px;padding:0 16px}
+@media (min-width:900px){.shell.has-side{grid-template-columns:250px minmax(0,1fr)}}
+@media (min-width:1200px){.shell.has-toc{grid-template-columns:minmax(0,1fr) 220px}.shell.has-side.has-toc{grid-template-columns:250px minmax(0,1fr) 220px}}
+main{min-width:0;padding:24px 0 64px}
+@media (min-width:900px){main{padding-top:40px}}
+.content{max-width:760px}
+.wide .content{max-width:900px}
+.sidebar,.toc{display:none}
+@media (min-width:900px){.sidebar{display:block;position:sticky;top:57px;align-self:start;max-height:calc(100vh - 57px);overflow:auto;padding:28px 8px 40px 0;border-right:1px solid var(--line)}.mnav{display:none}}
+@media (min-width:1200px){.toc{display:block;position:sticky;top:57px;align-self:start;max-height:calc(100vh - 57px);overflow:auto;padding:40px 0}}
+.sidebar ul,.mnav ul,.toc ul{list-style:none;margin:0;padding:0}
+.nav-group{margin:20px 12px 4px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.nav-group:first-child{margin-top:0}
+.sidebar a,.mnav a{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 12px;border-radius:8px;color:var(--text);text-decoration:none;font-size:15px;line-height:1.35}
+.sidebar a:hover,.mnav a:hover{background:var(--surface)}
+.sidebar a[aria-current],.mnav a[aria-current]{background:var(--surface);font-weight:600;box-shadow:inset 3px 0 0 var(--star)}
+.mnav{border:1px solid var(--line);border-radius:12px;margin-bottom:24px;background:var(--bg)}
+.mnav summary{display:flex;align-items:center;gap:12px;min-height:48px;padding:0 16px;cursor:pointer;font-weight:600;list-style:none}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);translate:0 -2px}
+.mnav[open] summary::after{transform:rotate(-135deg);translate:0 2px}
+.mnav .here{color:var(--muted);font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mnav nav{padding:4px 8px 12px;border-top:1px solid var(--line)}
+.toc h2{font:600 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px 12px}
+.toc a{display:flex;align-items:center;min-height:44px;padding:4px 12px;color:var(--muted);text-decoration:none;font-size:14px;line-height:1.35;border-left:2px solid var(--line)}
+.toc .l3 a{padding-left:24px;font-size:13.5px}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);border-left-color:var(--star)}
+
+/* content */
+.eyebrow{margin:0 0 6px;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--link)}
+h1,h2,h3,h4{line-height:1.2;margin:0}
+.content h1{font:700 clamp(32px,5vw,44px)/1.1 var(--serif);letter-spacing:-.03em;margin:0 0 20px}
+.content h2{font:600 28px/1.2 var(--serif);letter-spacing:-.02em;margin:48px 0 14px;padding-top:8px}
+.content h3{font:600 20px/1.3 var(--sans);margin:32px 0 10px}
+.content h4{font:600 17px/1.3 var(--sans);margin:24px 0 8px}
+.content h2 code,.content h3 code{font-size:.85em}
+.anchor{float:left;margin-left:-1.1em;width:1.1em;color:var(--muted);text-decoration:none;opacity:0;font-family:var(--sans)}
+h2:hover .anchor,h3:hover .anchor,h4:hover .anchor{opacity:1}
+.content p,.content ul,.content ol{margin:0 0 16px}
+.content ul,.content ol{padding-left:24px}
+.content li{margin:6px 0}
+.content li::marker{color:var(--muted)}
+code{font-family:var(--mono);font-size:.86em}
+:not(pre)>code{background:var(--inline-code);border:1px solid var(--line);border-radius:5px;padding:.08em .35em;overflow-wrap:anywhere}
+.note{border:1px solid var(--line);border-left:3px solid var(--star);background:var(--note);border-radius:10px;padding:14px 18px;margin:20px 0}
+.note p:last-child{margin-bottom:0}
+.table-wrap{overflow-x:auto;margin:16px 0 24px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+th{background:var(--surface);font-weight:600;font-size:14px;white-space:nowrap}
+td:first-child code{white-space:nowrap;overflow-wrap:normal}
+.code{margin:16px 0 24px;border-radius:12px;background:var(--code-bg);border:1px solid var(--code-line);overflow:hidden}
+.code-bar{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:0 6px 0 16px;border-bottom:1px solid var(--code-line);font:500 12px var(--mono);letter-spacing:.04em;color:#A3B2C5}
+.code pre{margin:0;padding:14px 16px;overflow-x:auto;color:var(--code-text);font:400 14px/1.65 var(--mono);tab-size:2}
+.code pre code{font-size:inherit;white-space:pre}
+.copy{min-height:44px;min-width:64px;padding:0 12px;background:transparent;color:#E6ECF4;border:0;border-radius:8px;font:500 13px var(--sans);cursor:pointer}
+.copy:hover{background:#22304A}
+.copy:focus-visible{outline-color:#F2A93B;outline-offset:-3px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+.pager a{display:grid;gap:2px;min-height:44px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--text);font-weight:600}
+.pager a:hover{border-color:var(--focus)}
+.pager span{font-size:13px;font-weight:500;color:var(--muted)}
+.pager .next{text-align:right;grid-column:2}
+@media (max-width:519px){.pager{grid-template-columns:1fr}.pager .next{grid-column:1}}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;background:var(--star);color:#0E1726;font-weight:600;text-decoration:none;border:0}
+.btn:hover{background:#F5B95C}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--focus)}
+.badge{display:inline-flex;align-items:center;padding:1px 8px;border-radius:999px;border:1px solid var(--line);font:500 12px/1.6 var(--mono);color:var(--muted);white-space:nowrap}
+.notice{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-left:3px solid var(--star);background:var(--note);border-radius:12px;padding:16px 18px;margin:0 0 32px}
+.notice strong{display:block}
+.notice p{margin:0}
+
+/* footer */
+.foot{border-top:1px solid var(--line)}
+.foot-in{max-width:1440px;margin:0 auto;padding:24px 16px 40px;font-size:15px}
+.foot p{margin:0 0 6px}
+.foot a{display:inline-block;padding:10px 2px}
+
+/* API */
+.method{display:inline-flex;align-items:center;justify-content:center;min-width:54px;padding:2px 6px;border-radius:6px;font:600 11.5px/1.5 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--bg);background:var(--muted)}
+.method.get{background:var(--get)}.method.post{background:var(--post)}.method.put{background:var(--put)}.method.patch{background:var(--patch)}.method.delete{background:var(--delete)}
+.sidebar .method,.mnav .method{min-width:46px;font-size:10.5px;flex:none}
+.sidebar .ep,.mnav .ep{font-size:14px}
+.op{border-top:1px solid var(--line);margin-top:40px;padding-top:8px}
+.op-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:18px 0 12px}
+.op-path{font:500 15px var(--mono);overflow-wrap:anywhere}
+.badge.internal{border-color:var(--delete);color:var(--delete)}
+.badge.stable{border-color:var(--get);color:var(--get)}
+.badge.beta,.badge.experimental,.badge.alpha,.badge.preview{border-color:var(--put);color:var(--put)}
+.badge.deprecated{border-color:var(--delete);color:var(--delete);text-decoration:line-through}
+.op h4{font:600 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:24px 0 8px}
+.schema{list-style:none;margin:0;padding:0;font-size:15px}
+.schema .schema{margin:8px 0 0 4px;padding-left:14px;border-left:1px solid var(--line)}
+.schema li{margin:0;padding:8px 0;border-bottom:1px dashed var(--line)}
+.schema li:last-child{border-bottom:0}
+.schema .f{font:500 14px var(--mono);overflow-wrap:anywhere}
+.schema .t{font:400 13px var(--mono);color:var(--muted);margin-left:6px}
+.schema .req{font-size:12px;font-weight:600;color:var(--delete);margin-left:6px}
+.schema .d{margin:2px 0 0;color:var(--muted);font-size:14.5px}
+.schema .d p{margin:0}
+.resp{border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.resp>summary{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 14px;cursor:pointer;list-style:none}
+.resp>summary::-webkit-details-marker{display:none}
+.resp>summary::before{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);flex:none;margin-right:2px}
+.resp[open]>summary::before{transform:rotate(45deg)}
+.resp-body{padding:4px 16px 12px;border-top:1px solid var(--line)}
+.status{font:600 14px var(--mono)}
+.status.s2{color:var(--get)}.status.s3{color:var(--post)}.status.s4{color:var(--put)}.status.s5{color:var(--delete)}
+.ctype{font:400 13px var(--mono);color:var(--muted)}
+.api-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 20px}
+.servers{list-style:none;padding:0!important}
+.servers code{font-size:14px}
+
+/* download */
+.tabs [role=tablist]{display:flex;flex-wrap:wrap;gap:0 4px;border-bottom:1px solid var(--line);margin:0 0 16px}
+.tabs [role=tab]{min-height:44px;padding:0 16px;background:transparent;border:0;border-bottom:2px solid transparent;color:var(--muted);font:500 15px var(--sans);cursor:pointer;white-space:nowrap}
+.tabs [role=tab][aria-selected=true]{color:var(--text);border-bottom-color:var(--star)}
+.tabs [role=tab]:hover{color:var(--text)}
+.tabs.on .panel-h{display:none}
+.panel-h{font:600 17px var(--sans)!important;margin:24px 0 8px!important}
+.os-hint{font-size:14px;color:var(--muted)}
+.dl-table td:nth-child(3){white-space:nowrap}
+</style>
+</head>
+<body data-search="/istari/docs/search.json">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/" aria-label="Istari AI home"><svg class="mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#111B2B" stroke="#22304A"/><path d="M16 5 L23.5 25 H8.5 Z" fill="none" stroke="#E6ECF4" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="17.5" r="2.4" fill="#F2A93B"/><circle cx="26.2" cy="6.6" r="1.1" fill="#F2A93B"/></svg><span class="wordmark" aria-hidden="true">Istari <b>AI</b></span></a>
+    <a class="product" href="/istari/docs/">Istari docs</a>
+    <nav class="topnav" aria-label="Istari"><a href="/istari/docs/" aria-current="page">Docs</a><a href="/istari/download/">Download</a></nav>
+    <div class="search" role="search" hidden>
+      <label class="sr" for="q">Search the docs</label>
+      <input id="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" aria-describedby="q-hint" aria-controls="results">
+      <kbd id="q-hint" aria-label="Press slash to search">/</kbd>
+      <div id="results" class="results" hidden><p class="results-status" role="status" aria-live="polite"></p><ul></ul></div>
+    </div>
+  </div>
+</header>
+<div class="shell has-side has-toc">
+<nav class="sidebar" aria-label="Docs"><p class="nav-group">Get started</p><ul><li><a href="/istari/docs/">Introduction</a></li><li><a href="/istari/docs/install/">Install</a></li><li><a href="/istari/docs/quickstart/" aria-current="page">Quick start</a></li><li><a href="/istari/docs/setup/">Setup</a></li></ul><p class="nav-group">Use Istari</p><ul><li><a href="/istari/docs/features/">Features</a></li><li><a href="/istari/docs/daily-loop/">The daily loop</a></li><li><a href="/istari/docs/control/">Staying in control</a></li><li><a href="/istari/docs/accounts/">Multiple accounts</a></li><li><a href="/istari/docs/graph-reviews/">Graph-first reviews</a></li><li><a href="/istari/docs/troubleshooting/">Troubleshooting</a></li><li><a href="/istari/docs/uninstall/">Uninstall</a></li></ul><p class="nav-group">Reference</p><ul><li><a href="/istari/docs/commands/">Commands</a></li><li><a href="/istari/docs/hooks/">Hook events</a></li><li><a href="/istari/docs/workflows/">Workflow catalog</a></li></ul><p class="nav-group">More</p><ul><li><a href="/istari/download/">Download</a></li></ul></nav>
+<main id="main" tabindex="-1">
+<details class="mnav"><summary><span>Menu</span><span class="here">Quick start</span></summary><nav aria-label="Docs menu"><p class="nav-group">Get started</p><ul><li><a href="/istari/docs/">Introduction</a></li><li><a href="/istari/docs/install/">Install</a></li><li><a href="/istari/docs/quickstart/" aria-current="page">Quick start</a></li><li><a href="/istari/docs/setup/">Setup</a></li></ul><p class="nav-group">Use Istari</p><ul><li><a href="/istari/docs/features/">Features</a></li><li><a href="/istari/docs/daily-loop/">The daily loop</a></li><li><a href="/istari/docs/control/">Staying in control</a></li><li><a href="/istari/docs/accounts/">Multiple accounts</a></li><li><a href="/istari/docs/graph-reviews/">Graph-first reviews</a></li><li><a href="/istari/docs/troubleshooting/">Troubleshooting</a></li><li><a href="/istari/docs/uninstall/">Uninstall</a></li></ul><p class="nav-group">Reference</p><ul><li><a href="/istari/docs/commands/">Commands</a></li><li><a href="/istari/docs/hooks/">Hook events</a></li><li><a href="/istari/docs/workflows/">Workflow catalog</a></li></ul><p class="nav-group">More</p><ul><li><a href="/istari/download/">Download</a></li></ul></nav></details>
+<article class="content">
+<p class="eyebrow">Get started</p><h1 id="top">Quick start</h1><p>Five commands take you from a fresh install to an agent working on a ticket. Each one is safe to run on a real repo.</p>
+<div class="code"><div class="code-bar"><span>shell</span><button type="button" class="copy" hidden>Copy</button></div><pre tabindex="0"><code data-lang="bash"># 1. Configure: your role, your engines, and whether to install hooks
+ist setup
+
+# 2. Review the work on your current branch. This runs locally and posts nothing
+ist review
+
+# 3. Ask your memory a question
+ist recall &quot;what did we decide about the auth migration?&quot;
+
+# 4. Hand a ticket to an agent and follow along
+ist pick PROJ-123 --follow
+
+# 5. See what is running
+ist status</code></pre></div>
+<p><code>ist guide</code> lists what Istari can do, task by task. <code>ist examples</code> shows command recipes for common situations.</p>
+<h2 id="your-first-review"><a class="anchor" href="#your-first-review" aria-hidden="true" tabindex="-1">#</a>Your first review</h2>
+<p>Before you point Istari at a real pull request, watch it review something safe: your own last commit. In any repo you have committed to, run:</p>
+<div class="code"><div class="code-bar"><span>shell</span><button type="button" class="copy" hidden>Copy</button></div><pre tabindex="0"><code data-lang="bash">ist review</code></pre></div>
+<p>It reads the diff, forms an opinion and tells you what it cost. A run looks like this:</p>
+<div class="code"><div class="code-bar"><span>output</span><button type="button" class="copy" hidden>Copy</button></div><pre tabindex="0"><code data-lang="text">  ISTARI  reviewing your last commit
+  1 file, 3 changed lines
+  Working...
+
+docs/PARKED.md:36
+Not a blocker, but this new row still says &quot;OPEN, cannot close locally&quot;
+right after the row above says the release was created.
+
+  ✓ Reviewed your last commit - 1 file, 3 lines
+    Found 1 finding (1 minor)
+    Cost  21.9K tokens · 42s · codex
+
+  Nothing was posted anywhere - this ran entirely on your machine.</code></pre></div>
+<p>That is the whole product in miniature. Once it feels right, the same engine runs against real PRs.</p>
+<h2 id="the-path-from-here"><a class="anchor" href="#the-path-from-here" aria-hidden="true" tabindex="-1">#</a>The path from here</h2>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Step</th><th scope="col">What you do</th></tr></thead><tbody>
+<tr><td>Install</td><td>One binary, checksum-verified. See <a href="/istari/docs/install/">install</a>.</td></tr>
+<tr><td>Setup</td><td>A few questions, all skippable. See <a href="/istari/docs/setup/">setup</a>.</td></tr>
+<tr><td>First win</td><td><code>ist review</code>, which posts nothing.</td></tr>
+<tr><td>Daily loop</td><td><code>ist go</code> every morning. See <a href="/istari/docs/daily-loop/">the daily loop</a>.</td></tr>
+</tbody></table></div><nav class="pager" aria-label="Previous and next"><a class="prev" href="/istari/docs/install/" rel="prev"><span>Previous</span>Install</a><a class="next" href="/istari/docs/setup/" rel="next"><span>Next</span>Setup</a></nav>
+</article>
+</main>
+<aside class="toc" aria-labelledby="toc-h"><h2 id="toc-h">On this page</h2><ul><li class="l2"><a href="#your-first-review">Your first review</a></li><li class="l2"><a href="#the-path-from-here">The path from here</a></li></ul></aside>
+</div>
+<footer class="foot">
+  <div class="foot-in">
+    <p><a href="/">Istari AI</a> · <a href="/istari/">Istari</a> · <a href="/istari/docs/">Docs</a> · <a href="/istari/download/">Download</a></p>
+    <p class="muted">Istari is in early access. Licensed under Apache 2.0.</p>
+  </div>
+</footer>
+<p class="sr" id="live" role="status" aria-live="polite"></p>
+<script>
+(function(){
+  var live=document.getElementById('live');
+  function say(t){live.textContent='';setTimeout(function(){live.textContent=t},30)}
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.hidden=false;
+    b.setAttribute('aria-label','Copy code');
+    b.addEventListener('click',function(){
+      var el=b.closest('.code').querySelector('pre');
+      var text=el.innerText.replace(/\n$/,'');
+      function done(){var was=b.textContent;b.textContent='Copied';say('Copied to clipboard');setTimeout(function(){b.textContent=was},1500)}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fallback)}else fallback();
+      function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);say('Code selected. Press Command C or Control C to copy.')}
+    });
+  });
+  // "On this page" highlight
+  var toc=[].slice.call(document.querySelectorAll('.toc a'));
+  if(toc.length&&'IntersectionObserver' in window){
+    var map={};toc.forEach(function(a){map[decodeURIComponent(a.hash.slice(1))]=a});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&map[e.target.id]){toc.forEach(function(a){a.classList.remove('on')});map[e.target.id].classList.add('on')}})},{rootMargin:'-70px 0px -70% 0px'});
+    Object.keys(map).forEach(function(id){var h=document.getElementById(id);if(h)io.observe(h)});
+  }
+  // Search
+  var box=document.querySelector('.search');if(!box||!window.fetch)return;
+  box.hidden=false;
+  var q=document.getElementById('q'),res=document.getElementById('results'),list=res.querySelector('ul'),status=res.querySelector('.results-status');
+  var idx=null,loading=null;
+  function load(){if(!loading)loading=fetch(document.body.dataset.search).then(function(r){return r.json()}).then(function(d){idx=d.map(function(e){e.lt=(e.t||'').toLowerCase();e.lh=(e.h||'').toLowerCase();e.lx=(e.k||e.x||'').toLowerCase();return e});return idx}).catch(function(){status.textContent='Search is unavailable right now.';return []});return loading}
+  function terms(s){return s.toLowerCase().split(/\s+/).filter(Boolean)}
+  function score(e,ts){var s=0;for(var i=0;i<ts.length;i++){var t=ts[i],k=0;if(e.lh.indexOf(t)>-1)k+=e.lh.indexOf(t)===0?8:6;if(e.lt.indexOf(t)>-1)k+=4;if(e.lx.indexOf(t)>-1)k+=1;if(!k)return 0;s+=k}if(e.lh===ts.join(' '))s+=10;if(!e.h)s+=1;return s}
+  function hl(node,text,ts){var lower=text.toLowerCase(),i=0;while(i<text.length){var best=-1,len=0;ts.forEach(function(t){var p=lower.indexOf(t,i);if(p>-1&&(best<0||p<best)){best=p;len=t.length}});if(best<0){node.appendChild(document.createTextNode(text.slice(i)));break}node.appendChild(document.createTextNode(text.slice(i,best)));var m=document.createElement('mark');m.textContent=text.slice(best,best+len);node.appendChild(m);i=best+len}}
+  function render(){
+    var v=q.value.trim();list.textContent='';
+    if(!v){res.hidden=true;return}
+    load().then(function(){
+      if(q.value.trim()!==v)return;
+      var ts=terms(v);
+      var hits=idx.map(function(e){return [score(e,ts),e]}).filter(function(x){return x[0]>0}).sort(function(a,b){return b[0]-a[0]}).slice(0,10);
+      res.hidden=false;
+      status.textContent=hits.length?(hits.length+(hits.length===1?' result':' results')+'. Press the down arrow to move through them.'):'No results for \u201c'+v+'\u201d.';
+      hits.forEach(function(x){var e=x[1],li=document.createElement('li'),a=document.createElement('a');a.href=e.u;
+        var h=document.createElement('span');h.className='r-h';hl(h,e.h||e.t,ts);a.appendChild(h);
+        var p=document.createElement('span');p.className='r-p';p.textContent=e.g+(e.h?' \u203a '+e.t:'');a.appendChild(p);
+        if(e.x){var t=document.createElement('span');t.className='r-x';hl(t,e.x,ts);a.appendChild(t)}
+        li.appendChild(a);list.appendChild(li)});
+    });
+  }
+  var timer;q.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(render,80)});
+  q.addEventListener('focus',function(){load();if(q.value.trim())render()});
+  function links(){return [].slice.call(list.querySelectorAll('a'))}
+  box.addEventListener('keydown',function(e){
+    var ls=links(),i=ls.indexOf(document.activeElement);
+    if(e.key==='Escape'){res.hidden=true;q.focus();if(!q.value)q.blur();return}
+    if(e.key==='ArrowDown'&&ls.length){e.preventDefault();(ls[i+1]||ls[0]).focus()}
+    else if(e.key==='ArrowUp'&&ls.length){e.preventDefault();if(i<=0)q.focus();else ls[i-1].focus()}
+    else if(e.key==='Enter'&&document.activeElement===q&&ls.length){e.preventDefault();location.href=ls[0].href}
+  });
+  document.addEventListener('click',function(e){if(!box.contains(e.target))res.hidden=true});
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='/'||e.metaKey||e.ctrlKey||e.altKey)return;
+    var t=e.target,tag=t&&t.tagName;if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable))return;
+    e.preventDefault();q.focus();q.select();
+  });
+})();
+</script>
+
+</body>
+</html>

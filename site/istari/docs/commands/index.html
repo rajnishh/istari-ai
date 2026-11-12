@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commands · Istari docs</title>
+<meta name="description" content="Every command and every flag.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A111D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230E1726%22%2F%3E%3Cpath%20d%3D%22M16%205%20L23.5%2025%20H8.5%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23E6ECF4%22%20stroke-width%3D%222.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2217.5%22%20r%3D%222.4%22%20fill%3D%22%23F2A93B%22%2F%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:light dark;
+--bg:#FFFFFF;--surface:#F3F5F7;--surface2:#E9EDF2;--line:#DCE2EA;--text:#0E1726;--muted:#4E5E73;
+--link:#8F5410;--star:#F2A93B;--focus:#B7701A;--code-bg:#0E1726;--code-text:#E6ECF4;--code-line:#22304A;
+--inline-code:#EEF1F5;--note:#FBF4E8;
+--get:#1F6F4E;--post:#1E5FA8;--put:#8F5410;--patch:#6B4BA8;--delete:#B3322A;
+--sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+--serif:Fraunces,Georgia,"Times New Roman",serif;
+--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+--bg:#0A111D;--surface:#111B2B;--surface2:#17243A;--line:#22304A;--text:#E6ECF4;--muted:#A3B2C5;
+--link:#F2A93B;--focus:#F2A93B;--code-bg:#111B2B;--code-line:#22304A;--inline-code:#17243A;--note:#151F2F;
+--get:#7BC8A4;--post:#82B8F2;--put:#F2A93B;--patch:#C3A6F0;--delete:#FF8A73}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 var(--sans);overflow-wrap:break-word}
+a{color:var(--link);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+main:focus{outline:none}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:16px;top:-100px;z-index:100;background:var(--star);color:#0E1726;padding:12px 16px;border-radius:8px;font-weight:600;text-decoration:none}
+.skip:focus{top:12px}
+.muted{color:var(--muted)}
+
+/* top bar */
+.top{border-bottom:1px solid var(--line);background:var(--bg)}
+@media (min-width:900px){.top{position:sticky;top:0;z-index:20}}
+.top-in{max-width:1440px;margin:0 auto;padding:6px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px}
+.brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--text);text-decoration:none;font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:-.02em}
+.brand b{font-family:var(--sans);font-size:11px;letter-spacing:.18em;color:var(--link);font-weight:600;vertical-align:2px;margin-left:2px}
+.product{display:inline-flex;align-items:center;min-height:44px;color:var(--text);text-decoration:none;font-weight:600;padding-left:16px;border-left:1px solid var(--line)}
+.topnav{display:flex;gap:4px}
+.topnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500}
+.topnav a:hover{color:var(--text);background:var(--surface)}
+.topnav a{position:relative}
+.topnav a[aria-current]{color:var(--text)}
+.topnav a[aria-current]::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:2px;border-radius:2px;background:var(--star)}
+.search{position:relative;margin-left:auto;flex:0 1 320px}
+.search input{width:100%;min-height:44px;padding:0 40px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font:inherit;font-size:16px}
+.search input::placeholder{color:var(--muted)}
+.search input:focus~kbd,.search input:not(:placeholder-shown)~kbd{display:none}
+.search input:focus-visible{outline-offset:0}
+.search kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font:500 12px var(--mono);color:var(--muted);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;pointer-events:none}
+.results{position:absolute;right:0;top:calc(100% + 6px);width:min(520px,calc(100vw - 32px));max-height:70vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 40px rgba(10,17,29,.18);padding:8px;z-index:30}
+.results-status{margin:4px 8px 8px;color:var(--muted);font-size:14px}
+.results ul{list-style:none;margin:0;padding:0}
+.results a{display:grid;gap:2px;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--text);min-height:44px}
+.results a:hover,.results a:focus-visible{background:var(--surface)}
+.results .r-h{font-weight:600}
+.results .r-p{font-size:13px;color:var(--muted)}
+.results .r-x{font-size:14px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.results mark{background:transparent;color:var(--link);font-weight:600}
+@media (max-width:719px){
+.product{padding-left:12px}
+.wordmark{display:none}
+.topnav{order:3;width:100%;margin:0 -12px}
+.search{order:4;flex:1 1 100%;margin:0 0 6px}
+.results{left:0;right:auto;width:100%}}
+
+/* page grid */
+.shell{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:0 48px;padding:0 16px}
+@media (min-width:900px){.shell.has-side{grid-template-columns:250px minmax(0,1fr)}}
+@media (min-width:1200px){.shell.has-toc{grid-template-columns:minmax(0,1fr) 220px}.shell.has-side.has-toc{grid-template-columns:250px minmax(0,1fr) 220px}}
+main{min-width:0;padding:24px 0 64px}
+@media (min-width:900px){main{padding-top:40px}}
+.content{max-width:760px}
+.wide .content{max-width:900px}
+.sidebar,.toc{display:none}
+@media (min-width:900px){.sidebar{display:block;position:sticky;top:57px;align-self:start;max-height:calc(100vh - 57px);overflow:auto;padding:28px 8px 40px 0;border-right:1px solid var(--line)}.mnav{display:none}}
+@media (min-width:1200px){.toc{display:block;position:sticky;top:57px;align-self:start;max-height:calc(100vh - 57px);overflow:auto;padding:40px 0}}
+.sidebar ul,.mnav ul,.toc ul{list-style:none;margin:0;padding:0}
+.nav-group{margin:20px 12px 4px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.nav-group:first-child{margin-top:0}
+.sidebar a,.mnav a{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 12px;border-radius:8px;color:var(--text);text-decoration:none;font-size:15px;line-height:1.35}
+.sidebar a:hover,.mnav a:hover{background:var(--surface)}
+.sidebar a[aria-current],.mnav a[aria-current]{background:var(--surface);font-weight:600;box-shadow:inset 3px 0 0 var(--star)}
+.mnav{border:1px solid var(--line);border-radius:12px;margin-bottom:24px;background:var(--bg)}
+.mnav summary{display:flex;align-items:center;gap:12px;min-height:48px;padding:0 16px;cursor:pointer;font-weight:600;list-style:none}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);translate:0 -2px}
+.mnav[open] summary::after{transform:rotate(-135deg);translate:0 2px}
+.mnav .here{color:var(--muted);font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mnav nav{padding:4px 8px 12px;border-top:1px solid var(--line)}
+.toc h2{font:600 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px 12px}
+.toc a{display:flex;align-items:center;min-height:44px;padding:4px 12px;color:var(--muted);text-decoration:none;font-size:14px;line-height:1.35;border-left:2px solid var(--line)}
+.toc .l3 a{padding-left:24px;font-size:13.5px}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);border-left-color:var(--star)}
+
+/* content */
+.eyebrow{margin:0 0 6px;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--link)}
+h1,h2,h3,h4{line-height:1.2;margin:0}
+.content h1{font:700 clamp(32px,5vw,44px)/1.1 var(--serif);letter-spacing:-.03em;margin:0 0 20px}
+.content h2{font:600 28px/1.2 var(--serif);letter-spacing:-.02em;margin:48px 0 14px;padding-top:8px}
+.content h3{font:600 20px/1.3 var(--sans);margin:32px 0 10px}
+.content h4{font:600 17px/1.3 var(--sans);margin:24px 0 8px}
+.content h2 code,.content h3 code{font-size:.85em}
+.anchor{float:left;margin-left:-1.1em;width:1.1em;color:var(--muted);text-decoration:none;opacity:0;font-family:var(--sans)}
+h2:hover .anchor,h3:hover .anchor,h4:hover .anchor{opacity:1}
+.content p,.content ul,.content ol{margin:0 0 16px}
+.content ul,.content ol{padding-left:24px}
+.content li{margin:6px 0}
+.content li::marker{color:var(--muted)}
+code{font-family:var(--mono);font-size:.86em}
+:not(pre)>code{background:var(--inline-code);border:1px solid var(--line);border-radius:5px;padding:.08em .35em;overflow-wrap:anywhere}
+.note{border:1px solid var(--line);border-left:3px solid var(--star);background:var(--note);border-radius:10px;padding:14px 18px;margin:20px 0}
+.note p:last-child{margin-bottom:0}
+.table-wrap{overflow-x:auto;margin:16px 0 24px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+th{background:var(--surface);font-weight:600;font-size:14px;white-space:nowrap}
+td:first-child code{white-space:nowrap;overflow-wrap:normal}
+.code{margin:16px 0 24px;border-radius:12px;background:var(--code-bg);border:1px solid var(--code-line);overflow:hidden}
+.code-bar{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:0 6px 0 16px;border-bottom:1px solid var(--code-line);font:500 12px var(--mono);letter-spacing:.04em;color:#A3B2C5}
+.code pre{margin:0;padding:14px 16px;overflow-x:auto;color:var(--code-text);font:400 14px/1.65 var(--mono);tab-size:2}
+.code pre code{font-size:inherit;white-space:pre}
+.copy{min-height:44px;min-width:64px;padding:0 12px;background:transparent;color:#E6ECF4;border:0;border-radius:8px;font:500 13px var(--sans);cursor:pointer}
+.copy:hover{background:#22304A}
+.copy:focus-visible{outline-color:#F2A93B;outline-offset:-3px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+.pager a{display:grid;gap:2px;min-height:44px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--text);font-weight:600}
+.pager a:hover{border-color:var(--focus)}
+.pager span{font-size:13px;font-weight:500;color:var(--muted)}
+.pager .next{text-align:right;grid-column:2}
+@media (max-width:519px){.pager{grid-template-columns:1fr}.pager .next{grid-column:1}}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;background:var(--star);color:#0E1726;font-weight:600;text-decoration:none;border:0}
+.btn:hover{background:#F5B95C}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--focus)}
+.badge{display:inline-flex;align-items:center;padding:1px 8px;border-radius:999px;border:1px solid var(--line);font:500 12px/1.6 var(--mono);color:var(--muted);white-space:nowrap}
+.notice{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-left:3px solid var(--star);background:var(--note);border-radius:12px;padding:16px 18px;margin:0 0 32px}
+.notice strong{display:block}
+.notice p{margin:0}
+
+/* footer */
+.foot{border-top:1px solid var(--line)}
+.foot-in{max-width:1440px;margin:0 auto;padding:24px 16px 40px;font-size:15px}
+.foot p{margin:0 0 6px}
+.foot a{display:inline-block;padding:10px 2px}
+
+/* API */
+.method{display:inline-flex;align-items:center;justify-content:center;min-width:54px;padding:2px 6px;border-radius:6px;font:600 11.5px/1.5 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--bg);background:var(--muted)}
+.method.get{background:var(--get)}.method.post{background:var(--post)}.method.put{background:var(--put)}.method.patch{background:var(--patch)}.method.delete{background:var(--delete)}
+.sidebar .method,.mnav .method{min-width:46px;font-size:10.5px;flex:none}
+.sidebar .ep,.mnav .ep{font-size:14px}
+.op{border-top:1px solid var(--line);margin-top:40px;padding-top:8px}
+.op-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:18px 0 12px}
+.op-path{font:500 15px var(--mono);overflow-wrap:anywhere}
+.badge.internal{border-color:var(--delete);color:var(--delete)}
+.badge.stable{border-color:var(--get);color:var(--get)}
+.badge.beta,.badge.experimental,.badge.alpha,.badge.preview{border-color:var(--put);color:var(--put)}
+.badge.deprecated{border-color:var(--delete);color:var(--delete);text-decoration:line-through}
+.op h4{font:600 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:24px 0 8px}
+.schema{list-style:none;margin:0;padding:0;font-size:15px}
+.schema .schema{margin:8px 0 0 4px;padding-left:14px;border-left:1px solid var(--line)}
+.schema li{margin:0;padding:8px 0;border-bottom:1px dashed var(--line)}
+.schema li:last-child{border-bottom:0}
+.schema .f{font:500 14px var(--mono);overflow-wrap:anywhere}
+.schema .t{font:400 13px var(--mono);color:var(--muted);margin-left:6px}
+.schema .req{font-size:12px;font-weight:600;color:var(--delete);margin-left:6px}
+.schema .d{margin:2px 0 0;color:var(--muted);font-size:14.5px}
+.schema .d p{margin:0}
+.resp{border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.resp>summary{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 14px;cursor:pointer;list-style:none}
+.resp>summary::-webkit-details-marker{display:none}
+.resp>summary::before{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);flex:none;margin-right:2px}
+.resp[open]>summary::before{transform:rotate(45deg)}
+.resp-body{padding:4px 16px 12px;border-top:1px solid var(--line)}
+.status{font:600 14px var(--mono)}
+.status.s2{color:var(--get)}.status.s3{color:var(--post)}.status.s4{color:var(--put)}.status.s5{color:var(--delete)}
+.ctype{font:400 13px var(--mono);color:var(--muted)}
+.api-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 20px}
+.servers{list-style:none;padding:0!important}
+.servers code{font-size:14px}
+
+/* download */
+.tabs [role=tablist]{display:flex;flex-wrap:wrap;gap:0 4px;border-bottom:1px solid var(--line);margin:0 0 16px}
+.tabs [role=tab]{min-height:44px;padding:0 16px;background:transparent;border:0;border-bottom:2px solid transparent;color:var(--muted);font:500 15px var(--sans);cursor:pointer;white-space:nowrap}
+.tabs [role=tab][aria-selected=true]{color:var(--text);border-bottom-color:var(--star)}
+.tabs [role=tab]:hover{color:var(--text)}
+.tabs.on .panel-h{display:none}
+.panel-h{font:600 17px var(--sans)!important;margin:24px 0 8px!important}
+.os-hint{font-size:14px;color:var(--muted)}
+.dl-table td:nth-child(3){white-space:nowrap}
+</style>
+</head>
+<body data-search="/istari/docs/search.json">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/" aria-label="Istari AI home"><svg class="mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#111B2B" stroke="#22304A"/><path d="M16 5 L23.5 25 H8.5 Z" fill="none" stroke="#E6ECF4" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="17.5" r="2.4" fill="#F2A93B"/><circle cx="26.2" cy="6.6" r="1.1" fill="#F2A93B"/></svg><span class="wordmark" aria-hidden="true">Istari <b>AI</b></span></a>
+    <a class="product" href="/istari/docs/">Istari docs</a>
+    <nav class="topnav" aria-label="Istari"><a href="/istari/docs/" aria-current="page">Docs</a><a href="/istari/download/">Download</a></nav>
+    <div class="search" role="search" hidden>
+      <label class="sr" for="q">Search the docs</label>
+      <input id="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" aria-describedby="q-hint" aria-controls="results">
+      <kbd id="q-hint" aria-label="Press slash to search">/</kbd>
+      <div id="results" class="results" hidden><p class="results-status" role="status" aria-live="polite"></p><ul></ul></div>
+    </div>
+  </div>
+</header>
+<div class="shell has-side has-toc">
+<nav class="sidebar" aria-label="Docs"><p class="nav-group">Get started</p><ul><li><a href="/istari/docs/">Introduction</a></li><li><a href="/istari/docs/install/">Install</a></li><li><a href="/istari/docs/quickstart/">Quick start</a></li><li><a href="/istari/docs/setup/">Setup</a></li></ul><p class="nav-group">Use Istari</p><ul><li><a href="/istari/docs/features/">Features</a></li><li><a href="/istari/docs/daily-loop/">The daily loop</a></li><li><a href="/istari/docs/control/">Staying in control</a></li><li><a href="/istari/docs/accounts/">Multiple accounts</a></li><li><a href="/istari/docs/graph-reviews/">Graph-first reviews</a></li><li><a href="/istari/docs/troubleshooting/">Troubleshooting</a></li><li><a href="/istari/docs/uninstall/">Uninstall</a></li></ul><p class="nav-group">Reference</p><ul><li><a href="/istari/docs/commands/" aria-current="page">Commands</a></li><li><a href="/istari/docs/hooks/">Hook events</a></li><li><a href="/istari/docs/workflows/">Workflow catalog</a></li></ul><p class="nav-group">More</p><ul><li><a href="/istari/download/">Download</a></li></ul></nav>
+<main id="main" tabindex="-1">
+<details class="mnav"><summary><span>Menu</span><span class="here">Commands</span></summary><nav aria-label="Docs menu"><p class="nav-group">Get started</p><ul><li><a href="/istari/docs/">Introduction</a></li><li><a href="/istari/docs/install/">Install</a></li><li><a href="/istari/docs/quickstart/">Quick start</a></li><li><a href="/istari/docs/setup/">Setup</a></li></ul><p class="nav-group">Use Istari</p><ul><li><a href="/istari/docs/features/">Features</a></li><li><a href="/istari/docs/daily-loop/">The daily loop</a></li><li><a href="/istari/docs/control/">Staying in control</a></li><li><a href="/istari/docs/accounts/">Multiple accounts</a></li><li><a href="/istari/docs/graph-reviews/">Graph-first reviews</a></li><li><a href="/istari/docs/troubleshooting/">Troubleshooting</a></li><li><a href="/istari/docs/uninstall/">Uninstall</a></li></ul><p class="nav-group">Reference</p><ul><li><a href="/istari/docs/commands/" aria-current="page">Commands</a></li><li><a href="/istari/docs/hooks/">Hook events</a></li><li><a href="/istari/docs/workflows/">Workflow catalog</a></li></ul><p class="nav-group">More</p><ul><li><a href="/istari/download/">Download</a></li></ul></nav></details>
+<article class="content">
+<p class="eyebrow">Reference</p><h1 id="top">Commands</h1><h2 id="all-commands"><a class="anchor" href="#all-commands" aria-hidden="true" tabindex="-1">#</a>All commands</h2>
+<p>Every command the CLI knows about. <strong>Category</strong> matches what <code>ist --all-commands</code> shows: <em>Primary</em> shows in <code>ist --help</code>, <em>Power user</em> works but is hidden, <em>Deprecated</em> still runs and redirects, <em>Coming soon</em> only prints a notice, and <em>Internal</em> commands are called by hooks and daemons rather than people, so they are left out here.</p>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Command</th><th scope="col">Category</th><th scope="col">What it does</th><th scope="col">Subcommands and key options</th></tr></thead><tbody>
+<tr id="ist-account"><td><code>ist account</code></td><td>Primary</td><td>Manage parallel Claude Code accounts.</td><td>list, add, use, switch, remove, heal, aliases, swap, resume</td></tr>
+<tr id="ist-agent"><td><code>ist agent</code></td><td>Primary</td><td>Agent templates - list, show, create, edit, run, enable, disable, install.</td><td>list, show, create, edit, run, enable, disable, install</td></tr>
+<tr id="ist-analytics"><td><code>ist analytics</code></td><td>Primary</td><td>Daily work analytics.</td><td></td></tr>
+<tr id="ist-answer"><td><code>ist answer</code></td><td>Primary</td><td>Answer a pipeline question (resumes escalated jobs).</td><td></td></tr>
+<tr id="ist-approve"><td><code>ist approve</code></td><td>Primary</td><td>Approve a plan at the plan gate.</td><td></td></tr>
+<tr id="ist-ask"><td><code>ist ask</code></td><td>Primary</td><td>Agent asks for clarification on an unclear requirement.</td><td></td></tr>
+<tr id="ist-assemble"><td><code>ist assemble</code></td><td>Coming soon</td><td>Spawn full agent team.</td><td></td></tr>
+<tr id="ist-assets"><td><code>ist assets</code></td><td>Primary</td><td>Cross-tool asset map - scan, adopt, mute, override project/agent skills and rules.</td><td>scan, list, show, adopt, mute, ignore, override, ack, lint, assemble, shadow</td></tr>
+<tr id="ist-attach"><td><code>ist attach</code></td><td>Primary</td><td>Pull a background agent into this terminal (interactive).</td><td></td></tr>
+<tr id="ist-audit"><td><code>ist audit</code></td><td>Primary</td><td>View the audit trail (who changed what, when, outcome).</td><td></td></tr>
+<tr id="ist-automations"><td><code>ist automations</code></td><td>Primary</td><td>Unified watcher + workflow status (read-only overview).</td><td></td></tr>
+<tr id="ist-autopilot"><td><code>ist autopilot</code></td><td>Deprecated</td><td>Toggle autonomous mode. Replaced by <code>ist push</code>.</td><td>on, off, status (modes: full, custom)</td></tr>
+<tr id="ist-board"><td><code>ist board</code></td><td>Primary</td><td>Show JIRA tickets.</td><td></td></tr>
+<tr id="ist-bootstrap"><td><code>ist bootstrap</code></td><td>Primary</td><td>Seed memory from existing AI files, Claude projects and git history.</td><td></td></tr>
+<tr id="ist-career"><td><code>ist career</code></td><td>Primary</td><td>Career mirror - reflects your observable work vs a target role (opt-in, local).</td><td>(default weekly mirror), today</td></tr>
+<tr id="ist-cd"><td><code>ist cd</code></td><td>Primary</td><td>Print absolute path of a context (shell-helper primitive).</td><td></td></tr>
+<tr id="ist-chat"><td><code>ist chat</code></td><td>Primary</td><td>Talk to a running agent (two-way).</td><td></td></tr>
+<tr id="ist-child"><td><code>ist child</code></td><td>Primary</td><td>Start a child/sub-session.</td><td>start, stop, status</td></tr>
+<tr id="ist-clean"><td><code>ist clean</code></td><td>Primary</td><td>Purge zombie/dead-process registry rows.</td><td></td></tr>
+<tr id="ist-companion"><td><code>ist companion</code></td><td>Primary</td><td>Companion server (The Eyes) - init, start, stop, status, register, queue, logs.</td><td>init, start, stop, status, register, queue, logs</td></tr>
+<tr id="ist-config"><td><code>ist config</code></td><td>Power user</td><td>Configuration - get, set, list (incl. <code>review</code> subkey).</td><td><code>&lt;key&gt;</code> [value], list, review, statusline (interactive picker)</td></tr>
+<tr id="ist-connect"><td><code>ist connect</code></td><td>Deprecated</td><td>Set up channels. Replaced by <code>ist setup</code>.</td><td></td></tr>
+<tr id="ist-context"><td><code>ist context</code></td><td>Primary</td><td>Unified work model - projects, tasks, scratch, adhoc.</td><td>list, show, cd, migrate</td></tr>
+<tr id="ist-conversations"><td><code>ist conversations</code> (alias <code>convos</code>)</td><td>Power user</td><td>Browse conversation history.</td><td></td></tr>
+<tr id="ist-cost"><td><code>ist cost</code></td><td>Primary</td><td>Token usage and cost analytics.</td><td></td></tr>
+<tr id="ist-council"><td><code>ist council</code></td><td>Coming soon</td><td>Agent coordination session.</td><td></td></tr>
+<tr id="ist-daemon"><td><code>ist daemon</code></td><td>Power user</td><td>Background daemon - start, stop, restart, status, install.</td><td>start, stop, restart, status, install, uninstall</td></tr>
+<tr id="ist-dashboard"><td><code>ist dashboard</code></td><td>Primary</td><td>Web dashboard - start, stop, restart, status.</td><td>start, stop, restart, status</td></tr>
+<tr id="ist-debt"><td><code>ist debt</code></td><td>Power user</td><td>Technical debt radar.</td><td></td></tr>
+<tr id="ist-demo"><td><code>ist demo</code></td><td>Primary</td><td>Build a stakeholder demo deck for a delivered ticket.</td><td></td></tr>
+<tr id="ist-discord-link"><td><code>ist discord-link</code></td><td>Primary</td><td>Bind Discord identity - enable feed DM push/digest (<code>--feed-dm &lt;id&gt;</code>).</td><td></td></tr>
+<tr id="ist-doctor"><td><code>ist doctor</code></td><td>Primary</td><td>Health check.</td><td></td></tr>
+<tr id="ist-done"><td><code>ist done</code></td><td>Primary</td><td>Mark a task as completed.</td><td></td></tr>
+<tr id="ist-down"><td><code>ist down</code></td><td>Primary</td><td>Take Istari fully down (daemons + watchers) and lock it until restart.</td><td></td></tr>
+<tr id="ist-eval"><td><code>ist eval</code></td><td>Power user</td><td>Run the canonical-query benchmark harness (recall QA gate).</td><td>recall (baseline or alternative pipelines)</td></tr>
+<tr id="ist-examples"><td><code>ist examples</code></td><td>Primary</td><td>How do I... - real command recipes for common situations.</td><td></td></tr>
+<tr id="ist-feed"><td><code>ist feed</code></td><td>Primary</td><td>Personalized engineering inbox - PRs, JIRA, sessions.</td><td>init, start, stop, status, badge, lines, snooze, dismiss, open, pick, review, mark, history, restore, brief, config, detect-stack, preview, reading, sources</td></tr>
+<tr id="ist-gates"><td><code>ist gates</code></td><td>Primary</td><td>Delivery-gate recognition ledger - which PR gates istari has stopped understanding.</td><td></td></tr>
+<tr id="ist-go"><td><code>ist go</code></td><td>Primary</td><td>What should I work on? (universal entry).</td><td></td></tr>
+<tr id="ist-graph"><td><code>ist graph</code></td><td>Primary</td><td>Semantic memory graph - claims and lineage (terminal, DOT, HTML).</td><td></td></tr>
+<tr id="ist-graphify"><td><code>ist graphify</code></td><td>Primary</td><td>Knowledge graph wrapper - query code structure via Graphify.</td><td>install, build, update, query, sync, status, list, prune, on, off, stats, check, instruct</td></tr>
+<tr id="ist-guide"><td><code>ist guide</code></td><td>Primary</td><td>What istari can do, task by task.</td><td></td></tr>
+<tr id="ist-harvest"><td><code>ist harvest</code></td><td>Deprecated</td><td>Dead time harvester. Replaced by <code>ist watch</code>.</td><td></td></tr>
+<tr id="ist-head"><td><code>ist head</code></td><td>Primary</td><td>Reclaim or inspect the active head when engines diverge.</td><td>reclaim, status</td></tr>
+<tr id="ist-hooks"><td><code>ist hooks</code></td><td>Primary</td><td>Turn istari&#39;s hooks off/on temporarily - status, off, on.</td><td>status, off, on</td></tr>
+<tr id="ist-inbox"><td><code>ist inbox</code></td><td>Primary</td><td>Interactive feed browser - ↑/↓ navigate, Enter to open (numbered list when piped).</td><td></td></tr>
+<tr id="ist-index"><td><code>ist index</code></td><td>Deprecated</td><td>Build search index.</td><td></td></tr>
+<tr id="ist-info"><td><code>ist info</code></td><td>Primary</td><td>Unified workspace context view.</td><td></td></tr>
+<tr id="ist-infra"><td><code>ist infra</code></td><td>Primary</td><td>Workspace infra (Docker) - up, down, status, logs, snapshot, restore.</td><td>init, up, down, destroy, restart, status, ports, logs, health, seed, snapshot, restore, config, env</td></tr>
+<tr id="ist-ingest"><td><code>ist ingest</code></td><td>Power user</td><td>Async ingest pipeline (worker, queue management).</td><td>worker (--once, --max-rps, --budget-ms, --max-attempts)</td></tr>
+<tr id="ist-init"><td><code>ist init</code></td><td>Primary</td><td>Initialize a WORKSPACE for a ticket (<code>--adhoc</code> for no-clone-no-ticket). Not first-run setup - see <code>ist setup</code>.</td><td></td></tr>
+<tr id="ist-jira"><td><code>ist jira</code></td><td>Primary</td><td>Write to JIRA (comment / subtask / describe).</td><td>comment, subtask, describe</td></tr>
+<tr id="ist-kb"><td><code>ist kb</code></td><td>Primary</td><td>PR review knowledge base - show, search, stats, diff, review, thread.</td><td>show, search, stats, refresh-profiles, diff, review, thread, reasoning</td></tr>
+<tr id="ist-kill"><td><code>ist kill</code></td><td>Primary</td><td>Stop a task.</td><td></td></tr>
+<tr id="ist-learn"><td><code>ist learn</code></td><td>Primary</td><td>Add or manage project learnings.</td><td></td></tr>
+<tr id="ist-ledger"><td><code>ist ledger</code></td><td>Primary</td><td>Decision ledger - add, last, list, show, reindex.</td><td>add, last, list, show, reindex, supersede, promote, review, sync, migrate, refile</td></tr>
+<tr id="ist-link"><td><code>ist link</code></td><td>Primary</td><td>Attach a JIRA ticket to the current ticket-less session.</td><td></td></tr>
+<tr id="ist-logs"><td><code>ist logs</code></td><td>Primary</td><td>Stream agent output.</td><td></td></tr>
+<tr id="ist-media"><td><code>ist media</code></td><td>Power user</td><td>Inspect ticket media - scene-deduped contact sheet + timestamp sidecar for videos.</td><td>inspect</td></tr>
+<tr id="ist-meeting"><td><code>ist meeting</code></td><td>Primary</td><td>Meeting transcripts - capture, list, show, sources, record-mode.</td><td>capture, ingest, watch, paths, list, show, sources, record-mode (enable/disable/status), detect (status/enable/disable/test), setup</td></tr>
+<tr id="ist-memory"><td><code>ist memory</code></td><td>Primary</td><td>Memory - open, parked, decided, why, conflicts (semantic layer); status, topics, share, maintain, cost, pending.</td><td>status, topics, share, show, conflicts, archive, forget, maintain, cost, pending, accept, reject, deprecate, promote, open, parked, decided, why, claim, link, resolve, consolidate, import-ledger, rejects</td></tr>
+<tr id="ist-metrics"><td><code>ist metrics</code></td><td>Power user</td><td>Engineering metrics (DORA+AI).</td><td></td></tr>
+<tr id="ist-migrate"><td><code>ist migrate</code></td><td>Power user</td><td>Migrate JSON/JSONL state to SQLite database.</td><td></td></tr>
+<tr id="ist-mirror"><td><code>ist mirror</code></td><td>Primary</td><td>Toggle Discord mirror for current session.</td><td></td></tr>
+<tr id="ist-mute"><td><code>ist mute</code></td><td>Primary</td><td>Silence a ticket&#39;s Discord thread posts.</td><td></td></tr>
+<tr id="ist-mywork"><td><code>ist mywork</code></td><td>Primary</td><td>Cross-source view of tickets you have worked on (alias for: ist analytics <code>--summary</code>).</td><td></td></tr>
+<tr id="ist-name"><td><code>ist name</code></td><td>Primary</td><td>Rename the current session (until Claude re-titles it).</td><td></td></tr>
+<tr id="ist-note"><td><code>ist note</code></td><td>Primary</td><td>Record a decision in current session.</td><td></td></tr>
+<tr id="ist-notes"><td><code>ist notes</code></td><td>Primary</td><td>Project knowledge docs - list, init, sync, search, open.</td><td>list, init, sync, search, open, config, ingest</td></tr>
+<tr id="ist-notify"><td><code>ist notify</code></td><td>Power user</td><td>Send notification manually.</td><td></td></tr>
+<tr id="ist-open"><td><code>ist open</code></td><td>Primary</td><td>Open task worktree in IDE.</td><td></td></tr>
+<tr id="ist-pair"><td><code>ist pair</code></td><td>Deprecated</td><td>Pair phone/tablet. Replaced by <code>ist setup</code>.</td><td></td></tr>
+<tr id="ist-pause"><td><code>ist pause</code></td><td>Primary</td><td>Suspend a running agent in-place (SIGSTOP).</td><td></td></tr>
+<tr id="ist-persona"><td><code>ist persona</code></td><td>Primary</td><td>Reviewer persona - learn your voice from your own review history.</td><td></td></tr>
+<tr id="ist-pick"><td><code>ist pick</code></td><td>Primary</td><td>Dispatch autonomous task for a ticket.</td><td></td></tr>
+<tr id="ist-place"><td><code>ist place</code></td><td>Primary</td><td>Place work: <code>--child</code> (navigable in this CLI via agent-view) or <code>--fork</code>/<code>--background</code> (detached warm session for when away).</td><td></td></tr>
+<tr id="ist-plan"><td><code>ist plan</code></td><td>Primary</td><td>View or open a ticket&#39;s pipeline plan.</td><td></td></tr>
+<tr id="ist-pr-digest"><td><code>ist pr-digest</code></td><td>Primary</td><td>Digest of all PRs in review lifecycle (waiting/stale/escalated).</td><td></td></tr>
+<tr id="ist-pr-lifecycle"><td><code>ist pr-lifecycle</code></td><td>Primary</td><td>Scan PRs and apply istari/&lt;tag&gt; labels (in-review, round-N-done, approved, merged).</td><td>scan (labels: review-requested, review-submitted, approved, merged, closed-unmerged)</td></tr>
+<tr id="ist-pr-summary"><td><code>ist pr-summary</code></td><td>Primary</td><td>View technical summary docs generated during PR review.</td><td></td></tr>
+<tr id="ist-productivity"><td><code>ist productivity</code></td><td>Primary</td><td>Developer productivity score.</td><td></td></tr>
+<tr id="ist-project"><td><code>ist project</code></td><td>Primary</td><td>One bare repo per project - add, list, fetch.</td><td>add, list, fetch</td></tr>
+<tr id="ist-proxy"><td><code>ist proxy</code></td><td>Power user</td><td>Model-routing proxy - on, off, status.</td><td>on, off, status</td></tr>
+<tr id="ist-pull"><td><code>ist pull</code></td><td>Primary</td><td>Take over: autonomous -&gt; interactive.</td><td></td></tr>
+<tr id="ist-push"><td><code>ist push</code></td><td>Primary</td><td>Release: interactive -&gt; autonomous.</td><td></td></tr>
+<tr id="ist-questions"><td><code>ist questions</code></td><td>Primary</td><td>Inbox of gates + questions waiting on you (all tickets).</td><td></td></tr>
+<tr id="ist-recall"><td><code>ist recall</code></td><td>Primary</td><td>Search past work - query archives, list, export, stats, reindex.</td><td>list, export, expand, why, timeline, backfill, stats, reindex, benchmark, retitle, segment, cleanup, integrate, supersede, restore, eval, facts, exemplars</td></tr>
+<tr id="ist-reconcile-agents"><td><code>ist reconcile-agents</code></td><td>Power user</td><td>Fold split ~/.istari/agents/&lt;key&gt;/&lt;ticket&gt; dirs into one (dry run by default).</td><td></td></tr>
+<tr id="ist-replan"><td><code>ist replan</code></td><td>Primary</td><td>Reject a gated plan and plan again.</td><td></td></tr>
+<tr id="ist-resume"><td><code>ist resume</code></td><td>Primary</td><td>Recover crashed/frozen agent.</td><td></td></tr>
+<tr id="ist-review"><td><code>ist review</code></td><td>Primary</td><td>Review your current work locally - posts nothing, no GitHub needed.</td><td></td></tr>
+<tr id="ist-reviews"><td><code>ist reviews</code></td><td>Primary</td><td>PR review status - list, history, <code>--approve</code>, <code>--pause</code>, <code>--resume</code>.</td><td></td></tr>
+<tr id="ist-rollback"><td><code>ist rollback</code></td><td>Power user</td><td>Rollback agent changes.</td><td></td></tr>
+<tr id="ist-routing"><td><code>ist routing</code></td><td>Power user</td><td>AI engine routing - show, set, reset, doctor, trace.</td><td>show, set, reset, doctor, trace, migrate, preset, test-supervisor</td></tr>
+<tr id="ist-rulebook"><td><code>ist rulebook</code></td><td>Power user</td><td>Portable typed rulebook registry - list / add / why / sync / rm / audit / port / adopt / import rules.</td><td>list, add, why, sync, rm, audit, port, adopt, import</td></tr>
+<tr id="ist-scan"><td><code>ist scan</code></td><td>Primary</td><td>Detect engines/connectors and register a default engine.</td><td></td></tr>
+<tr id="ist-search"><td><code>ist search</code></td><td>Power user</td><td>Search agent memories and history.</td><td>--source agent / archive / learning / conversation / git / session</td></tr>
+<tr id="ist-session"><td><code>ist session</code></td><td>Primary</td><td>Session management - list, show, resume, export, delete, temp.</td><td>list, show, resume, export, delete, temp, keep, info, clean, group, work, events, state, segments</td></tr>
+<tr id="ist-session-close"><td><code>ist session-close</code></td><td>Primary</td><td>Close session + write compact context for next fresh start.</td><td></td></tr>
+<tr id="ist-sessions"><td><code>ist sessions</code></td><td>Primary</td><td>View unified sessions across engines.</td><td></td></tr>
+<tr id="ist-setup"><td><code>ist setup</code></td><td>Primary</td><td>THE first-run entry point - detect, opt out, configure.</td><td></td></tr>
+<tr id="ist-skill"><td><code>ist skill</code></td><td>Primary</td><td>Run a registered skill through istari governance - list, run &lt;name&gt; (inline or forked).</td><td></td></tr>
+<tr id="ist-sprint"><td><code>ist sprint</code></td><td>Power user</td><td>Sprint planning and retrospective.</td><td>plan, risks, retro</td></tr>
+<tr id="ist-standup"><td><code>ist standup</code></td><td>Primary</td><td>Daily standup - per-ticket summary across sessions, commits, PRs, JIRA.</td><td></td></tr>
+<tr id="ist-start"><td><code>ist start</code></td><td>Primary</td><td>Interactive session with Istari superpowers.</td><td></td></tr>
+<tr id="ist-status"><td><code>ist status</code></td><td>Primary</td><td>Show all running tasks.</td><td>agents, reviews, ports, --all</td></tr>
+<tr id="ist-support-bundle"><td><code>ist support-bundle</code></td><td>Primary</td><td>Package diagnostics into one shareable file.</td><td></td></tr>
+<tr id="ist-switch"><td><code>ist switch</code></td><td>Primary</td><td>Switch engine for current session.</td><td>claude-code, codex, ollama (+ --model)</td></tr>
+<tr id="ist-sync-codex"><td><code>ist sync-codex</code></td><td>Primary</td><td>Sync Istari config to Codex CLI.</td><td></td></tr>
+<tr id="ist-talk"><td><code>ist talk</code></td><td>Primary</td><td>Bidirectional Discord mirroring.</td><td>on, off, status</td></tr>
+<tr id="ist-team"><td><code>ist team</code></td><td>Coming soon</td><td>Team agent overview.</td><td>status, cost</td></tr>
+<tr id="ist-tell"><td><code>ist tell</code></td><td>Primary</td><td>Quick one-way instruction to agent.</td><td></td></tr>
+<tr id="ist-test-discord"><td><code>ist test-discord</code></td><td>Power user</td><td>Test Discord Gateway integration.</td><td></td></tr>
+<tr id="ist-trust"><td><code>ist trust</code></td><td>Power user</td><td>Trust level - interactive, supervised, autonomous, silent.</td><td>interactive, supervised, autonomous, silent</td></tr>
+<tr id="ist-uninstall"><td><code>ist uninstall</code></td><td>Primary</td><td>Remove istari - dry run first, your data kept unless <code>--purge</code>.</td><td>dry run first, --purge (with export offer)</td></tr>
+<tr id="ist-unpause"><td><code>ist unpause</code></td><td>Primary</td><td>Resume a paused agent (SIGCONT).</td><td></td></tr>
+<tr id="ist-up"><td><code>ist up</code> (alias <code>restart</code>)</td><td>Primary</td><td>Bring Istari back up - clears the halt lock and restarts the daemon.</td><td></td></tr>
+<tr id="ist-upgrade"><td><code>ist upgrade</code> (alias <code>update</code>)</td><td>Primary</td><td>Update the ist binary - <code>--check</code>, <code>--rollback</code>, <code>--version &lt;tag&gt;</code>.</td><td>--check, --rollback, --version <code>&lt;tag&gt;</code></td></tr>
+<tr id="ist-verify"><td><code>ist verify</code></td><td>Power user</td><td>Verify implementation vs ACs.</td><td></td></tr>
+<tr id="ist-verify-agents"><td><code>ist verify-agents</code></td><td>Power user</td><td>Test all 9 Claude Code agents end-to-end.</td><td></td></tr>
+<tr id="ist-watch"><td><code>ist watch</code></td><td>Primary</td><td>Background watchers - start, stop, status, list (PR review, bugs, CI).</td><td>start, stop, status, list, add, remove, auto-detect, prune, refresh; plus <code>watch pr</code>, <code>watch ci</code>, <code>watch review</code> one-shot watchers</td></tr>
+<tr id="ist-workflow"><td><code>ist workflow</code></td><td>Primary</td><td>Dynamic workflows - list, show, create, run, enable, disable, preset, set.</td><td>list, show, create, run, enable, disable, install, delete, preset, set, pause, resume, stop-all, start-all, reinstall</td></tr>
+<tr id="ist-workspace"><td><code>ist workspace</code></td><td>Primary</td><td>Persistent workspaces - create, list, delete, open, sessions, archive.</td><td>create, list, show, delete, open, sessions, config, suggest, setup, scan, reset, cleanup, tree, archive, status</td></tr>
+<tr id="ist-worktree"><td><code>ist worktree</code></td><td>Primary</td><td>Per-worktree port + env isolation - setup, teardown, ports, env, cleanup.</td><td>setup, teardown, release, ports, status, env, cleanup, gc, detect, list, prune</td></tr>
+<tr id="ist-ws"><td><code>ist ws</code></td><td>Primary</td><td>Workspaces on one bare repo - add, list, sync, rename, rm.</td><td>add, list, sync, rename, rm</td></tr>
+<tr id="ist-wt"><td><code>ist wt</code></td><td>Primary</td><td>Task worktrees - add, list, path, rm.</td><td>add, list, path, rm</td></tr>
+</tbody></table></div>
+<h2 id="command-flags"><a class="anchor" href="#command-flags" aria-hidden="true" tabindex="-1">#</a>Command flags</h2>
+<p>These commands validate their flags and print the same list with <code>--help</code>. Every flag they accept:</p>
+<h3 id="ist-approve-2"><a class="anchor" href="#ist-approve-2" aria-hidden="true" tabindex="-1">#</a><code>ist approve</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr id="anyway"><td><code>--anyway</code></td><td>Skip the plan-staleness check and approve as-is</td></tr>
+<tr id="lld"><td><code>--lld</code></td><td>Force the LLD design stage ON before implementation</td></tr>
+<tr id="no-lld"><td><code>--no-lld</code></td><td>Force the LLD design stage OFF (default: planner recommendation)</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-board-2"><a class="anchor" href="#ist-board-2" aria-hidden="true" tabindex="-1">#</a><code>ist board</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr id="type-type"><td><code>--type &lt;type&gt;</code></td><td>Filter JIRA by type (story/bug/task/epic)</td></tr>
+<tr id="priority-level"><td><code>--priority &lt;level&gt;</code></td><td>Filter JIRA by priority (critical/high/medium/low)</td></tr>
+<tr id="status-status"><td><code>--status &lt;status&gt;</code></td><td>Filter JIRA by status (e.g. &quot;To Do&quot;, &quot;In Progress&quot;)</td></tr>
+<tr id="sprint-sprint"><td><code>--sprint &lt;sprint&gt;</code></td><td>Filter JIRA by sprint (default: current)</td></tr>
+<tr id="limit-n"><td><code>--limit &lt;N&gt;</code></td><td>Max JIRA tickets to return (default: 50)</td></tr>
+<tr id="include-done"><td><code>--include-done</code></td><td>Include Done/Closed/Resolved/Cancelled tickets</td></tr>
+<tr id="include-subtasks"><td><code>--include-subtasks</code></td><td>Include Sub-task tickets</td></tr>
+<tr id="all"><td><code>--all</code></td><td>Shortcut for --include-done --include-subtasks</td></tr>
+<tr id="browser"><td><code>--browser</code></td><td>Use Chrome browser scraping instead of API (JIRA only)</td></tr>
+<tr id="no-jira"><td><code>--no-jira</code></td><td>Skip JIRA fetch</td></tr>
+<tr id="no-prs-to-review"><td><code>--no-prs-to-review</code></td><td>Skip PR-review-requested fetch</td></tr>
+<tr id="no-my-prs"><td><code>--no-my-prs</code></td><td>Skip my-open-PRs fetch</td></tr>
+<tr id="only-source"><td><code>--only &lt;source&gt;</code></td><td>Show one section only: jira / reviews / my-prs</td></tr>
+<tr id="plain"><td><code>--plain</code></td><td>Plain-text output - no colours, no OSC 8 hyperlinks. Useful for piping to grep / wc / less without -R.</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-clean-2"><a class="anchor" href="#ist-clean-2" aria-hidden="true" tabindex="-1">#</a><code>ist clean</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr><td><code>--dry-run</code> / <code>-n</code></td><td>Show what would be cleaned without writing</td></tr>
+<tr id="prune-missing-cwd"><td><code>--prune-missing-cwd</code></td><td>Also remove completed/failed rows whose workDir no longer exists on disk</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help</td></tr>
+</tbody></table></div>
+<h3 id="ist-graph-2"><a class="anchor" href="#ist-graph-2" aria-hidden="true" tabindex="-1">#</a><code>ist graph</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr id="html-path"><td><code>--html [path]</code></td><td>Self-contained page, no network. Default: a temp file</td></tr>
+<tr id="dot-path"><td><code>--dot [path]</code></td><td>Graphviz DOT. stdout when no path is given</td></tr>
+<tr id="open"><td><code>--open</code></td><td>Open the --html page in the default viewer</td></tr>
+<tr id="in-tier"><td><code>--in &lt;tier&gt;</code></td><td>project / shared / global / all</td></tr>
+<tr id="project-key"><td><code>--project &lt;key&gt;</code></td><td>One named project. Implies --in project unless --in is also given</td></tr>
+<tr id="kind-kind"><td><code>--kind &lt;KIND&gt;</code></td><td>DECIDED / OPEN / PARKED / LEARNED</td></tr>
+<tr id="since-window"><td><code>--since &lt;window&gt;</code></td><td>30d / 4w / 6m / 1y / YYYY-MM-DD</td></tr>
+<tr id="live-2"><td><code>--live</code></td><td>Live claims only. Off by default: a lineage graph without superseded claims has every arrow target removed</td></tr>
+<tr id="limit-n-2"><td><code>--limit &lt;n&gt;</code></td><td>Claim cap (default 500)</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-kill-2"><a class="anchor" href="#ist-kill-2" aria-hidden="true" tabindex="-1">#</a><code>ist kill</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr id="all-2"><td><code>--all</code></td><td>Kill all running agents</td></tr>
+<tr id="role-role"><td><code>--role &lt;role&gt;</code></td><td>Which agent role to kill when several match one ticket (dev/qa/tl/sa/devops/security)</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-logs-2"><a class="anchor" href="#ist-logs-2" aria-hidden="true" tabindex="-1">#</a><code>ist logs</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr id="tail-n"><td><code>--tail &lt;N&gt;</code></td><td>Show last N lines only</td></tr>
+<tr><td><code>--follow</code> / <code>-f</code></td><td>Follow log output in real-time (like tail -f)</td></tr>
+<tr id="raw"><td><code>--raw</code></td><td>Force the raw session log for v2 pipeline jobs (skip the event feed)</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-pick-2"><a class="anchor" href="#ist-pick-2" aria-hidden="true" tabindex="-1">#</a><code>ist pick</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr><td><code>--role &lt;role&gt;</code> / <code>-r</code></td><td>Agent role (dev/qa/tl/sa/devops/security, default: dev)</td></tr>
+<tr><td><code>--model &lt;model&gt;</code> / <code>-m</code></td><td>Model override (e.g. sonnet, opus)</td></tr>
+<tr id="gate-plannonepre-push"><td><code>--gate &lt;plan|none|pre-push&gt;</code></td><td>Pause the pipeline after a stage for &#39;ist approve&#39;. Comma-combine (plan,pre-push); default from config.pipeline.plan_gate.</td></tr>
+<tr id="restart"><td><code>--restart</code></td><td>Discard saved plan/gate state and start the job over</td></tr>
+<tr id="dry-run"><td><code>--dry-run</code></td><td>Show what would happen without spawning</td></tr>
+<tr id="here"><td><code>--here</code></td><td>Work in the current directory (skip worktree creation)</td></tr>
+<tr id="base-branch"><td><code>--base &lt;branch&gt;</code></td><td>Base the diff/scope/PR on a branch other than main (stacked tickets)</td></tr>
+<tr id="at-when"><td><code>--at &lt;when&gt;</code></td><td>Schedule the pick instead of spawning now: &quot;21:30&quot;/&quot;9am&quot; (next occurrence), &quot;in 2h&quot;/&quot;in 45m&quot;, or &quot;reset&quot; (when the engine limit lifts)</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+<tr id="trust-level"><td><code>--trust &lt;level&gt;</code></td><td>Trust level (interactive/supervised/autonomous/silent) <em>(advanced)</em></td></tr>
+<tr><td><code>--budget &lt;tokens&gt;</code> / <code>-b</code></td><td>Token budget for the agent <em>(advanced)</em></td></tr>
+<tr id="budget-usd-amount"><td><code>--budget-usd &lt;amount&gt;</code></td><td>USD budget for the agent <em>(advanced)</em></td></tr>
+<tr id="no-budget"><td><code>--no-budget</code></td><td>Disable budget kill-switch <em>(advanced)</em></td></tr>
+<tr id="no-prediction"><td><code>--no-prediction</code></td><td>Skip cost prediction <em>(advanced)</em></td></tr>
+<tr><td><code>--engine &lt;engine&gt;</code> / <code>-e</code></td><td>Engine to use (claude/codex/ollama) <em>(advanced)</em></td></tr>
+<tr id="lld-2"><td><code>--lld</code></td><td>Force the LLD design stage ON <em>(advanced)</em></td></tr>
+<tr id="no-lld-2"><td><code>--no-lld</code></td><td>Force the LLD design stage OFF (default: auto) <em>(advanced)</em></td></tr>
+<tr id="legacy"><td><code>--legacy</code></td><td>Use the v1 one-shot pipeline (opt out of v2 supervised) <em>(advanced)</em></td></tr>
+<tr><td><code>--follow</code> / <code>-i</code></td><td>Stream the pipeline event log until the gate or a terminal state <em>(advanced)</em></td></tr>
+<tr id="supervised"><td><code>--supervised</code></td><td>Watch for rate-limit / quota exhaustion + auto-failover <em>(advanced)</em></td></tr>
+<tr id="no-supervised"><td><code>--no-supervised</code></td><td>Force supervisor off (default for interactive runs) <em>(advanced)</em></td></tr>
+<tr id="dry-pr"><td><code>--dry-pr</code></td><td>Block destructive gh PR commands; agent runs end-to-end but nothing posts. Logs would-be commands to &lt;workDir&gt;/.istari-dry-pr/log.txt <em>(advanced)</em></td></tr>
+<tr id="draft"><td><code>--draft</code></td><td>Draft-PR review gate: deliver a draft PR, halt for your review, then verify-then-decide on your concerns. Reply via &#39;ist answer &lt;ticket&gt; ready/&lt;concerns&gt;&#39;. <em>(advanced)</em></td></tr>
+<tr id="unattended"><td><code>--unattended</code></td><td>Run to PR creation with no human turn. Base drift auto-rebases (conflict -&gt; draft PR, never a force-push), exhausted verification ships a draft PR with the failures in the body, and the draft-review dialogue is skipped. Safety stops (scope, secrets, infra, AI-%) still park. <em>(advanced)</em></td></tr>
+<tr id="mock"><td><code>--mock</code></td><td>Use placeholder ticket if real sources unreachable (default: fail loudly) <em>(advanced)</em></td></tr>
+<tr id="browser-2"><td><code>--browser</code></td><td>Use browser scraping for the JIRA ticket <em>(advanced)</em></td></tr>
+<tr id="no-graphify"><td><code>--no-graphify</code></td><td>Skip the graphify graph check (no graph-status.md written) <em>(advanced)</em></td></tr>
+<tr><td><code>--quiet</code> / <code>-q</code></td><td>Minimal output <em>(advanced)</em></td></tr>
+<tr id="porcelain"><td><code>--porcelain</code></td><td>Also print a machine-readable IST_PICK_RESULT line (spawned vs attached) for scripts such as &#39;ist assemble&#39; <em>(advanced)</em></td></tr>
+</tbody></table></div>
+<h3 id="ist-plan-2"><a class="anchor" href="#ist-plan-2" aria-hidden="true" tabindex="-1">#</a><code>ist plan</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr id="open-n"><td><code>--open &lt;N&gt;</code></td><td>Show archived plan.N.md (rejected/replanned versions)</td></tr>
+<tr id="path"><td><code>--path</code></td><td>Print the file path only (for piping/scripting)</td></tr>
+<tr id="editor-editor"><td><code>--editor &lt;editor&gt;</code></td><td>Editor to open with (used with --open; defaults to ist open detection)</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-resume-2"><a class="anchor" href="#ist-resume-2" aria-hidden="true" tabindex="-1">#</a><code>ist resume</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr id="engine-engine"><td><code>--engine &lt;engine&gt;</code></td><td>Engine to resume on (claude-code/codex/ollama). If omitted, resumes on the original engine.</td></tr>
+<tr id="model-model"><td><code>--model &lt;model&gt;</code></td><td>Model override (e.g. sonnet, opus, or an Ollama model)</td></tr>
+<tr id="budget-tokens"><td><code>--budget &lt;tokens&gt;</code></td><td>Add additional token budget</td></tr>
+<tr><td><code>--after &lt;delay&gt;</code> / <code>-bg</code></td><td>Run as background agent (default: interactive)</td></tr>
+<tr id="foreground-timer"><td><code>--foreground-timer</code></td><td>Keep this terminal attached, wait for --after/--at, then resume interactively</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-start-2"><a class="anchor" href="#ist-start-2" aria-hidden="true" tabindex="-1">#</a><code>ist start</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr><td><code>--role &lt;role&gt;</code> / <code>-r</code></td><td>Agent role (dev/qa/tl/sa/devops/security, default: dev)</td></tr>
+<tr><td><code>--model &lt;model&gt;</code> / <code>-m</code></td><td>Override model (opus/sonnet/haiku)</td></tr>
+<tr><td><code>--engine &lt;engine&gt;</code> / <code>-e</code></td><td>Engine to use (claude/codex/ollama, default: claude)</td></tr>
+<tr id="scratch"><td><code>--scratch</code></td><td>Create an exploratory worktree off the current branch (optional [name]). No ticket required; auto-names if name omitted. Sets up the workspace and exits - no agent spawn.</td></tr>
+<tr id="temp"><td><code>--temp</code></td><td>Mark session as temporary (auto-cleaned on completion)</td></tr>
+<tr id="here-2"><td><code>--here</code></td><td>Work in the current directory (skip worktree creation)</td></tr>
+<tr id="mirror"><td><code>--mirror</code></td><td>Mirror the session to Discord</td></tr>
+<tr id="no-graphify-2"><td><code>--no-graphify</code></td><td>Skip graphify graph check (no graph-status.md written)</td></tr>
+<tr><td><code>--verbose</code> / <code>-v</code></td><td>Print the underlying claude/codex command line</td></tr>
+<tr><td><code>--quiet</code> / <code>-q</code></td><td>Minimal output</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-status-2"><a class="anchor" href="#ist-status-2" aria-hidden="true" tabindex="-1">#</a><code>ist status</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr><td><code>--all</code> / <code>-a</code></td><td>Show sessions from all projects (not just current directory)</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help message</td></tr>
+</tbody></table></div>
+<h3 id="ist-uninstall-2"><a class="anchor" href="#ist-uninstall-2" aria-hidden="true" tabindex="-1">#</a><code>ist uninstall</code></h3>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Flag</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr id="yes"><td><code>--yes</code></td><td>Actually remove - without this nothing is written</td></tr>
+<tr><td><code>--dry-run</code> / <code>-n</code></td><td>Show the plan and exit (this is the default)</td></tr>
+<tr id="purge"><td><code>--purge</code></td><td>Also remove your data, after exporting it first</td></tr>
+<tr id="export-to-dir"><td><code>--export-to &lt;dir&gt;</code></td><td>Where --purge writes the export (default ~/.istari-export/&lt;timestamp&gt;)</td></tr>
+<tr id="no-export"><td><code>--no-export</code></td><td>Skip the export --purge would write</td></tr>
+<tr id="keep-binary"><td><code>--keep-binary</code></td><td>Leave the ist binary in place</td></tr>
+<tr><td><code>--help</code> / <code>-h</code></td><td>Show this help</td></tr>
+</tbody></table></div><nav class="pager" aria-label="Previous and next"><a class="prev" href="/istari/docs/uninstall/" rel="prev"><span>Previous</span>Uninstall</a><a class="next" href="/istari/docs/hooks/" rel="next"><span>Next</span>Hook events</a></nav>
+</article>
+</main>
+<aside class="toc" aria-labelledby="toc-h"><h2 id="toc-h">On this page</h2><ul><li class="l2"><a href="#all-commands">All commands</a></li><li class="l2"><a href="#command-flags">Command flags</a></li><li class="l3"><a href="#ist-approve-2">ist approve</a></li><li class="l3"><a href="#ist-board-2">ist board</a></li><li class="l3"><a href="#ist-clean-2">ist clean</a></li><li class="l3"><a href="#ist-graph-2">ist graph</a></li><li class="l3"><a href="#ist-kill-2">ist kill</a></li><li class="l3"><a href="#ist-logs-2">ist logs</a></li><li class="l3"><a href="#ist-pick-2">ist pick</a></li><li class="l3"><a href="#ist-plan-2">ist plan</a></li><li class="l3"><a href="#ist-resume-2">ist resume</a></li><li class="l3"><a href="#ist-start-2">ist start</a></li><li class="l3"><a href="#ist-status-2">ist status</a></li><li class="l3"><a href="#ist-uninstall-2">ist uninstall</a></li></ul></aside>
+</div>
+<footer class="foot">
+  <div class="foot-in">
+    <p><a href="/">Istari AI</a> · <a href="/istari/">Istari</a> · <a href="/istari/docs/">Docs</a> · <a href="/istari/download/">Download</a></p>
+    <p class="muted">Istari is in early access. Licensed under Apache 2.0.</p>
+  </div>
+</footer>
+<p class="sr" id="live" role="status" aria-live="polite"></p>
+<script>
+(function(){
+  var live=document.getElementById('live');
+  function say(t){live.textContent='';setTimeout(function(){live.textContent=t},30)}
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.hidden=false;
+    b.setAttribute('aria-label','Copy code');
+    b.addEventListener('click',function(){
+      var el=b.closest('.code').querySelector('pre');
+      var text=el.innerText.replace(/\n$/,'');
+      function done(){var was=b.textContent;b.textContent='Copied';say('Copied to clipboard');setTimeout(function(){b.textContent=was},1500)}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fallback)}else fallback();
+      function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);say('Code selected. Press Command C or Control C to copy.')}
+    });
+  });
+  // "On this page" highlight
+  var toc=[].slice.call(document.querySelectorAll('.toc a'));
+  if(toc.length&&'IntersectionObserver' in window){
+    var map={};toc.forEach(function(a){map[decodeURIComponent(a.hash.slice(1))]=a});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&map[e.target.id]){toc.forEach(function(a){a.classList.remove('on')});map[e.target.id].classList.add('on')}})},{rootMargin:'-70px 0px -70% 0px'});
+    Object.keys(map).forEach(function(id){var h=document.getElementById(id);if(h)io.observe(h)});
+  }
+  // Search
+  var box=document.querySelector('.search');if(!box||!window.fetch)return;
+  box.hidden=false;
+  var q=document.getElementById('q'),res=document.getElementById('results'),list=res.querySelector('ul'),status=res.querySelector('.results-status');
+  var idx=null,loading=null;
+  function load(){if(!loading)loading=fetch(document.body.dataset.search).then(function(r){return r.json()}).then(function(d){idx=d.map(function(e){e.lt=(e.t||'').toLowerCase();e.lh=(e.h||'').toLowerCase();e.lx=(e.k||e.x||'').toLowerCase();return e});return idx}).catch(function(){status.textContent='Search is unavailable right now.';return []});return loading}
+  function terms(s){return s.toLowerCase().split(/\s+/).filter(Boolean)}
+  function score(e,ts){var s=0;for(var i=0;i<ts.length;i++){var t=ts[i],k=0;if(e.lh.indexOf(t)>-1)k+=e.lh.indexOf(t)===0?8:6;if(e.lt.indexOf(t)>-1)k+=4;if(e.lx.indexOf(t)>-1)k+=1;if(!k)return 0;s+=k}if(e.lh===ts.join(' '))s+=10;if(!e.h)s+=1;return s}
+  function hl(node,text,ts){var lower=text.toLowerCase(),i=0;while(i<text.length){var best=-1,len=0;ts.forEach(function(t){var p=lower.indexOf(t,i);if(p>-1&&(best<0||p<best)){best=p;len=t.length}});if(best<0){node.appendChild(document.createTextNode(text.slice(i)));break}node.appendChild(document.createTextNode(text.slice(i,best)));var m=document.createElement('mark');m.textContent=text.slice(best,best+len);node.appendChild(m);i=best+len}}
+  function render(){
+    var v=q.value.trim();list.textContent='';
+    if(!v){res.hidden=true;return}
+    load().then(function(){
+      if(q.value.trim()!==v)return;
+      var ts=terms(v);
+      var hits=idx.map(function(e){return [score(e,ts),e]}).filter(function(x){return x[0]>0}).sort(function(a,b){return b[0]-a[0]}).slice(0,10);
+      res.hidden=false;
+      status.textContent=hits.length?(hits.length+(hits.length===1?' result':' results')+'. Press the down arrow to move through them.'):'No results for \u201c'+v+'\u201d.';
+      hits.forEach(function(x){var e=x[1],li=document.createElement('li'),a=document.createElement('a');a.href=e.u;
+        var h=document.createElement('span');h.className='r-h';hl(h,e.h||e.t,ts);a.appendChild(h);
+        var p=document.createElement('span');p.className='r-p';p.textContent=e.g+(e.h?' \u203a '+e.t:'');a.appendChild(p);
+        if(e.x){var t=document.createElement('span');t.className='r-x';hl(t,e.x,ts);a.appendChild(t)}
+        li.appendChild(a);list.appendChild(li)});
+    });
+  }
+  var timer;q.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(render,80)});
+  q.addEventListener('focus',function(){load();if(q.value.trim())render()});
+  function links(){return [].slice.call(list.querySelectorAll('a'))}
+  box.addEventListener('keydown',function(e){
+    var ls=links(),i=ls.indexOf(document.activeElement);
+    if(e.key==='Escape'){res.hidden=true;q.focus();if(!q.value)q.blur();return}
+    if(e.key==='ArrowDown'&&ls.length){e.preventDefault();(ls[i+1]||ls[0]).focus()}
+    else if(e.key==='ArrowUp'&&ls.length){e.preventDefault();if(i<=0)q.focus();else ls[i-1].focus()}
+    else if(e.key==='Enter'&&document.activeElement===q&&ls.length){e.preventDefault();location.href=ls[0].href}
+  });
+  document.addEventListener('click',function(e){if(!box.contains(e.target))res.hidden=true});
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='/'||e.metaKey||e.ctrlKey||e.altKey)return;
+    var t=e.target,tag=t&&t.tagName;if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable))return;
+    e.preventDefault();q.focus();q.select();
+  });
+})();
+</script>
+
+</body>
+</html>
