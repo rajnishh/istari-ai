@@ -56,6 +56,7 @@ p{margin:0}
 .nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;font-size:15px;font-weight:500;color:var(--muted);text-decoration:none}
 .nav a:hover{color:var(--ink);background:var(--surface)}
 @media (max-width:520px){.nav .opt{display:none}}
+@media (max-width:340px){.nav .gh{display:none}}
 
 /* Tiles */
 .tile{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;min-width:0}
@@ -125,6 +126,8 @@ section{scroll-margin-top:16px}
   .lift:hover,.lift:hover .arrow{transform:none}
 }
 
+.social{margin:14px 0 0;font-size:15px;color:var(--muted)}
+.social a{color:var(--ink);font-weight:600;display:inline-flex;align-items:center;min-height:44px}
 .crumb{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--muted);margin:4px 0 12px}
 .crumb a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding-right:8px;text-decoration:none;color:var(--muted);font-weight:500}
 .crumb a:hover{color:var(--ink)}
@@ -219,7 +222,7 @@ section{scroll-margin-top:16px}
   <nav class="nav" aria-label="Main">
     <a href="/#products">Products</a>
     <a class="opt" href="/#principles">How we build</a>
-    <a href="https://github.com/rajnishh" rel="noopener">GitHub</a>
+    <a class="gh" href="https://github.com/rajnishh" rel="noopener">GitHub</a>
   </nav>
 </header>
 <main id="main" class="wrap" style="--pc-l:#2F74C0;--pc-d:#82B8F2">
@@ -233,6 +236,7 @@ section{scroll-margin-top:16px}
       <p class="tag">Every spend, counted once. On your phone.</p>
       <p class="pitch">Captures your spends automatically from what your phone already receives, counts each one once, and turns them into budgets and goals, while your data stays on your phone.</p>
       <div class="act"><a class="btn primary" href="https://apps.apple.com/ae/app/id6831568312" rel="noopener">Download on the App Store<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a class="btn ghost" href="https://trybachat.com" rel="noopener">trybachat.com</a><span class="chip" data-stage="live"><i aria-hidden="true"></i>On the App Store</span></div>
+      <p class="social">Follow Bachat: <a href="https://www.instagram.com/trybachat/" rel="noopener">Instagram</a></p>
     </section>
     <div class="tile night pi" aria-hidden="true">
       <svg class="stars" viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice"><circle cx="82.6" cy="119.7" r="0.46" opacity="0.38"/><circle class="tw" cx="205.7" cy="55.5" r="0.92" opacity="0.42"/><circle cx="191.4" cy="54.9" r="0.59" opacity="0.44"/><circle class="tw" cx="152.9" cy="64.8" r="0.73" opacity="0.79"/><circle cx="195.2" cy="57.2" r="0.61" opacity="0.63"/><circle class="tw" cx="116.1" cy="166.2" r="0.47" opacity="0.62"/><circle cx="126.4" cy="95.9" r="0.96" opacity="0.69"/><circle class="tw" cx="270.2" cy="101.8" r="0.49" opacity="0.55"/><circle cx="198.5" cy="178.0" r="0.98" opacity="0.43"/><circle class="tw" cx="127.5" cy="80.7" r="0.79" opacity="0.57"/><circle cx="285.4" cy="13.5" r="0.80" opacity="0.64"/><circle class="tw" cx="126.9" cy="92.9" r="0.61" opacity="0.80"/><circle cx="171.3" cy="69.4" r="0.66" opacity="0.45"/><circle class="tw" cx="92.7" cy="173.6" r="0.47" opacity="0.62"/><circle cx="268.0" cy="52.3" r="0.47" opacity="0.59"/><circle class="tw" cx="261.4" cy="74.5" r="1.10" opacity="0.78"/><circle cx="101.3" cy="100.3" r="0.87" opacity="0.51"/><circle class="tw" cx="77.9" cy="105.3" r="0.77" opacity="0.38"/><circle cx="266.9" cy="62.6" r="0.48" opacity="0.44"/><circle class="tw" cx="159.9" cy="63.2" r="0.67" opacity="0.74"/><circle cx="53.8" cy="169.5" r="1.03" opacity="0.41"/><circle class="tw" cx="231.6" cy="211.3" r="0.82" opacity="0.69"/></svg>
@@ -288,6 +292,7 @@ section{scroll-margin-top:16px}
       <ul>
         <li><a href="/reelkar/">Reelkar</a></li><li><a href="/warden/">Warden</a></li><li><a href="/bachat/">Bachat</a></li><li><a href="/istari/">Istari</a></li>
         <li><a href="https://github.com/rajnishh" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/rajnishkumar88/" rel="noopener me">LinkedIn</a></li>
         <li><a href="mailto:security@istari-ai.dev">Report a security issue</a></li>
       </ul>
     </nav>

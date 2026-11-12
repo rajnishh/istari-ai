@@ -56,6 +56,7 @@ p{margin:0}
 .nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;font-size:15px;font-weight:500;color:var(--muted);text-decoration:none}
 .nav a:hover{color:var(--ink);background:var(--surface)}
 @media (max-width:520px){.nav .opt{display:none}}
+@media (max-width:340px){.nav .gh{display:none}}
 
 /* Tiles */
 .tile{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;min-width:0}
@@ -125,6 +126,8 @@ section{scroll-margin-top:16px}
   .lift:hover,.lift:hover .arrow{transform:none}
 }
 
+.social{margin:14px 0 0;font-size:15px;color:var(--muted)}
+.social a{color:var(--ink);font-weight:600;display:inline-flex;align-items:center;min-height:44px}
 .crumb{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--muted);margin:4px 0 12px}
 .crumb a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding-right:8px;text-decoration:none;color:var(--muted);font-weight:500}
 .crumb a:hover{color:var(--ink)}
@@ -219,7 +222,7 @@ section{scroll-margin-top:16px}
   <nav class="nav" aria-label="Main">
     <a href="/#products">Products</a>
     <a class="opt" href="/#principles">How we build</a>
-    <a href="https://github.com/rajnishh" rel="noopener">GitHub</a>
+    <a class="gh" href="https://github.com/rajnishh" rel="noopener">GitHub</a>
   </nav>
 </header>
 <main id="main" class="wrap" style="--pc-l:#2F8F68;--pc-d:#7BC8A4">
@@ -233,6 +236,7 @@ section{scroll-margin-top:16px}
       <p class="tag">Keeps your Mac fast and cool.</p>
       <p class="pitch">A small Mac app that keeps your background services running, calms programs that run hot, and stops idle AI servers and simulators before they slow you down.</p>
       <div class="act"><a class="btn primary" href="#get">Download for Mac<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a><span class="chip" data-stage="live"><i aria-hidden="true"></i>Download for Mac</span></div>
+      
     </section>
     <div class="tile night pi" aria-hidden="true">
       <svg class="stars" viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice"><circle cx="75.3" cy="108.1" r="1.14" opacity="0.43"/><circle class="tw" cx="182.2" cy="171.5" r="1.14" opacity="0.53"/><circle cx="280.4" cy="98.0" r="1.07" opacity="0.58"/><circle class="tw" cx="106.1" cy="23.8" r="0.81" opacity="0.61"/><circle cx="215.8" cy="92.0" r="0.70" opacity="0.50"/><circle class="tw" cx="80.0" cy="60.5" r="0.55" opacity="0.39"/><circle cx="221.5" cy="187.4" r="1.14" opacity="0.55"/><circle class="tw" cx="192.6" cy="167.4" r="1.07" opacity="0.35"/><circle cx="156.4" cy="205.8" r="0.70" opacity="0.73"/><circle class="tw" cx="115.5" cy="11.2" r="0.93" opacity="0.63"/><circle cx="205.4" cy="125.9" r="0.86" opacity="0.51"/><circle class="tw" cx="143.9" cy="165.3" r="0.92" opacity="0.60"/><circle cx="204.7" cy="33.1" r="0.72" opacity="0.37"/><circle class="tw" cx="156.7" cy="115.3" r="0.98" opacity="0.57"/><circle cx="186.2" cy="29.5" r="0.76" opacity="0.48"/><circle class="tw" cx="95.1" cy="182.5" r="0.72" opacity="0.67"/><circle cx="40.6" cy="101.9" r="0.57" opacity="0.51"/><circle class="tw" cx="160.4" cy="106.3" r="0.43" opacity="0.43"/><circle cx="99.3" cy="168.3" r="1.06" opacity="0.64"/><circle class="tw" cx="129.9" cy="5.5" r="0.91" opacity="0.39"/><circle cx="234.8" cy="83.9" r="0.75" opacity="0.71"/><circle class="tw" cx="191.9" cy="198.3" r="0.55" opacity="0.55"/></svg>
@@ -327,6 +331,7 @@ section{scroll-margin-top:16px}
       <ul>
         <li><a href="/reelkar/">Reelkar</a></li><li><a href="/warden/">Warden</a></li><li><a href="/bachat/">Bachat</a></li><li><a href="/istari/">Istari</a></li>
         <li><a href="https://github.com/rajnishh" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/rajnishkumar88/" rel="noopener me">LinkedIn</a></li>
         <li><a href="mailto:security@istari-ai.dev">Report a security issue</a></li>
       </ul>
     </nav>

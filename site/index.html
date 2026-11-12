@@ -56,6 +56,7 @@ p{margin:0}
 .nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;font-size:15px;font-weight:500;color:var(--muted);text-decoration:none}
 .nav a:hover{color:var(--ink);background:var(--surface)}
 @media (max-width:520px){.nav .opt{display:none}}
+@media (max-width:340px){.nav .gh{display:none}}
 
 /* Tiles */
 .tile{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;min-width:0}
@@ -246,6 +247,7 @@ section{scroll-margin-top:16px}
 .pgrid p{color:var(--muted)}
 .about{justify-content:space-between}
 .about p.big{font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.35;letter-spacing:-.01em;color:var(--starlight)}
+.about-links{display:flex;flex-direction:column}
 .about a{font-weight:600;color:var(--star);display:inline-flex;align-items:center;min-height:44px;gap:6px}
 body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-s="reelkar"]{transform:scale(1.7)}body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-s="reelkar"] .glow{opacity:.55}body:has(#grid li[data-s="warden"]:is(:hover,:focus-within)) .sky-svg .st[data-s="warden"]{transform:scale(1.7)}body:has(#grid li[data-s="warden"]:is(:hover,:focus-within)) .sky-svg .st[data-s="warden"] .glow{opacity:.55}body:has(#grid li[data-s="bachat"]:is(:hover,:focus-within)) .sky-svg .st[data-s="bachat"]{transform:scale(1.7)}body:has(#grid li[data-s="bachat"]:is(:hover,:focus-within)) .sky-svg .st[data-s="bachat"] .glow{opacity:.55}body:has(#grid li[data-s="istari"]:is(:hover,:focus-within)) .sky-svg .st[data-s="istari"]{transform:scale(1.7)}body:has(#grid li[data-s="istari"]:is(:hover,:focus-within)) .sky-svg .st[data-s="istari"] .glow{opacity:.55}</style>
 </head>
@@ -256,7 +258,7 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
   <nav class="nav" aria-label="Main">
     <a href="/#products">Products</a>
     <a class="opt" href="/#principles">How we build</a>
-    <a href="https://github.com/rajnishh" rel="noopener">GitHub</a>
+    <a class="gh" href="https://github.com/rajnishh" rel="noopener">GitHub</a>
   </nav>
 </header>
 <main id="main" class="wrap">
@@ -406,7 +408,7 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
       <article class="tile night about">
         <span class="num" style="color:#F2A93B">Istari AI</span>
         <p class="big">Quiet tools that guide, and leave the choices to you.</p>
-        <a href="https://github.com/rajnishh" rel="noopener">Follow the work on GitHub <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <div class="about-links"><a href="https://github.com/rajnishh" rel="noopener">Follow the work on GitHub <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a href="https://www.linkedin.com/in/rajnishkumar88/" rel="noopener me">Follow and connect on LinkedIn <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
       </article>
     </div>
   </section>
@@ -421,6 +423,7 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
       <ul>
         <li><a href="/reelkar/">Reelkar</a></li><li><a href="/warden/">Warden</a></li><li><a href="/bachat/">Bachat</a></li><li><a href="/istari/">Istari</a></li>
         <li><a href="https://github.com/rajnishh" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/rajnishkumar88/" rel="noopener me">LinkedIn</a></li>
         <li><a href="mailto:security@istari-ai.dev">Report a security issue</a></li>
       </ul>
     </nav>
