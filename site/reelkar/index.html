@@ -56,6 +56,7 @@ p{margin:0}
 .nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;font-size:15px;font-weight:500;color:var(--muted);text-decoration:none}
 .nav a:hover{color:var(--ink);background:var(--surface)}
 @media (max-width:520px){.nav .opt{display:none}}
+@media (max-width:340px){.nav .gh{display:none}}
 
 /* Tiles */
 .tile{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;min-width:0}
@@ -125,6 +126,8 @@ section{scroll-margin-top:16px}
   .lift:hover,.lift:hover .arrow{transform:none}
 }
 
+.social{margin:14px 0 0;font-size:15px;color:var(--muted)}
+.social a{color:var(--ink);font-weight:600;display:inline-flex;align-items:center;min-height:44px}
 .crumb{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--muted);margin:4px 0 12px}
 .crumb a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding-right:8px;text-decoration:none;color:var(--muted);font-weight:500}
 .crumb a:hover{color:var(--ink)}
@@ -219,7 +222,7 @@ section{scroll-margin-top:16px}
   <nav class="nav" aria-label="Main">
     <a href="/#products">Products</a>
     <a class="opt" href="/#principles">How we build</a>
-    <a href="https://github.com/rajnishh" rel="noopener">GitHub</a>
+    <a class="gh" href="https://github.com/rajnishh" rel="noopener">GitHub</a>
   </nav>
 </header>
 <main id="main" class="wrap" style="--pc-l:#E2543F;--pc-d:#FF8A73">
@@ -233,6 +236,7 @@ section{scroll-margin-top:16px}
       <p class="tag">From an idea to a finished reel.</p>
       <p class="pitch">Turn an idea, a few photos, a song or a clip you filmed into a finished short reel, with captions, voice and music, ready to post anywhere.</p>
       <div class="act"><a class="btn primary" href="https://reelkar.istari-ai.dev" rel="noopener">Open Reelkar<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a><span class="chip" data-stage="beta"><i aria-hidden="true"></i>Private beta</span></div>
+      
     </section>
     <div class="tile night pi" aria-hidden="true">
       <svg class="stars" viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice"><circle cx="143.0" cy="206.4" r="1.17" opacity="0.45"/><circle class="tw" cx="261.4" cy="40.4" r="1.11" opacity="0.67"/><circle cx="202.3" cy="204.8" r="0.99" opacity="0.42"/><circle class="tw" cx="203.1" cy="104.6" r="0.65" opacity="0.68"/><circle cx="179.1" cy="182.4" r="0.71" opacity="0.60"/><circle class="tw" cx="299.7" cy="143.1" r="0.79" opacity="0.40"/><circle cx="82.2" cy="98.9" r="0.87" opacity="0.59"/><circle class="tw" cx="2.4" cy="74.3" r="0.78" opacity="0.63"/><circle cx="93.8" cy="181.8" r="0.57" opacity="0.50"/><circle class="tw" cx="286.9" cy="99.2" r="1.09" opacity="0.51"/><circle cx="107.8" cy="50.8" r="0.83" opacity="0.43"/><circle class="tw" cx="239.1" cy="51.4" r="0.69" opacity="0.69"/><circle cx="112.7" cy="165.5" r="1.07" opacity="0.46"/><circle class="tw" cx="185.1" cy="192.1" r="1.07" opacity="0.47"/><circle cx="218.0" cy="96.4" r="0.55" opacity="0.74"/><circle class="tw" cx="263.4" cy="148.3" r="0.77" opacity="0.45"/><circle cx="24.3" cy="0.4" r="0.90" opacity="0.54"/><circle class="tw" cx="143.0" cy="174.5" r="0.70" opacity="0.33"/><circle cx="37.1" cy="19.3" r="0.94" opacity="0.37"/><circle class="tw" cx="183.6" cy="118.6" r="0.83" opacity="0.59"/><circle cx="24.2" cy="22.7" r="0.50" opacity="0.63"/><circle class="tw" cx="139.9" cy="51.6" r="1.12" opacity="0.80"/></svg>
@@ -288,6 +292,7 @@ section{scroll-margin-top:16px}
       <ul>
         <li><a href="/reelkar/">Reelkar</a></li><li><a href="/warden/">Warden</a></li><li><a href="/bachat/">Bachat</a></li><li><a href="/istari/">Istari</a></li>
         <li><a href="https://github.com/rajnishh" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/rajnishkumar88/" rel="noopener me">LinkedIn</a></li>
         <li><a href="mailto:security@istari-ai.dev">Report a security issue</a></li>
       </ul>
     </nav>
