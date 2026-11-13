@@ -249,7 +249,215 @@ section{scroll-margin-top:16px}
 .about p.big{font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.35;letter-spacing:-.01em;color:var(--starlight)}
 .about-links{display:flex;flex-direction:column}
 .about a{font-weight:600;color:var(--star);display:inline-flex;align-items:center;min-height:44px;gap:6px}
-body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-s="reelkar"]{transform:scale(1.7)}body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-s="reelkar"] .glow{opacity:.55}body:has(#grid li[data-s="warden"]:is(:hover,:focus-within)) .sky-svg .st[data-s="warden"]{transform:scale(1.7)}body:has(#grid li[data-s="warden"]:is(:hover,:focus-within)) .sky-svg .st[data-s="warden"] .glow{opacity:.55}body:has(#grid li[data-s="bachat"]:is(:hover,:focus-within)) .sky-svg .st[data-s="bachat"]{transform:scale(1.7)}body:has(#grid li[data-s="bachat"]:is(:hover,:focus-within)) .sky-svg .st[data-s="bachat"] .glow{opacity:.55}body:has(#grid li[data-s="istari"]:is(:hover,:focus-within)) .sky-svg .st[data-s="istari"]{transform:scale(1.7)}body:has(#grid li[data-s="istari"]:is(:hover,:focus-within)) .sky-svg .st[data-s="istari"] .glow{opacity:.55}</style>
+/* Spotlight: one product shown with a real screenshot */
+.spot{display:grid;gap:28px;grid-template-columns:1fr;align-items:center;overflow:hidden;padding:28px 22px;background:linear-gradient(150deg,color-mix(in srgb,var(--pc) 18%,var(--surface)) 0%,var(--surface) 70%);border-color:color-mix(in srgb,var(--pc) 40%,var(--line))}
+@media (min-width:640px){.spot{padding:40px}}
+@media (min-width:960px){.spot{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:44px}}
+.spot .s-eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.spot .s-eyebrow i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--pc);margin-right:10px;vertical-align:1px}
+.spot h3{font-size:clamp(32px,4vw,48px);margin:14px 0 14px;text-wrap:balance}
+.spot .s-body{color:var(--muted);max-width:50ch}
+.spot ul{list-style:none;margin:20px 0 26px;padding:0;display:grid;gap:10px}
+.spot li{display:flex;gap:12px;align-items:baseline;font-size:16px}
+.spot li b{font-family:var(--mono);font-weight:500;font-size:13px;color:var(--pc);min-width:5.5ch}
+.spot .cta{display:flex;flex-wrap:wrap;gap:12px}
+.spot-vis{min-width:0}
+.shot{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line-strong);background:#ECECEC;box-shadow:var(--shadow)}
+.shot .bar{display:flex;gap:7px;padding:10px 12px;background:#E3E3E3;border-bottom:1px solid #D2D2D2}
+.shot .bar i{width:11px;height:11px;border-radius:50%;background:#FF5F57}.shot .bar i+i{background:#FEBC2E}.shot .bar i+i+i{background:#28C840}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:13.5px;color:#4E5E73;background:#F6F6F6;padding:10px 14px;border-top:1px solid #D2D2D2}
+
+/* Warden sections */
+.w-sec{margin-top:var(--gap)}
+.w-h{font-size:clamp(30px,4vw,44px)}
+.w-kicker{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--star)}
+.w-note{font-size:13.5px;color:var(--muted);margin:12px 0 56px}
+.night .w-note{color:var(--dusk)}
+
+/* 1. Watch it step in */
+.w-explain{display:grid;gap:28px;grid-template-columns:1fr;padding:28px 22px}
+@media (min-width:640px){.w-explain{padding:40px}}
+@media (min-width:960px){.w-explain{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:center}}
+.w-explain h2{font-size:clamp(30px,3.6vw,42px);margin:12px 0 18px;text-wrap:balance}
+.w-steps{list-style:none;margin:0;padding:0;display:grid;gap:16px;counter-reset:s}
+.w-steps li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;counter-increment:s}
+.w-steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid #3A4C69;font:500 13px var(--mono);color:#F2A93B}
+.w-steps b{display:block;font-weight:600;color:#E6ECF4}
+.w-steps span{color:#A3B2C5;font-size:15.5px}
+.w-chart{width:100%;height:auto;display:block}
+.w-chart text{font-family:var(--mono);font-size:11.5px}
+.w-chart .grid line{stroke:#22304A}
+.w-chart .with{animation:w-draw 9s ease-out infinite}
+.w-chart .without{animation:w-draw-late 9s ease-in infinite}
+.w-chart .knee{animation:w-pop 9s ease-out infinite}
+.w-chart .ring{transform-box:fill-box;transform-origin:center;animation:w-ring 2.2s ease-out infinite}
+.w-chart .late{animation:w-late 9s ease-out infinite}
+@keyframes w-draw{0%{stroke-dashoffset:100}50%,100%{stroke-dashoffset:0}}
+@keyframes w-draw-late{0%,20%{stroke-dashoffset:100;opacity:0}22%{opacity:.85}62%,100%{stroke-dashoffset:0;opacity:.85}}
+@keyframes w-pop{0%,22%{opacity:0}28%,100%{opacity:1}}
+@keyframes w-late{0%,48%{opacity:0}56%,100%{opacity:1}}
+@keyframes w-ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(3.2)}}
+
+/* 2. Showcase rows */
+.w-rows{display:grid;gap:var(--gap)}
+.w-row{display:grid;gap:26px;grid-template-columns:1fr;align-items:center;padding:26px 22px}
+@media (min-width:640px){.w-row{padding:36px}}
+@media (min-width:960px){.w-row{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:44px}.w-row.flip>.w-copy{order:2}}
+.w-copy h3{font-size:clamp(26px,2.8vw,34px);margin:10px 0 12px;text-wrap:balance}
+.w-copy p{color:var(--muted);max-width:52ch}
+.w-copy ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.w-copy li{position:relative;padding-left:18px;font-size:15.5px}
+.w-copy li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--pc)}
+.w-copy code{font:500 .86em var(--mono);background:var(--surface-2);border:1px solid var(--line);padding:1px 5px;border-radius:5px;overflow-wrap:anywhere}
+.w-tag{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--pc)}
+kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:1px 6px;background:var(--surface-2)}
+.w-vis{min-width:0}
+
+/* Real screenshot in a window */
+.w-shot{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line-strong);background:#ECECEC;box-shadow:var(--shadow)}
+.w-shot .bar{display:flex;gap:7px;padding:10px 12px;background:#E3E3E3;border-bottom:1px solid #D2D2D2}
+.w-shot .bar i{width:11px;height:11px;border-radius:50%;background:#FF5F57}.w-shot .bar i+i{background:#FEBC2E}.w-shot .bar i+i+i{background:#28C840}
+.w-shot img{display:block;width:100%;height:auto}
+.w-shot figcaption{font-size:13px;color:#4E5E73;background:#F6F6F6;padding:9px 14px;border-top:1px solid #D2D2D2}
+
+/* Menu bar menu */
+.w-menuwrap{max-width:420px;margin:0 auto;width:100%}
+.w-mbar{display:flex;justify-content:flex-end;align-items:center;gap:14px;padding:6px 12px;border-radius:10px 10px 0 0;background:color-mix(in srgb,var(--ink) 8%,var(--surface));font:500 13px var(--sans);color:var(--ink)}
+.w-mbar .on{display:inline-grid;place-items:center;width:26px;height:22px;border-radius:5px;background:color-mix(in srgb,var(--ink) 16%,transparent)}
+.w-mbar svg{width:16px;height:16px}
+.w-menu{list-style:none;margin:6px 0 0;padding:6px;border-radius:11px;background:var(--surface);border:1px solid var(--line-strong);box-shadow:var(--shadow);font-size:14px;line-height:1.3}
+.w-menu li{padding:6px 10px;border-radius:6px}
+.w-menu .sub{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.w-menu .hd{font-size:11.5px;font-weight:600;color:var(--muted);padding:10px 10px 4px}
+.w-menu .sep{height:1px;background:var(--line);padding:0;margin:5px 6px}
+.w-menu .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2F8F68;margin-right:8px;vertical-align:1px}
+.w-menu .dot.amber{background:#F2A93B}
+.w-menu .row{display:flex;justify-content:space-between;gap:10px}
+.w-menu .key{color:var(--muted);font-family:var(--mono);font-size:12px}
+.w-menu .hi{background:#0A64D8;color:#fff;animation:w-hi 4s ease-in-out infinite}
+.w-menu .hi .sub,.w-menu .hi .key{color:#DDE8FA}
+@keyframes w-hi{0%,100%{background:#0A64D8}50%{background:#2F7BE6}}
+
+/* STOPPED-BY-WARDEN.md */
+.w-file{padding:0;overflow:hidden;background:#0A111D;border-color:#22304A;color:#E6ECF4}
+.w-file .fbar{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid #22304A;font:500 13px var(--mono);color:#A3B2C5}
+.w-file .fbar i{width:10px;height:10px;border-radius:50%;background:#33445F}
+.w-file .fbar i:first-child{background:#7BC8A4}
+.w-file .fbody{padding:18px 18px 20px;font-size:14px}
+.w-file h4{font:700 20px var(--serif);margin:0 0 8px;letter-spacing:-.01em}
+.w-file .agents{color:#A3B2C5;font-size:13.5px;margin-bottom:14px}
+.w-file .agents b{color:#F2A93B}
+.w-log{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.w-log li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:10px 12px;border:1px solid #22304A;border-radius:10px;background:#0E1726}
+.w-log time{font:500 12.5px var(--mono);color:#F2A93B;padding-top:2px}
+.w-log b{display:block;font-weight:600;font-size:14px}
+.w-log span{display:block;color:#A3B2C5;font-size:13px;line-height:1.45}
+.w-log li:first-child{animation:w-new 6s ease-out infinite}
+@keyframes w-new{0%{border-color:#7BC8A4;background:#12271F}40%,100%{border-color:#22304A;background:#0E1726}}
+.w-file code{font:500 12px var(--mono);background:#1A2537;padding:1px 4px;border-radius:4px}
+
+/* Finished worktree + memory card */
+.w-card{display:grid;gap:12px}
+.w-checks{list-style:none;margin:0;padding:14px;display:grid;gap:8px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2)}
+.w-checks li{display:flex;align-items:center;gap:10px;font-size:14.5px}
+.w-checks .ck{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--pc);color:var(--surface)}
+.w-checks .ck svg{width:13px;height:13px}
+.w-checks li:nth-child(1) .ck{animation:w-ck 10s infinite;animation-delay:0s}
+.w-checks li:nth-child(2) .ck{animation:w-ck 10s infinite;animation-delay:.6s}
+.w-checks li:nth-child(3) .ck{animation:w-ck 10s infinite;animation-delay:1.2s}
+.w-checks li:nth-child(4) .ck{animation:w-ck 10s infinite;animation-delay:1.8s}
+.w-checks .res{margin-top:4px;padding-top:10px;border-top:1px dashed var(--line-strong);font-weight:600;color:var(--pc);animation:w-res 10s infinite}
+@keyframes w-ck{0%{transform:scale(.4);opacity:.2}6%,100%{transform:scale(1);opacity:1}}
+@keyframes w-res{0%,22%{opacity:.15}30%,100%{opacity:1}}
+.w-past{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:14px}
+.w-past .w-ph{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--muted);margin-bottom:10px}
+.w-past .w-ph svg{width:16px;height:16px;color:var(--pc)}
+.w-past .search{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13.5px;color:var(--muted);margin-bottom:10px}
+.w-past .item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center}
+.w-past .t{font-weight:600}
+.w-past .m{grid-column:1;font-size:13px;color:var(--muted)}
+.w-past .c{grid-column:1;font-size:13px}
+.w-past .btn2{grid-column:2;grid-row:1/span 3;font:600 13.5px var(--sans);border:1px solid var(--line-strong);border-radius:8px;padding:7px 12px;background:var(--surface-2);white-space:nowrap}
+
+/* 3. Proof */
+.w-proof{display:grid;gap:var(--gap);grid-template-columns:1fr;margin:0}
+@media (min-width:640px){.w-proof{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.w-proof{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.w-proof>div{display:flex;flex-direction:column;gap:8px;padding:22px}
+.w-proof dt{order:2;color:var(--muted);font-size:15px}
+.w-proof dd{order:1;margin:0;font:700 clamp(34px,3.6vw,46px)/1 var(--serif);letter-spacing:-.03em;color:var(--pc);font-variant-numeric:tabular-nums}
+
+/* 4. Safety */
+.w-safe{display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media (min-width:760px){.w-safe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.w-safe{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.w-safe article{display:flex;flex-direction:column;gap:10px;padding:22px}
+.w-safe .si{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--pc) 14%,transparent);color:var(--pc)}
+.w-safe .si svg{width:20px;height:20px}
+.w-safe h3{font:600 18px var(--sans);letter-spacing:0}
+.w-safe p{color:var(--muted);font-size:15px}
+
+/* 5. A day */
+.w-day{padding:0;overflow:hidden}
+.w-day-head,.w-day li{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,1fr);gap:16px;padding:14px 20px}
+.w-day-head{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.w-day-head .ok{color:var(--pc)}
+.w-day ol{list-style:none;margin:0;padding:0}
+.w-day li{border-bottom:1px solid var(--line);font-size:15px}
+.w-day li:last-child{border-bottom:0}
+.w-day time{font:500 13px var(--mono);color:var(--muted);padding-top:2px}
+.w-day .bad{color:var(--muted)}
+.w-day .good{font-weight:500}
+@media (max-width:639.98px){
+  .w-day-head{display:none}
+  .w-day li{grid-template-columns:52px minmax(0,1fr);gap:4px 12px}
+  .w-day .bad,.w-day .good{grid-column:2}
+  .w-day .bad::before{content:"Without: ";font-weight:600}
+  .w-day .good::before{content:"With Warden: ";font-weight:600;color:var(--pc)}
+}
+
+/* 6. Works with */
+.w-with{display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media (min-width:760px){.w-with{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.w-with article{padding:22px}
+.w-with h3{font:600 13px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.w-with ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.w-with li{font-size:14px;font-weight:500;border:1px solid color-mix(in srgb,var(--pc) 35%,var(--line));background:color-mix(in srgb,var(--pc) 8%,var(--surface));border-radius:10px;padding:5px 10px}
+.w-with p{margin-top:12px;font-size:14.5px;color:var(--muted)}
+
+/* Memory card (drawn to match Warden 1.0's Overview banner) */
+.w-mem{border-radius:14px;padding:16px;background:color-mix(in srgb,#F2A93B 13%,var(--surface));border:1px solid color-mix(in srgb,#F2A93B 28%,var(--line));font-size:14px;line-height:1.35;color:var(--ink)}
+.w-mem .top{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:start}
+.w-mem .chipi{color:#E8862A}
+.w-mem .chipi svg{width:22px;height:22px}
+.w-mem .tt{font-weight:600;font-size:15px}
+.w-mem .st{color:var(--muted);font-size:13px;margin-top:2px}
+.w-mem .acts{display:flex;align-items:center;gap:8px}
+.w-mem .b{font:500 12.5px var(--sans);border:1px solid var(--line-strong);background:var(--surface);border-radius:7px;padding:4px 9px;white-space:nowrap}
+.w-mem .auto{position:relative;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:color-mix(in srgb,#34C759 22%,var(--surface));color:#2E9E4F}
+.w-mem .auto svg{width:17px;height:17px}
+.w-mem .auto i{position:absolute;right:-3px;bottom:-3px;width:13px;height:13px;border-radius:50%;background:#34C759;color:#fff;font:700 8.5px/13px var(--sans);font-style:normal;text-align:center}
+.w-mem .lead{font-weight:600;font-size:13.5px;margin:14px 0 6px 38px}
+.w-mem ul{list-style:none;margin:0 0 0 38px;padding:0;display:grid;gap:2px}
+.w-mem li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 6px;border-radius:8px}
+.w-mem li svg{width:16px;height:16px;color:var(--muted)}
+.w-mem .n{font-size:14px}
+.w-mem .d{display:block;font-size:12px;color:var(--muted)}
+.w-mem li.pick{background:color-mix(in srgb,#F2A93B 22%,transparent);animation:w-pick 7s ease-in-out infinite}
+@keyframes w-pick{0%,100%{background:color-mix(in srgb,#F2A93B 22%,transparent)}50%{background:color-mix(in srgb,#F2A93B 34%,transparent)}}
+.w-ask{margin:10px 0 0 38px;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line-strong);box-shadow:var(--shadow);animation:w-ask 7s ease-out infinite}
+.w-ask b{display:block;font-size:14px;margin-bottom:4px}
+.w-ask p{font-size:12.5px;color:var(--muted)}
+.w-ask .row2{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+.w-ask .row2 span{font:500 12.5px var(--sans);border:1px solid var(--line-strong);border-radius:7px;padding:4px 12px}
+.w-ask .row2 span.go2{background:#0A64D8;border-color:#0A64D8;color:#fff}
+@keyframes w-ask{0%,20%{opacity:.25;transform:translateY(4px)}30%,100%{opacity:1;transform:none}}
+@media (max-width:520px){.w-mem .lead,.w-mem ul,.w-ask{margin-left:0}.w-mem .top{grid-template-columns:24px minmax(0,1fr)}.w-mem .acts{grid-column:2}}
+@media (prefers-reduced-motion:reduce){.w-mem *,.w-ask{animation:none!important}}
+
+@media (prefers-reduced-motion:reduce){.w-chart *,.w-menu *,.w-log *,.w-checks *{animation:none!important}}
+body:has(#grid li[data-s="bachat"]:is(:hover,:focus-within)) .sky-svg .st[data-s="bachat"]{transform:scale(1.7)}body:has(#grid li[data-s="bachat"]:is(:hover,:focus-within)) .sky-svg .st[data-s="bachat"] .glow{opacity:.55}body:has(#grid li[data-s="warden"]:is(:hover,:focus-within)) .sky-svg .st[data-s="warden"]{transform:scale(1.7)}body:has(#grid li[data-s="warden"]:is(:hover,:focus-within)) .sky-svg .st[data-s="warden"] .glow{opacity:.55}body:has(#grid li[data-s="istari"]:is(:hover,:focus-within)) .sky-svg .st[data-s="istari"]{transform:scale(1.7)}body:has(#grid li[data-s="istari"]:is(:hover,:focus-within)) .sky-svg .st[data-s="istari"] .glow{opacity:.55}body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-s="reelkar"]{transform:scale(1.7)}body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-s="reelkar"] .glow{opacity:.55}</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -276,11 +484,11 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
     </div>
     <div class="tile night h-sky">
       <div class="sky-head"><span class="livedot"><i aria-hidden="true"></i>The sky tonight</span><span class="mono muted">4 stars</span></div>
-      <svg class="sky-svg" viewBox="0 0 400 300" role="img" aria-labelledby="skyT"><title id="skyT">A constellation: the Istari AI star in the middle, linked to 4 product stars: Reelkar, Warden, Bachat, Istari.</title>
-<g class="bg"><circle cx="207.5" cy="285.9" r="0.65" opacity="0.76"/><circle class="tw" cx="279.7" cy="246.7" r="0.58" opacity="0.49"/><circle cx="86.6" cy="89.1" r="1.05" opacity="0.59"/><circle class="tw" cx="110.8" cy="252.3" r="0.73" opacity="0.59"/><circle cx="249.7" cy="16.5" r="0.77" opacity="0.54"/><circle class="tw" cx="57.9" cy="82.8" r="0.48" opacity="0.82"/><circle cx="279.4" cy="175.3" r="0.81" opacity="0.61"/><circle class="tw" cx="50.1" cy="182.7" r="0.64" opacity="0.51"/><circle cx="252.6" cy="231.9" r="1.27" opacity="0.51"/><circle class="tw" cx="3.6" cy="258.9" r="0.81" opacity="0.42"/><circle cx="156.8" cy="22.6" r="0.86" opacity="0.42"/><circle class="tw" cx="200.3" cy="274.9" r="1.19" opacity="0.83"/><circle cx="231.8" cy="182.1" r="0.71" opacity="0.66"/><circle class="tw" cx="191.7" cy="263.9" r="0.78" opacity="0.37"/><circle cx="235.6" cy="90.9" r="0.82" opacity="0.48"/><circle class="tw" cx="227.8" cy="160.7" r="0.64" opacity="0.69"/><circle cx="36.3" cy="41.4" r="0.84" opacity="0.72"/><circle class="tw" cx="11.2" cy="252.4" r="0.83" opacity="0.83"/><circle cx="328.1" cy="123.1" r="0.70" opacity="0.78"/><circle class="tw" cx="375.9" cy="147.4" r="0.65" opacity="0.45"/><circle cx="273.0" cy="26.2" r="1.02" opacity="0.83"/><circle class="tw" cx="290.9" cy="164.0" r="0.64" opacity="0.78"/><circle cx="67.2" cy="63.9" r="0.72" opacity="0.73"/><circle class="tw" cx="389.8" cy="36.4" r="0.69" opacity="0.43"/><circle cx="32.3" cy="114.2" r="0.73" opacity="0.40"/><circle class="tw" cx="223.8" cy="41.4" r="0.77" opacity="0.35"/><circle cx="231.8" cy="78.9" r="1.18" opacity="0.82"/><circle class="tw" cx="41.7" cy="41.7" r="0.57" opacity="0.74"/><circle cx="212.6" cy="63.1" r="1.23" opacity="0.38"/><circle class="tw" cx="292.6" cy="49.8" r="0.72" opacity="0.58"/><circle cx="71.3" cy="272.6" r="0.43" opacity="0.50"/><circle class="tw" cx="55.7" cy="209.0" r="1.21" opacity="0.55"/><circle cx="45.7" cy="29.5" r="0.88" opacity="0.51"/><circle class="tw" cx="394.1" cy="194.9" r="0.50" opacity="0.68"/><circle cx="230.9" cy="107.9" r="1.07" opacity="0.38"/><circle class="tw" cx="233.1" cy="134.2" r="0.81" opacity="0.84"/><circle cx="21.2" cy="287.2" r="1.29" opacity="0.63"/><circle class="tw" cx="364.8" cy="42.6" r="0.53" opacity="0.37"/><circle cx="76.3" cy="224.6" r="0.73" opacity="0.59"/><circle class="tw" cx="376.7" cy="182.2" r="1.02" opacity="0.71"/><circle cx="12.5" cy="46.4" r="0.79" opacity="0.44"/><circle class="tw" cx="105.7" cy="236.7" r="0.51" opacity="0.60"/><circle cx="219.2" cy="57.9" r="0.91" opacity="0.50"/><circle class="tw" cx="16.8" cy="5.8" r="0.48" opacity="0.68"/><circle cx="200.6" cy="172.2" r="0.64" opacity="0.81"/><circle class="tw" cx="107.1" cy="118.4" r="1.09" opacity="0.35"/></g><line x1="281.0" y1="67.3" x2="318.3" y2="190.1" stroke="#E6ECF4" stroke-opacity=".12" stroke-dasharray="2 4"/><line x1="318.3" y1="190.1" x2="136.8" y2="226.3" stroke="#E6ECF4" stroke-opacity=".12" stroke-dasharray="2 4"/><line x1="136.8" y1="226.3" x2="94.5" y2="103.0" stroke="#E6ECF4" stroke-opacity=".12" stroke-dasharray="2 4"/><line x1="94.5" y1="103.0" x2="281.0" y2="67.3" stroke="#E6ECF4" stroke-opacity=".12" stroke-dasharray="2 4"/><line x1="200" y1="150" x2="281.0" y2="67.3" stroke="#FF8A73" stroke-opacity=".45" stroke-width="1.2"/><line x1="200" y1="150" x2="318.3" y2="190.1" stroke="#7BC8A4" stroke-opacity=".45" stroke-width="1.2"/><line x1="200" y1="150" x2="136.8" y2="226.3" stroke="#82B8F2" stroke-opacity=".45" stroke-width="1.2"/><line x1="200" y1="150" x2="94.5" y2="103.0" stroke="#F2A93B" stroke-opacity=".45" stroke-width="1.2"/>
+      <svg class="sky-svg" viewBox="0 0 400 300" role="img" aria-labelledby="skyT"><title id="skyT">A constellation: the Istari AI star in the middle, linked to 4 product stars: Bachat, Warden, Istari, Reelkar.</title>
+<g class="bg"><circle cx="207.5" cy="285.9" r="0.65" opacity="0.76"/><circle class="tw" cx="279.7" cy="246.7" r="0.58" opacity="0.49"/><circle cx="86.6" cy="89.1" r="1.05" opacity="0.59"/><circle class="tw" cx="110.8" cy="252.3" r="0.73" opacity="0.59"/><circle cx="249.7" cy="16.5" r="0.77" opacity="0.54"/><circle class="tw" cx="57.9" cy="82.8" r="0.48" opacity="0.82"/><circle cx="279.4" cy="175.3" r="0.81" opacity="0.61"/><circle class="tw" cx="50.1" cy="182.7" r="0.64" opacity="0.51"/><circle cx="252.6" cy="231.9" r="1.27" opacity="0.51"/><circle class="tw" cx="3.6" cy="258.9" r="0.81" opacity="0.42"/><circle cx="156.8" cy="22.6" r="0.86" opacity="0.42"/><circle class="tw" cx="200.3" cy="274.9" r="1.19" opacity="0.83"/><circle cx="231.8" cy="182.1" r="0.71" opacity="0.66"/><circle class="tw" cx="191.7" cy="263.9" r="0.78" opacity="0.37"/><circle cx="235.6" cy="90.9" r="0.82" opacity="0.48"/><circle class="tw" cx="227.8" cy="160.7" r="0.64" opacity="0.69"/><circle cx="36.3" cy="41.4" r="0.84" opacity="0.72"/><circle class="tw" cx="11.2" cy="252.4" r="0.83" opacity="0.83"/><circle cx="328.1" cy="123.1" r="0.70" opacity="0.78"/><circle class="tw" cx="375.9" cy="147.4" r="0.65" opacity="0.45"/><circle cx="273.0" cy="26.2" r="1.02" opacity="0.83"/><circle class="tw" cx="290.9" cy="164.0" r="0.64" opacity="0.78"/><circle cx="67.2" cy="63.9" r="0.72" opacity="0.73"/><circle class="tw" cx="389.8" cy="36.4" r="0.69" opacity="0.43"/><circle cx="32.3" cy="114.2" r="0.73" opacity="0.40"/><circle class="tw" cx="223.8" cy="41.4" r="0.77" opacity="0.35"/><circle cx="231.8" cy="78.9" r="1.18" opacity="0.82"/><circle class="tw" cx="41.7" cy="41.7" r="0.57" opacity="0.74"/><circle cx="212.6" cy="63.1" r="1.23" opacity="0.38"/><circle class="tw" cx="292.6" cy="49.8" r="0.72" opacity="0.58"/><circle cx="71.3" cy="272.6" r="0.43" opacity="0.50"/><circle class="tw" cx="55.7" cy="209.0" r="1.21" opacity="0.55"/><circle cx="45.7" cy="29.5" r="0.88" opacity="0.51"/><circle class="tw" cx="394.1" cy="194.9" r="0.50" opacity="0.68"/><circle cx="230.9" cy="107.9" r="1.07" opacity="0.38"/><circle class="tw" cx="233.1" cy="134.2" r="0.81" opacity="0.84"/><circle cx="21.2" cy="287.2" r="1.29" opacity="0.63"/><circle class="tw" cx="364.8" cy="42.6" r="0.53" opacity="0.37"/><circle cx="76.3" cy="224.6" r="0.73" opacity="0.59"/><circle class="tw" cx="376.7" cy="182.2" r="1.02" opacity="0.71"/><circle cx="12.5" cy="46.4" r="0.79" opacity="0.44"/><circle class="tw" cx="105.7" cy="236.7" r="0.51" opacity="0.60"/><circle cx="219.2" cy="57.9" r="0.91" opacity="0.50"/><circle class="tw" cx="16.8" cy="5.8" r="0.48" opacity="0.68"/><circle cx="200.6" cy="172.2" r="0.64" opacity="0.81"/><circle class="tw" cx="107.1" cy="118.4" r="1.09" opacity="0.35"/></g><line x1="281.0" y1="67.3" x2="318.3" y2="190.1" stroke="#E6ECF4" stroke-opacity=".12" stroke-dasharray="2 4"/><line x1="318.3" y1="190.1" x2="136.8" y2="226.3" stroke="#E6ECF4" stroke-opacity=".12" stroke-dasharray="2 4"/><line x1="136.8" y1="226.3" x2="94.5" y2="103.0" stroke="#E6ECF4" stroke-opacity=".12" stroke-dasharray="2 4"/><line x1="94.5" y1="103.0" x2="281.0" y2="67.3" stroke="#E6ECF4" stroke-opacity=".12" stroke-dasharray="2 4"/><line x1="200" y1="150" x2="281.0" y2="67.3" stroke="#82B8F2" stroke-opacity=".45" stroke-width="1.2"/><line x1="200" y1="150" x2="318.3" y2="190.1" stroke="#7BC8A4" stroke-opacity=".45" stroke-width="1.2"/><line x1="200" y1="150" x2="136.8" y2="226.3" stroke="#F2A93B" stroke-opacity=".45" stroke-width="1.2"/><line x1="200" y1="150" x2="94.5" y2="103.0" stroke="#FF8A73" stroke-opacity=".45" stroke-width="1.2"/>
 <circle class="halo" cx="200" cy="150" r="24" fill="#F2A93B" opacity=".2"/>
 <path d="M200 131 L213 163 H187 Z" fill="#0A111D" stroke="#E6ECF4" stroke-width="2" stroke-linejoin="round"/>
-<circle cx="200" cy="154" r="3.6" fill="#F2A93B"/><g class="st" data-s="reelkar"><circle class="glow" cx="281.0" cy="67.3" r="9" fill="#FF8A73" opacity=".18"/><circle cx="281.0" cy="67.3" r="4.2" fill="#FF8A73"/><text x="292.0" y="71.3" text-anchor="start" style="font-size:12px">Reelkar</text></g><g class="st" data-s="warden"><circle class="glow" cx="318.3" cy="190.1" r="9" fill="#7BC8A4" opacity=".18"/><circle cx="318.3" cy="190.1" r="4.2" fill="#7BC8A4"/><text x="329.3" y="194.1" text-anchor="start" style="font-size:12px">Warden</text></g><g class="st" data-s="bachat"><circle class="glow" cx="136.8" cy="226.3" r="9" fill="#82B8F2" opacity=".18"/><circle cx="136.8" cy="226.3" r="4.2" fill="#82B8F2"/><text x="125.8" y="230.3" text-anchor="end" style="font-size:12px">Bachat</text></g><g class="st" data-s="istari"><circle class="glow" cx="94.5" cy="103.0" r="9" fill="#F2A93B" opacity=".18"/><circle cx="94.5" cy="103.0" r="4.2" fill="#F2A93B"/><text x="83.5" y="107.0" text-anchor="end" style="font-size:12px">Istari</text></g></svg>
+<circle cx="200" cy="154" r="3.6" fill="#F2A93B"/><g class="st" data-s="bachat"><circle class="glow" cx="281.0" cy="67.3" r="9" fill="#82B8F2" opacity=".18"/><circle cx="281.0" cy="67.3" r="4.2" fill="#82B8F2"/><text x="292.0" y="71.3" text-anchor="start" style="font-size:12px">Bachat</text></g><g class="st" data-s="warden"><circle class="glow" cx="318.3" cy="190.1" r="9" fill="#7BC8A4" opacity=".18"/><circle cx="318.3" cy="190.1" r="4.2" fill="#7BC8A4"/><text x="329.3" y="194.1" text-anchor="start" style="font-size:12px">Warden</text></g><g class="st" data-s="istari"><circle class="glow" cx="136.8" cy="226.3" r="9" fill="#F2A93B" opacity=".18"/><circle cx="136.8" cy="226.3" r="4.2" fill="#F2A93B"/><text x="125.8" y="230.3" text-anchor="end" style="font-size:12px">Istari</text></g><g class="st" data-s="reelkar"><circle class="glow" cx="94.5" cy="103.0" r="9" fill="#FF8A73" opacity=".18"/><circle cx="94.5" cy="103.0" r="4.2" fill="#FF8A73"/><text x="83.5" y="107.0" text-anchor="end" style="font-size:12px">Reelkar</text></g></svg>
       <p class="sky-foot"><span><b>2</b> live</span><span><b>1</b> beta</span><span><b>1</b> early access</span></p>
     </div>
   </section>
@@ -300,18 +508,18 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
       </div>
     </div>
     <ul class="grid" id="grid">
-<li class="s-feat m-wide feat" data-s="reelkar" data-stage="beta" data-cat="creators">
-  <article class="tile lift tint" style="--pc-l:#E2543F;--pc-d:#FF8A73" aria-labelledby="t-reelkar">
-    <span class="ghost-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span>
-    <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+<li class="s-feat m-wide feat" data-s="bachat" data-stage="live" data-cat="money">
+  <article class="tile lift tint" style="--pc-l:#2F74C0;--pc-d:#82B8F2" aria-labelledby="t-bachat">
+    <span class="ghost-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M4 7h13a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z'/><path d='M4 7l10-3v3'/><circle cx='16' cy='14' r='1.3' fill='currentColor'/></svg></span>
+    <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M4 7h13a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z'/><path d='M4 7l10-3v3'/><circle cx='16' cy='14' r='1.3' fill='currentColor'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
     <div class="t-body">
-      <p class="t-kind"><span class="cat">Creators</span> · AI creator studio</p>
-      <h3 class="t-name" id="t-reelkar"><a class="stretch" href="/reelkar/">Reelkar</a></h3>
-      <p class="t-tag">From an idea to a finished reel.</p>
-      <p class="t-pitch">Turn an idea, a few photos, a song or a clip you filmed into a finished short reel, with captions, voice and music, ready to post anywhere.</p>
+      <p class="t-kind"><span class="cat">Finance</span> · AI money saver</p>
+      <h3 class="t-name" id="t-bachat"><a class="stretch" href="/bachat/">Bachat</a></h3>
+      <p class="t-tag">Every spend, counted once. On your phone.</p>
+      <p class="t-pitch">Captures your spends automatically from what your phone already receives, counts each one once, and turns them into budgets and goals, while your data stays on your phone.</p>
     </div>
     <div class="t-side"><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
-    <div class="t-foot"><span class="chip" data-stage="beta"><i aria-hidden="true"></i>Private beta</span><span class="t-plat">iPhone · Android · Web</span></div>
+    <div class="t-foot"><span class="chip" data-stage="live"><i aria-hidden="true"></i>On the App Store</span><span class="t-plat">iPhone</span></div>
   </article>
 </li>
 <li class="s-6" data-s="warden" data-stage="live" data-cat="mac">
@@ -321,28 +529,14 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
     <div class="t-body">
       <p class="t-kind"><span class="cat">Mac utilities</span> · Mac helper for developers</p>
       <h3 class="t-name" id="t-warden"><a class="stretch" href="/warden/">Warden</a></h3>
-      <p class="t-tag">Keeps your Mac fast and cool.</p>
-      <p class="t-pitch">A small Mac app that keeps your background services running, calms programs that run hot, and stops idle AI servers and simulators before they slow you down.</p>
+      <p class="t-tag">Run every agent. Keep a calm Mac.</p>
+      <p class="t-pitch">Warden watches memory, heat and disk on a Mac that runs many AI agents. It slows what&#39;s running away, tidies what finished sessions leave behind and frees space safely. It asks first, and never touches work in progress.</p>
     </div>
     <div class="t-side"><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
     <div class="t-foot"><span class="chip" data-stage="live"><i aria-hidden="true"></i>Download for Mac</span></div>
   </article>
 </li>
-<li class="s-3" data-s="bachat" data-stage="live" data-cat="money">
-  <article class="tile lift" style="--pc-l:#2F74C0;--pc-d:#82B8F2" aria-labelledby="t-bachat">
-    
-    <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M4 7h13a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z'/><path d='M4 7l10-3v3'/><circle cx='16' cy='14' r='1.3' fill='currentColor'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
-    <div class="t-body">
-      <p class="t-kind"><span class="cat">Finance</span> · AI money saver</p>
-      <h3 class="t-name" id="t-bachat"><a class="stretch" href="/bachat/">Bachat</a></h3>
-      <p class="t-tag">Every spend, counted once. On your phone.</p>
-      <p class="t-pitch">Captures your spends automatically from what your phone already receives, counts each one once, and turns them into budgets and goals, while your data stays on your phone.</p>
-    </div>
-    <div class="t-side"><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
-    <div class="t-foot"><span class="chip" data-stage="live"><i aria-hidden="true"></i>On the App Store</span></div>
-  </article>
-</li>
-<li class="s-3 m-wide" data-s="istari" data-stage="early" data-cat="developers">
+<li class="s-3" data-s="istari" data-stage="early" data-cat="developers">
   <article class="tile lift" style="--pc-l:#B7701A;--pc-d:#F2A93B" aria-labelledby="t-istari">
     
     <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M12 3l7.5 18h-15z'/><circle cx='12' cy='14' r='1.6' fill='currentColor'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
@@ -356,8 +550,48 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
     <div class="t-foot"><span class="chip" data-stage="early"><i aria-hidden="true"></i>Free early access</span></div>
   </article>
 </li>
+<li class="s-3 m-wide" data-s="reelkar" data-stage="beta" data-cat="creators">
+  <article class="tile lift" style="--pc-l:#E2543F;--pc-d:#FF8A73" aria-labelledby="t-reelkar">
+    
+    <div class="t-top"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    <div class="t-body">
+      <p class="t-kind"><span class="cat">Creators</span> · AI creator studio</p>
+      <h3 class="t-name" id="t-reelkar"><a class="stretch" href="/reelkar/">Reelkar</a></h3>
+      <p class="t-tag">From an idea to a finished reel.</p>
+      <p class="t-pitch">Turn an idea, a few photos, a song or a clip you filmed into a finished short reel, with captions, voice and music, ready to post anywhere.</p>
+    </div>
+    <div class="t-side"><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    <div class="t-foot"><span class="chip" data-stage="beta"><i aria-hidden="true"></i>Private beta</span></div>
+  </article>
+</li>
     </ul>
     <p class="count" id="count" role="status" aria-live="polite"></p>
+  </section>
+
+  <section id="spotlight" aria-labelledby="sph">
+    <div class="sec-head"><div><h2 id="sph">Spotlight</h2><p>New this month, and running on our own Mac every day.</p></div></div>
+    <article class="tile spot" style="--pc-l:#2F8F68;--pc-d:#7BC8A4">
+      <div>
+        <p class="s-eyebrow"><i aria-hidden="true"></i>Warden 1.0 for Mac</p>
+        <h3>Run every agent. Keep a calm Mac.</h3>
+        <p class="s-body">Warden looks after a Mac running Claude Code, Codex, local models, simulators and tunnels all at once. It steps in early, tidies up after your agents and always says what you&#39;d lose before it stops anything.</p>
+        <ul><li><b>⌃⌥⌘F</b><span>Frees what&#39;s safe from anywhere, in one key press.</span></li><li><b>22 GB</b><span>Of finished-worktree packages cleared on our Mac in one night.</span></li><li><b>17 MB</b><span>What it uses in the background, at about 0.1% of one core.</span></li></ul>
+        <div class="cta"><a class="btn primary" href="/warden/">See how Warden works<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a class="btn ghost" href="/warden/#get">Download</a></div>
+      </div>
+      <div class="spot-vis"><div class="w-mem" role="img" aria-label="An illustration of Warden's Memory card. Memory is filling up; Warden frees what it safely can on its own, and Automatic is on. It has already done all it safely can, so it lists what else you could stop: llama-server, a local AI server idle 25 minutes holding 18.2 GB; a test run in my-app holding 6.1 GB; a Claude Code session idle 5 hours; and Google Chrome. Stopping llama-server asks first and says what you'd lose.">
+    <div aria-hidden="true">
+      <div class="top"><span class="chipi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='5' y='6' width='14' height='12' rx='2'/><path d='M9 3v3M15 3v3M9 18v3M15 18v3M2 10h3M2 14h3M19 10h3M19 14h3'/></svg></span><div><div class="tt">Memory is filling up</div><div class="st">Pressure warning · swap 6.4 GB. Warden frees what it safely can on its own.</div></div><div class="acts"><span class="b">Free memory now</span><span class="auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M20 11a8 8 0 0 0-14.3-4.3L4 8.5'/><path d='M4 4v4.5h4.5'/><path d='M4 13a8 8 0 0 0 14.3 4.3L20 15.5'/><path d='M20 20v-4.5h-4.5'/></svg><i>A</i></span></div></div>
+      <p class="lead">Warden has already done all it safely can. To free more, choose what to stop:</p>
+      <ul>
+        <li class="pick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z'/><path d='M19 15l.8 1.7 1.7.8-1.7.8L19 20l-.8-1.7-1.7-.8 1.7-.8z'/></svg><span><span class="n">llama-server</span><span class="d">llama.cpp · local AI server · idle 25 min · 18.2 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M14 6l4 4M3 21l9-9M12.5 4.5l3-1.5 5.5 5.5-1.5 3z'/></svg><span><span class="n">my-app › checkout</span><span class="d">node (vitest), node (vitest worker) · 2 processes · 6.1 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='3' y='4' width='18' height='16' rx='2'/><path d='M7 9l3 3-3 3M13 15h4'/></svg><span><span class="n">Claude Code in my-app › old-branch</span><span class="d">Idle 5 h · 1.4 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='4' y='4' width='16' height='16' rx='4' stroke-dasharray='3 3'/></svg><span><span class="n">Google Chrome</span><span class="d">69 processes · 8.2 GB</span></span><span class="b">Quit…</span></li>
+      </ul>
+      <div class="w-ask"><b>Stop llama-server?</b><p>Stops llama-server and frees the model it holds. Anything using it right now (a chat, an app, a script) loses the answer in progress. Warden won't start it again; start it again yourself when memory is fine.</p><div class="row2"><span>Cancel</span><span class="go2">Stop</span></div></div>
+    </div>
+  </div></div>
+    </article>
   </section>
 
   <section id="lab" aria-labelledby="lh">
@@ -421,7 +655,7 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
     </div>
     <nav aria-label="Footer">
       <ul>
-        <li><a href="/reelkar/">Reelkar</a></li><li><a href="/warden/">Warden</a></li><li><a href="/bachat/">Bachat</a></li><li><a href="/istari/">Istari</a></li>
+        <li><a href="/bachat/">Bachat</a></li><li><a href="/warden/">Warden</a></li><li><a href="/istari/">Istari</a></li><li><a href="/reelkar/">Reelkar</a></li>
         <li><a href="https://github.com/rajnishh" rel="noopener">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/rajnishkumar88/" rel="noopener me">LinkedIn</a></li>
         <li><a href="mailto:security@istari-ai.dev">Report a security issue</a></li>

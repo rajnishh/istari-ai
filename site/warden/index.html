@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Warden: Keeps your Mac fast and cool. | Istari AI</title>
-<meta name="description" content="A small Mac app that keeps your background services running, calms programs that run hot, and stops idle AI servers and simulators before they slow you down.">
+<title>Warden: Run every agent. Keep a calm Mac. | Istari AI</title>
+<meta name="description" content="Warden watches memory, heat and disk on a Mac that runs many AI agents. It slows what&#39;s running away, tidies what finished sessions leave behind and frees space safely. It asks first, and never touches work in progress.">
 <meta name="theme-color" content="#F3F5F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0A111D" media="(prefers-color-scheme: dark)">
 <meta name="color-scheme" content="light dark">
@@ -213,6 +213,196 @@ section{scroll-margin-top:16px}
 .more h3{font-size:21px}
 .more p{font-size:15px;color:var(--muted)}
 .more .arrow{color:var(--muted);flex:none}
+
+/* Warden sections */
+.w-sec{margin-top:var(--gap)}
+.w-h{font-size:clamp(30px,4vw,44px)}
+.w-kicker{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--star)}
+.w-note{font-size:13.5px;color:var(--muted);margin:12px 0 56px}
+.night .w-note{color:var(--dusk)}
+
+/* 1. Watch it step in */
+.w-explain{display:grid;gap:28px;grid-template-columns:1fr;padding:28px 22px}
+@media (min-width:640px){.w-explain{padding:40px}}
+@media (min-width:960px){.w-explain{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:center}}
+.w-explain h2{font-size:clamp(30px,3.6vw,42px);margin:12px 0 18px;text-wrap:balance}
+.w-steps{list-style:none;margin:0;padding:0;display:grid;gap:16px;counter-reset:s}
+.w-steps li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;counter-increment:s}
+.w-steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid #3A4C69;font:500 13px var(--mono);color:#F2A93B}
+.w-steps b{display:block;font-weight:600;color:#E6ECF4}
+.w-steps span{color:#A3B2C5;font-size:15.5px}
+.w-chart{width:100%;height:auto;display:block}
+.w-chart text{font-family:var(--mono);font-size:11.5px}
+.w-chart .grid line{stroke:#22304A}
+.w-chart .with{animation:w-draw 9s ease-out infinite}
+.w-chart .without{animation:w-draw-late 9s ease-in infinite}
+.w-chart .knee{animation:w-pop 9s ease-out infinite}
+.w-chart .ring{transform-box:fill-box;transform-origin:center;animation:w-ring 2.2s ease-out infinite}
+.w-chart .late{animation:w-late 9s ease-out infinite}
+@keyframes w-draw{0%{stroke-dashoffset:100}50%,100%{stroke-dashoffset:0}}
+@keyframes w-draw-late{0%,20%{stroke-dashoffset:100;opacity:0}22%{opacity:.85}62%,100%{stroke-dashoffset:0;opacity:.85}}
+@keyframes w-pop{0%,22%{opacity:0}28%,100%{opacity:1}}
+@keyframes w-late{0%,48%{opacity:0}56%,100%{opacity:1}}
+@keyframes w-ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(3.2)}}
+
+/* 2. Showcase rows */
+.w-rows{display:grid;gap:var(--gap)}
+.w-row{display:grid;gap:26px;grid-template-columns:1fr;align-items:center;padding:26px 22px}
+@media (min-width:640px){.w-row{padding:36px}}
+@media (min-width:960px){.w-row{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:44px}.w-row.flip>.w-copy{order:2}}
+.w-copy h3{font-size:clamp(26px,2.8vw,34px);margin:10px 0 12px;text-wrap:balance}
+.w-copy p{color:var(--muted);max-width:52ch}
+.w-copy ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.w-copy li{position:relative;padding-left:18px;font-size:15.5px}
+.w-copy li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--pc)}
+.w-copy code{font:500 .86em var(--mono);background:var(--surface-2);border:1px solid var(--line);padding:1px 5px;border-radius:5px;overflow-wrap:anywhere}
+.w-tag{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--pc)}
+kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:1px 6px;background:var(--surface-2)}
+.w-vis{min-width:0}
+
+/* Real screenshot in a window */
+.w-shot{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line-strong);background:#ECECEC;box-shadow:var(--shadow)}
+.w-shot .bar{display:flex;gap:7px;padding:10px 12px;background:#E3E3E3;border-bottom:1px solid #D2D2D2}
+.w-shot .bar i{width:11px;height:11px;border-radius:50%;background:#FF5F57}.w-shot .bar i+i{background:#FEBC2E}.w-shot .bar i+i+i{background:#28C840}
+.w-shot img{display:block;width:100%;height:auto}
+.w-shot figcaption{font-size:13px;color:#4E5E73;background:#F6F6F6;padding:9px 14px;border-top:1px solid #D2D2D2}
+
+/* Menu bar menu */
+.w-menuwrap{max-width:420px;margin:0 auto;width:100%}
+.w-mbar{display:flex;justify-content:flex-end;align-items:center;gap:14px;padding:6px 12px;border-radius:10px 10px 0 0;background:color-mix(in srgb,var(--ink) 8%,var(--surface));font:500 13px var(--sans);color:var(--ink)}
+.w-mbar .on{display:inline-grid;place-items:center;width:26px;height:22px;border-radius:5px;background:color-mix(in srgb,var(--ink) 16%,transparent)}
+.w-mbar svg{width:16px;height:16px}
+.w-menu{list-style:none;margin:6px 0 0;padding:6px;border-radius:11px;background:var(--surface);border:1px solid var(--line-strong);box-shadow:var(--shadow);font-size:14px;line-height:1.3}
+.w-menu li{padding:6px 10px;border-radius:6px}
+.w-menu .sub{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.w-menu .hd{font-size:11.5px;font-weight:600;color:var(--muted);padding:10px 10px 4px}
+.w-menu .sep{height:1px;background:var(--line);padding:0;margin:5px 6px}
+.w-menu .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2F8F68;margin-right:8px;vertical-align:1px}
+.w-menu .dot.amber{background:#F2A93B}
+.w-menu .row{display:flex;justify-content:space-between;gap:10px}
+.w-menu .key{color:var(--muted);font-family:var(--mono);font-size:12px}
+.w-menu .hi{background:#0A64D8;color:#fff;animation:w-hi 4s ease-in-out infinite}
+.w-menu .hi .sub,.w-menu .hi .key{color:#DDE8FA}
+@keyframes w-hi{0%,100%{background:#0A64D8}50%{background:#2F7BE6}}
+
+/* STOPPED-BY-WARDEN.md */
+.w-file{padding:0;overflow:hidden;background:#0A111D;border-color:#22304A;color:#E6ECF4}
+.w-file .fbar{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid #22304A;font:500 13px var(--mono);color:#A3B2C5}
+.w-file .fbar i{width:10px;height:10px;border-radius:50%;background:#33445F}
+.w-file .fbar i:first-child{background:#7BC8A4}
+.w-file .fbody{padding:18px 18px 20px;font-size:14px}
+.w-file h4{font:700 20px var(--serif);margin:0 0 8px;letter-spacing:-.01em}
+.w-file .agents{color:#A3B2C5;font-size:13.5px;margin-bottom:14px}
+.w-file .agents b{color:#F2A93B}
+.w-log{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.w-log li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:10px 12px;border:1px solid #22304A;border-radius:10px;background:#0E1726}
+.w-log time{font:500 12.5px var(--mono);color:#F2A93B;padding-top:2px}
+.w-log b{display:block;font-weight:600;font-size:14px}
+.w-log span{display:block;color:#A3B2C5;font-size:13px;line-height:1.45}
+.w-log li:first-child{animation:w-new 6s ease-out infinite}
+@keyframes w-new{0%{border-color:#7BC8A4;background:#12271F}40%,100%{border-color:#22304A;background:#0E1726}}
+.w-file code{font:500 12px var(--mono);background:#1A2537;padding:1px 4px;border-radius:4px}
+
+/* Finished worktree + memory card */
+.w-card{display:grid;gap:12px}
+.w-checks{list-style:none;margin:0;padding:14px;display:grid;gap:8px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2)}
+.w-checks li{display:flex;align-items:center;gap:10px;font-size:14.5px}
+.w-checks .ck{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--pc);color:var(--surface)}
+.w-checks .ck svg{width:13px;height:13px}
+.w-checks li:nth-child(1) .ck{animation:w-ck 10s infinite;animation-delay:0s}
+.w-checks li:nth-child(2) .ck{animation:w-ck 10s infinite;animation-delay:.6s}
+.w-checks li:nth-child(3) .ck{animation:w-ck 10s infinite;animation-delay:1.2s}
+.w-checks li:nth-child(4) .ck{animation:w-ck 10s infinite;animation-delay:1.8s}
+.w-checks .res{margin-top:4px;padding-top:10px;border-top:1px dashed var(--line-strong);font-weight:600;color:var(--pc);animation:w-res 10s infinite}
+@keyframes w-ck{0%{transform:scale(.4);opacity:.2}6%,100%{transform:scale(1);opacity:1}}
+@keyframes w-res{0%,22%{opacity:.15}30%,100%{opacity:1}}
+.w-past{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:14px}
+.w-past .w-ph{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--muted);margin-bottom:10px}
+.w-past .w-ph svg{width:16px;height:16px;color:var(--pc)}
+.w-past .search{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13.5px;color:var(--muted);margin-bottom:10px}
+.w-past .item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center}
+.w-past .t{font-weight:600}
+.w-past .m{grid-column:1;font-size:13px;color:var(--muted)}
+.w-past .c{grid-column:1;font-size:13px}
+.w-past .btn2{grid-column:2;grid-row:1/span 3;font:600 13.5px var(--sans);border:1px solid var(--line-strong);border-radius:8px;padding:7px 12px;background:var(--surface-2);white-space:nowrap}
+
+/* 3. Proof */
+.w-proof{display:grid;gap:var(--gap);grid-template-columns:1fr;margin:0}
+@media (min-width:640px){.w-proof{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.w-proof{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.w-proof>div{display:flex;flex-direction:column;gap:8px;padding:22px}
+.w-proof dt{order:2;color:var(--muted);font-size:15px}
+.w-proof dd{order:1;margin:0;font:700 clamp(34px,3.6vw,46px)/1 var(--serif);letter-spacing:-.03em;color:var(--pc);font-variant-numeric:tabular-nums}
+
+/* 4. Safety */
+.w-safe{display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media (min-width:760px){.w-safe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.w-safe{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.w-safe article{display:flex;flex-direction:column;gap:10px;padding:22px}
+.w-safe .si{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--pc) 14%,transparent);color:var(--pc)}
+.w-safe .si svg{width:20px;height:20px}
+.w-safe h3{font:600 18px var(--sans);letter-spacing:0}
+.w-safe p{color:var(--muted);font-size:15px}
+
+/* 5. A day */
+.w-day{padding:0;overflow:hidden}
+.w-day-head,.w-day li{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,1fr);gap:16px;padding:14px 20px}
+.w-day-head{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.w-day-head .ok{color:var(--pc)}
+.w-day ol{list-style:none;margin:0;padding:0}
+.w-day li{border-bottom:1px solid var(--line);font-size:15px}
+.w-day li:last-child{border-bottom:0}
+.w-day time{font:500 13px var(--mono);color:var(--muted);padding-top:2px}
+.w-day .bad{color:var(--muted)}
+.w-day .good{font-weight:500}
+@media (max-width:639.98px){
+  .w-day-head{display:none}
+  .w-day li{grid-template-columns:52px minmax(0,1fr);gap:4px 12px}
+  .w-day .bad,.w-day .good{grid-column:2}
+  .w-day .bad::before{content:"Without: ";font-weight:600}
+  .w-day .good::before{content:"With Warden: ";font-weight:600;color:var(--pc)}
+}
+
+/* 6. Works with */
+.w-with{display:grid;gap:var(--gap);grid-template-columns:1fr}
+@media (min-width:760px){.w-with{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.w-with article{padding:22px}
+.w-with h3{font:600 13px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.w-with ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.w-with li{font-size:14px;font-weight:500;border:1px solid color-mix(in srgb,var(--pc) 35%,var(--line));background:color-mix(in srgb,var(--pc) 8%,var(--surface));border-radius:10px;padding:5px 10px}
+.w-with p{margin-top:12px;font-size:14.5px;color:var(--muted)}
+
+/* Memory card (drawn to match Warden 1.0's Overview banner) */
+.w-mem{border-radius:14px;padding:16px;background:color-mix(in srgb,#F2A93B 13%,var(--surface));border:1px solid color-mix(in srgb,#F2A93B 28%,var(--line));font-size:14px;line-height:1.35;color:var(--ink)}
+.w-mem .top{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:start}
+.w-mem .chipi{color:#E8862A}
+.w-mem .chipi svg{width:22px;height:22px}
+.w-mem .tt{font-weight:600;font-size:15px}
+.w-mem .st{color:var(--muted);font-size:13px;margin-top:2px}
+.w-mem .acts{display:flex;align-items:center;gap:8px}
+.w-mem .b{font:500 12.5px var(--sans);border:1px solid var(--line-strong);background:var(--surface);border-radius:7px;padding:4px 9px;white-space:nowrap}
+.w-mem .auto{position:relative;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:color-mix(in srgb,#34C759 22%,var(--surface));color:#2E9E4F}
+.w-mem .auto svg{width:17px;height:17px}
+.w-mem .auto i{position:absolute;right:-3px;bottom:-3px;width:13px;height:13px;border-radius:50%;background:#34C759;color:#fff;font:700 8.5px/13px var(--sans);font-style:normal;text-align:center}
+.w-mem .lead{font-weight:600;font-size:13.5px;margin:14px 0 6px 38px}
+.w-mem ul{list-style:none;margin:0 0 0 38px;padding:0;display:grid;gap:2px}
+.w-mem li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 6px;border-radius:8px}
+.w-mem li svg{width:16px;height:16px;color:var(--muted)}
+.w-mem .n{font-size:14px}
+.w-mem .d{display:block;font-size:12px;color:var(--muted)}
+.w-mem li.pick{background:color-mix(in srgb,#F2A93B 22%,transparent);animation:w-pick 7s ease-in-out infinite}
+@keyframes w-pick{0%,100%{background:color-mix(in srgb,#F2A93B 22%,transparent)}50%{background:color-mix(in srgb,#F2A93B 34%,transparent)}}
+.w-ask{margin:10px 0 0 38px;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line-strong);box-shadow:var(--shadow);animation:w-ask 7s ease-out infinite}
+.w-ask b{display:block;font-size:14px;margin-bottom:4px}
+.w-ask p{font-size:12.5px;color:var(--muted)}
+.w-ask .row2{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+.w-ask .row2 span{font:500 12.5px var(--sans);border:1px solid var(--line-strong);border-radius:7px;padding:4px 12px}
+.w-ask .row2 span.go2{background:#0A64D8;border-color:#0A64D8;color:#fff}
+@keyframes w-ask{0%,20%{opacity:.25;transform:translateY(4px)}30%,100%{opacity:1;transform:none}}
+@media (max-width:520px){.w-mem .lead,.w-mem ul,.w-ask{margin-left:0}.w-mem .top{grid-template-columns:24px minmax(0,1fr)}.w-mem .acts{grid-column:2}}
+@media (prefers-reduced-motion:reduce){.w-mem *,.w-ask{animation:none!important}}
+
+@media (prefers-reduced-motion:reduce){.w-chart *,.w-menu *,.w-log *,.w-checks *{animation:none!important}}
 </style>
 </head>
 <body>
@@ -233,8 +423,8 @@ section{scroll-margin-top:16px}
       <span class="bigico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z'/><path d='M9 12l2 2 4-4'/></svg></span>
       <p class="kind"><i aria-hidden="true"></i><span class="cat">Mac utilities</span> · Mac helper for developers</p>
       <h1 id="h1">Warden</h1>
-      <p class="tag">Keeps your Mac fast and cool.</p>
-      <p class="pitch">A small Mac app that keeps your background services running, calms programs that run hot, and stops idle AI servers and simulators before they slow you down.</p>
+      <p class="tag">Run every agent. Keep a calm Mac.</p>
+      <p class="pitch">Warden watches memory, heat and disk on a Mac that runs many AI agents. It slows what&#39;s running away, tidies what finished sessions leave behind and frees space safely. It asks first, and never touches work in progress.</p>
       <div class="act"><a class="btn primary" href="#get">Download for Mac<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a><span class="chip" data-stage="live"><i aria-hidden="true"></i>Download for Mac</span></div>
       
     </section>
@@ -256,9 +446,168 @@ section{scroll-margin-top:16px}
   <section aria-label="At a glance">
     <dl class="stats">
       <div class="tile stat"><dt>Made for</dt><dd>Developers running AI agents</dd></div>
-      <div class="tile stat"><dt>Runs</dt><dd>On your Mac only</dd></div>
+      <div class="tile stat"><dt>In the background</dt><dd>About 0.1% of one core and 17 MB</dd></div>
+      <div class="tile stat"><dt>Asks first</dt><dd>Anything that stops or deletes starts off</dd></div>
       <div class="tile stat"><dt>Platforms</dt><dd class="lst"><ul><li>macOS 14 and later</li></ul></dd></div>
     </dl>
+  </section>
+
+  <section class="w-sec" aria-labelledby="w-step">
+    <div class="tile night w-explain">
+      <div>
+        <p class="w-kicker">How it keeps the Mac from freezing</p>
+        <h2 id="w-step">Watch it step in, before the beach ball</h2>
+        <ol class="w-steps">
+          <li><div><b>It spots the first sign</b><span>Memory pressure, or swap growing 1 GB in two minutes. That's how nearly every freeze starts.</span></div></li>
+          <li><div><b>It slows, it doesn't kill</b><span>The program that grew 1.5 GB in two minutes moves to background priority. It keeps working, and your other apps stay responsive.</span></div></li>
+          <li><div><b>It puts things back</b><span>Once memory has been fine for two minutes. One alert says what it did and names the biggest apps.</span></div></li>
+        </ol>
+      </div>
+      <svg class="w-chart" viewBox="0 0 600 300" role="img" aria-labelledby="w-chart-t">
+        <title id="w-chart-t">A chart of swap over time. Without Warden, swap keeps rising until every app stalls. With Warden, it rises until the first sign, Warden slows the program that's growing, and the line levels off.</title>
+        <g class="grid"><line x1="40" y1="70" x2="580" y2="70"/><line x1="40" y1="130" x2="580" y2="130"/><line x1="40" y1="190" x2="580" y2="190"/><line x1="40" y1="250" x2="580" y2="250"/></g>
+        <text x="40" y="34" fill="#8794AD">SWAP</text>
+        <text x="580" y="276" fill="#8794AD" text-anchor="end">TIME →</text>
+        <path class="without" pathLength="100" stroke-dasharray="100" d="M40 228 C 140 224 200 196 262 152 S 400 70 470 48 L 580 40" fill="none" stroke="#E5786B" stroke-width="2.4" stroke-linecap="round" opacity=".85"/>
+        <text class="late" x="578" y="30" fill="#E5786B" text-anchor="end">without: swap fills, every app stalls</text>
+        <path class="with" pathLength="100" stroke-dasharray="100" d="M40 228 C 140 224 200 196 262 152 C 300 132 336 128 390 130 S 520 136 580 138" fill="none" stroke="#F2A93B" stroke-width="4" stroke-linecap="round"/>
+        <g class="knee">
+          <circle class="ring" cx="262" cy="152" r="6" fill="none" stroke="#F2A93B" stroke-width="2"/>
+          <circle cx="262" cy="152" r="6.5" fill="#F2A93B"/>
+          <line x1="262" y1="162" x2="262" y2="196" stroke="#F2A93B" stroke-opacity=".5" stroke-dasharray="3 3"/>
+          <text x="270" y="210" fill="#E6ECF4">First sign: swap +1 GB in 2 min</text>
+          <text x="270" y="228" fill="#A3B2C5">Warden slows the build that's ballooning</text>
+        </g>
+        <text class="late" x="578" y="160" fill="#F2A93B" text-anchor="end">with Warden: still running, just slower</text>
+      </svg>
+    </div>
+  </section><section class="w-sec" aria-labelledby="w-see">
+    <div class="sec-head"><div><h2 id="w-see">See it work</h2><p>What Warden shows you, in its own words.</p></div></div>
+    <div class="w-rows">
+
+      <article class="tile w-row">
+        <div class="w-copy">
+          <p class="w-tag">Free memory now</p>
+          <h3>One key press frees what's safe. The rest is your call.</h3>
+          <p>Press <kbd>⌃⌥⌘F</kbd> anywhere. Warden slows whatever is ballooning and stops idle AI servers and unused simulators. It never touches your work. If that isn't enough, it lists what else you could stop, with how much each frees.</p>
+          <ul>
+            <li>Local AI servers first, then dev servers by project, idle sessions and the biggest apps.</li>
+            <li>Every Stop asks first and says what you'd lose.</li>
+            <li>Apps are asked to quit the normal way, so they can ask to save.</li>
+          </ul>
+        </div>
+        <div class="w-vis">
+          <div class="w-mem" role="img" aria-label="An illustration of Warden's Memory card. Memory is filling up; Warden frees what it safely can on its own, and Automatic is on. It has already done all it safely can, so it lists what else you could stop: llama-server, a local AI server idle 25 minutes holding 18.2 GB; a test run in my-app holding 6.1 GB; a Claude Code session idle 5 hours; and Google Chrome. Stopping llama-server asks first and says what you'd lose.">
+    <div aria-hidden="true">
+      <div class="top"><span class="chipi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='5' y='6' width='14' height='12' rx='2'/><path d='M9 3v3M15 3v3M9 18v3M15 18v3M2 10h3M2 14h3M19 10h3M19 14h3'/></svg></span><div><div class="tt">Memory is filling up</div><div class="st">Pressure warning · swap 6.4 GB. Warden frees what it safely can on its own.</div></div><div class="acts"><span class="b">Free memory now</span><span class="auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M20 11a8 8 0 0 0-14.3-4.3L4 8.5'/><path d='M4 4v4.5h4.5'/><path d='M4 13a8 8 0 0 0 14.3 4.3L20 15.5'/><path d='M20 20v-4.5h-4.5'/></svg><i>A</i></span></div></div>
+      <p class="lead">Warden has already done all it safely can. To free more, choose what to stop:</p>
+      <ul>
+        <li class="pick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z'/><path d='M19 15l.8 1.7 1.7.8-1.7.8L19 20l-.8-1.7-1.7-.8 1.7-.8z'/></svg><span><span class="n">llama-server</span><span class="d">llama.cpp · local AI server · idle 25 min · 18.2 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M14 6l4 4M3 21l9-9M12.5 4.5l3-1.5 5.5 5.5-1.5 3z'/></svg><span><span class="n">my-app › checkout</span><span class="d">node (vitest), node (vitest worker) · 2 processes · 6.1 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='3' y='4' width='18' height='16' rx='2'/><path d='M7 9l3 3-3 3M13 15h4'/></svg><span><span class="n">Claude Code in my-app › old-branch</span><span class="d">Idle 5 h · 1.4 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='4' y='4' width='16' height='16' rx='4' stroke-dasharray='3 3'/></svg><span><span class="n">Google Chrome</span><span class="d">69 processes · 8.2 GB</span></span><span class="b">Quit…</span></li>
+      </ul>
+      <div class="w-ask"><b>Stop llama-server?</b><p>Stops llama-server and frees the model it holds. Anything using it right now (a chat, an app, a script) loses the answer in progress. Warden won't start it again; start it again yourself when memory is fine.</p><div class="row2"><span>Cancel</span><span class="go2">Stop</span></div></div>
+    </div>
+  </div>
+        </div>
+      </article>
+
+      <article class="tile w-row flip">
+        <div class="w-copy">
+          <p class="w-tag">The menu bar</p>
+          <h3>A menu that opens even when the Mac won't</h3>
+          <p>When everything is stuck, the menu still opens. It's built ahead of time on its own thread: in our test, with every core busy and memory at warning, it opened in under 5 ms. Before, a click waited 22 seconds to 2 minutes.</p>
+          <ul>
+            <li><b>If the Mac is struggling</b> works without opening the app.</li>
+            <li>Stop a big AI or dev server, or Force Quit an app: each asks first.</li>
+            <li>The icon always says why it's amber or red.</li>
+          </ul>
+        </div>
+        <div class="w-vis">
+          <div class="w-menuwrap" role="img" aria-label="Warden's menu bar menu, as an illustration: Needs a look, memory is filling up. CPU 64 percent, memory 91 percent. Services: Tunnel running, Web app running. If the Mac is struggling: Free Memory Now, Stop llama-server 18.2 GB, Stop my-app 3.4 GB, Force Quit an App. Open Warden.">
+            <div class="w-mbar" aria-hidden="true"><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z'/><path d='M9 12l2 2 4-4'/></svg></span><span>Thu 14:05</span></div>
+            <ul class="w-menu" aria-hidden="true">
+              <li><span class="dot amber"></span>Needs a look<span class="sub">Memory is filling up · and 1 more</span></li>
+              <li>CPU 64% · Memory 91%<span class="sub">Swap 6.4 GB · 48 GB free on disk</span></li>
+              <li class="sep"></li>
+              <li class="hd">Services</li>
+              <li><span class="dot"></span>Tunnel<span class="sub">Running</span></li>
+              <li><span class="dot"></span>Web app<span class="sub">Running</span></li>
+              <li class="sep"></li>
+              <li class="hd">If the Mac is struggling</li>
+              <li class="hi"><span class="row"><span>Free Memory Now</span><span class="key">⌃⌥⌘F</span></span><span class="sub">Stops what's safe to stop · ⌃⌥⌘F works anywhere</span></li>
+              <li>Stop llama-server (18.2 GB)…</li>
+              <li>Stop my-app › checkout (3.4 GB)…</li>
+              <li>Force Quit an App<span class="sub">Asks first · unsaved work in it is lost</span></li>
+              <li class="sep"></li>
+              <li><span class="row"><span>Open Warden…</span><span class="key">⌘O</span></span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile w-row">
+        <div class="w-copy">
+          <p class="w-tag">After your agents</p>
+          <h3>Tidies up when a session ends, and writes down why</h3>
+          <p>Warden knows which coding session started each dev server, model server and simulator. When the session ends and they've gone idle, they're stopped, and every stop goes into a plain file.</p>
+          <ul>
+            <li>Downloads, training jobs and terminals are never touched.</li>
+            <li>Your agents can read <code>STOPPED-BY-WARDEN.md</code>, so they don't "fix" a stop by starting it again.</li>
+          </ul>
+        </div>
+        <div class="w-vis">
+          <div class="tile w-file" role="img" aria-label="An illustration of STOPPED-BY-WARDEN.md, with example entries in Warden's own words: a dev server left running after its Claude Code session ended, a simulator unused for 20 minutes, an idle local AI server stopped while memory was filling up, and packages cleared from finished worktrees.">
+            <div class="fbar" aria-hidden="true"><i></i><i></i><i></i><span>STOPPED-BY-WARDEN.md</span></div>
+            <div class="fbody" aria-hidden="true">
+              <h4>Stopped by Warden</h4>
+              <p class="agents">Everything below was stopped <b>on purpose</b>, not by a crash. <b>For AI agents:</b> don't start these again on your own.</p>
+              <ol class="w-log">
+                <li><time>14:04</time><div><b>next-server · my-app</b><span>left running after its Claude Code session ended</span></div></li>
+                <li><time>13:40</time><div><b>iOS Simulator (iPhone 16)</b><span>unused for 20 minutes</span></div></li>
+                <li><time>12:15</time><div><b>llama-server</b><span>an idle local AI server holding 18.2 GB while memory was filling up</span></div></li>
+                <li><time>02:58</time><div><b>packages and build output in 3 finished worktrees (5.4 GB)</b><span>cleared on its own: their work is merged into main and nothing in them had changed; <code>pnpm install</code> or a build brings them back</span></div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile w-row flip">
+        <div class="w-copy">
+          <p class="w-tag">Disk</p>
+          <h3>Frees disk without losing the story</h3>
+          <p>Each agent's worktree installs its own packages, often 2 GB or more. When a worktree is truly finished, Warden clears them. Before it removes a folder, it saves a memory card: the PR, commits, files changed and the conversations that made it.</p>
+          <ul>
+            <li>Kept if anything changed, is running, or could exist nowhere else (a <code>.env</code>, downloaded models).</li>
+            <li><b>Reopen</b> makes the worktree again and continues its conversation.</li>
+          </ul>
+        </div>
+        <div class="w-vis">
+          <div class="w-card" role="img" aria-label="An illustration of how Warden decides a worktree is finished: merged into main, nothing changed, nothing running inside, every Claude app session archived and quiet for an hour. Then packages are cleared and a memory card is saved. Below, a Past work entry for an example worktree with a Reopen button.">
+            <ul class="w-checks" aria-hidden="true">
+              <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Merged into main</li>
+              <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Nothing changed, nothing new</li>
+              <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Nothing running inside</li>
+              <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Sessions archived, quiet for an hour</li>
+              <li class="res">Packages cleared · 2.1 GB · memory card saved</li>
+            </ul>
+            <div class="w-past" aria-hidden="true">
+              <div class="w-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M3 12a9 9 0 1 0 3-6.7L3 8'/><path d='M3 3v5h5'/><path d='M12 7v5l3 2'/></svg>Past work</div>
+              <div class="search">Search titles, branches, PRs and files</div>
+              <div class="item">
+                <span class="t">Add dark mode to Settings</span>
+                <span class="m">my-app · feat/dark-mode · PR #42 · merged 12 Nov · 9 files</span>
+                <span class="c">Claude Code · 2 conversations</span>
+                <span class="btn2">Reopen</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="w-note">The Memory card, the menu, the file and Past work are drawn here as illustrations of Warden 1.0, with its real wording and example names.</p>
   </section>
 
   <div class="tile" style="padding:0;border:0;background:none"><style>
@@ -305,19 +654,59 @@ section{scroll-margin-top:16px}
   <section aria-labelledby="fh">
     <div class="sec-head"><div><h2 id="fh">What it does</h2></div></div>
     <ul class="fgrid">
-      <li class="f-7"><article class="tile tint"><span class="n">01</span><h3>Services that stay up</h3><p>Dev servers, workers, databases and tunnels restart on their own, with health checks from inside and outside.</p></article></li>
-      <li class="f-5"><article class="tile"><span class="n">02</span><h3>Heat and CPU</h3><p>When the Mac runs hot, the busiest programs move to background priority, then come back once it&#39;s calm.</p></article></li>
-      <li class="f-5"><article class="tile"><span class="n">03</span><h3>Memory guards</h3><p>Alerts on memory pressure and swap that name the biggest programs, and who started them.</p></article></li>
-      <li class="f-7"><article class="tile night"><span class="n">04</span><h3>Made for AI agents</h3><p>Idle local AI servers and unused simulators are stopped, and every stop is written down with its reason.</p></article></li>
+      <li class="f-7"><article class="tile tint"><span class="n">01</span><h3>No more freezes</h3><p>At the first sign of trouble (memory pressure, or swap growing 1 GB in two minutes), Warden slows the program that&#39;s ballooning. It keeps working, and your other apps stay responsive.</p></article></li>
+      <li class="f-5"><article class="tile"><span class="n">02</span><h3>A cool Mac</h3><p>When the Mac runs hot or CPU stays high, the busiest programs move to background priority, then come back once it&#39;s calm.</p></article></li>
+      <li class="f-5"><article class="tile"><span class="n">03</span><h3>No leftover servers</h3><p>Warden knows which coding session started each dev server. When the session ends and the server goes idle, it&#39;s stopped, so port 3000 is free again.</p></article></li>
+      <li class="f-7"><article class="tile night"><span class="n">04</span><h3>No forgotten models</h3><p>Local AI servers left idle and simulators nobody is using are stopped, if you turn that on. Ollama, Docker and databases are protected.</p></article></li>
+      <li class="f-7"><article class="tile"><span class="n">05</span><h3>Room on the disk</h3><p>Worktrees whose work is merged and quiet lose their packages, then the folder, after a memory card is saved. Reopen brings any of them back.</p></article></li>
+      <li class="f-5"><article class="tile"><span class="n">06</span><h3>Servers and tunnels that stay up</h3><p>Dev servers, workers and tunnels restart on their own, with health checks from inside and outside. A copy you started in Terminal is adopted, not doubled.</p></article></li>
     </ul>
+  </section>
+
+  <section class="w-sec" aria-labelledby="w-proof">
+    <div class="sec-head"><div><h2 id="w-proof">On our own Mac</h2><p>Warden runs every day on the 36 GB Mac we build these products on. From its own log, 12–13 November 2026.</p></div></div>
+    <dl class="w-proof">
+      <div class="tile"><dt>of packages cleared from finished worktrees in one night</dt><dd>22 GB</dd></div>
+      <div class="tile"><dt>merged worktrees removed, each with a memory card saved first</dt><dd>14</dd></div>
+      <div class="tile"><dt>for the menu to open with every core busy and memory at warning</dt><dd>&lt;5 ms</dd></div>
+      <div class="tile"><dt>what Warden uses in the background, at about 0.1% of one core</dt><dd>17 MB</dd></div>
+    </dl>
+  </section><section class="w-sec" aria-labelledby="w-safe">
+    <div class="sec-head"><div><h2 id="w-safe">Safe by design</h2><p>The rules every part of Warden follows.</p></div></div>
+    <div class="w-safe">
+      <article class="tile"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M12 3v9'/><path d='M7 6.3a8 8 0 1 0 10 0'/></svg></span><h3>Off until you say so</h3><p>Anything that stops a program or deletes files starts off. Until you turn it on, Warden only suggests it, with a button to do it once.</p></article>
+      <article class="tile"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M12 9v4'/><path d='M12 17h.01'/><path d='M10.3 3.9 2 18a2 2 0 0 0 1.7 3h16.6A2 2 0 0 0 22 18L13.7 3.9a2 2 0 0 0-3.4 0z'/></svg></span><h3>Says what you'd lose</h3><p>Every Stop, Quit and Clear shows its risk, and the confirmation shows it again. Even when the risk is small.</p></article>
+      <article class="tile"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='3' y='4' width='18' height='14' rx='2'/><path d='M8 21h8M12 18v3'/></svg></span><h3>Leaves live work alone</h3><p>It never quits an app, closes a window or force quits on its own. Editors, agents, terminals and protected programs are never stopped.</p></article>
+      <article class="tile"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/><path d='M14 3v6h6M8 13h8M8 17h5'/></svg></span><h3>Writes down why</h3><p>Every stop, clear and removal goes into a file with what, why and how to get it back, so you and your agents always know.</p></article>
+    </div>
+  </section><section class="w-sec" aria-labelledby="w-day">
+    <div class="sec-head"><div><h2 id="w-day">A day with many agents</h2><p>Times are made up; what Warden does at each one is its real behaviour.</p></div></div>
+    <div class="tile w-day">
+      <div class="w-day-head" aria-hidden="true"><span></span><span>Without Warden</span><span class="ok">With Warden</span></div>
+      <ol>
+        <li><time>09:00</time><span class="bad">The Mac is hot. Yesterday's sessions, a 20 GB model and a simulator ran all night.</span><span class="good">Cool. The idle simulator and the forgotten model were stopped overnight, and the log says why.</span></li>
+        <li><time>10:30</time><span class="bad">Four agents start four builds. Swap climbs.</span><span class="good">One build balloons. Warden slows it; it catches up a minute later.</span></li>
+        <li><time>13:00</time><span class="bad">Back from lunch to a beach ball. You force quit the wrong app.</span><span class="good">Back from lunch to a responsive Mac. Activity shows the one hot stretch, and what caused it.</span></li>
+        <li><time>15:00</time><span class="bad">Port 3000 is taken by a server from a session that ended this morning.</span><span class="good">Port 3000 is free. The leftover server was stopped once its session ended.</span></li>
+        <li><time>18:00</time><span class="bad">Half an hour deleting node_modules by hand, unsure what's safe.</span><span class="good">Merged worktrees are already gone, each a Reopen away in Past work.</span></li>
+      </ol>
+    </div>
+  </section><section class="w-sec" aria-labelledby="w-with">
+    <div class="sec-head"><div><h2 id="w-with">Works with your tools</h2><p>Nothing to set up: a tool is recognised the first time it runs.</p></div></div>
+    <div class="w-with">
+      <article class="tile"><h3>Coding agents</h3><ul><li>Claude Code</li><li>Claude app</li><li>Codex</li><li>Cursor</li><li>Gemini CLI</li><li>GitHub Copilot CLI</li><li>Aider</li><li>OpenCode</li><li>Amp</li><li>Windsurf</li></ul><p>It knows which session started each process, and reads each agent's sessions for memory cards.</p></article>
+      <article class="tile"><h3>Local AI servers</h3><ul><li>Ollama</li><li>LM Studio</li><li>llama.cpp</li><li>vLLM</li><li>MLX</li><li>ComfyUI</li><li>Jan</li><li>LocalAI</li><li>Whisper</li></ul><p>Recognised with no setup. Ollama is protected by default.</p></article>
+      <article class="tile"><h3>Simulators and builds</h3><ul><li>iOS Simulator</li><li>Android emulator</li><li>Xcode</li><li>Expo</li><li>Maestro</li><li>Appium</li></ul><p>A simulator counts as in use while its window is in front or a tool is driving it.</p></article>
+      <article class="tile"><h3>Services and tunnels</h3><ul><li>cloudflared</li><li>ngrok</li><li>Tailscale Funnel</li><li>Docker</li><li>OrbStack</li><li>Colima</li><li>any command</li></ul><p>Runs in your login shell, so nvm, volta, asdf, pyenv and mise just work.</p></article>
+    </div>
   </section>
 
   <section aria-labelledby="mh">
     <div class="sec-head"><div><h2 id="mh">More from Istari AI</h2></div></div>
     <ul class="more">
-      <li><article class="tile lift" style="--pc-l:#E2543F;--pc-d:#FF8A73"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/reelkar/">Reelkar</a></h3><p>From an idea to a finished reel.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
       <li><article class="tile lift" style="--pc-l:#2F74C0;--pc-d:#82B8F2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M4 7h13a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z'/><path d='M4 7l10-3v3'/><circle cx='16' cy='14' r='1.3' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/bachat/">Bachat</a></h3><p>Every spend, counted once. On your phone.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
       <li><article class="tile lift" style="--pc-l:#B7701A;--pc-d:#F2A93B"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M12 3l7.5 18h-15z'/><circle cx='12' cy='14' r='1.6' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/istari/">Istari</a></h3><p>Memory and supervision for coding agents.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
+      <li><article class="tile lift" style="--pc-l:#E2543F;--pc-d:#FF8A73"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/reelkar/">Reelkar</a></h3><p>From an idea to a finished reel.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
     </ul>
   </section>
 </main>
@@ -329,7 +718,7 @@ section{scroll-margin-top:16px}
     </div>
     <nav aria-label="Footer">
       <ul>
-        <li><a href="/reelkar/">Reelkar</a></li><li><a href="/warden/">Warden</a></li><li><a href="/bachat/">Bachat</a></li><li><a href="/istari/">Istari</a></li>
+        <li><a href="/bachat/">Bachat</a></li><li><a href="/warden/">Warden</a></li><li><a href="/istari/">Istari</a></li><li><a href="/reelkar/">Reelkar</a></li>
         <li><a href="https://github.com/rajnishh" rel="noopener">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/rajnishkumar88/" rel="noopener me">LinkedIn</a></li>
         <li><a href="mailto:security@istari-ai.dev">Report a security issue</a></li>
