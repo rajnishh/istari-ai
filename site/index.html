@@ -249,6 +249,23 @@ section{scroll-margin-top:16px}
 .about p.big{font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.35;letter-spacing:-.01em;color:var(--starlight)}
 .about-links{display:flex;flex-direction:column}
 .about a{font-weight:600;color:var(--star);display:inline-flex;align-items:center;min-height:44px;gap:6px}
+/* Spotlight: one product shown with a real screenshot */
+.spot{display:grid;gap:28px;grid-template-columns:1fr;align-items:center;overflow:hidden;padding:28px 22px;background:linear-gradient(150deg,color-mix(in srgb,var(--pc) 18%,var(--surface)) 0%,var(--surface) 70%);border-color:color-mix(in srgb,var(--pc) 40%,var(--line))}
+@media (min-width:640px){.spot{padding:40px}}
+@media (min-width:960px){.spot{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:44px}}
+.spot .s-eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.spot .s-eyebrow i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--pc);margin-right:10px;vertical-align:1px}
+.spot h3{font-size:clamp(32px,4vw,48px);margin:14px 0 14px;text-wrap:balance}
+.spot .s-body{color:var(--muted);max-width:50ch}
+.spot ul{list-style:none;margin:20px 0 26px;padding:0;display:grid;gap:10px}
+.spot li{display:flex;gap:12px;align-items:baseline;font-size:16px}
+.spot li b{font-family:var(--mono);font-weight:500;font-size:13px;color:var(--pc);min-width:5.5ch}
+.spot .cta{display:flex;flex-wrap:wrap;gap:12px}
+.shot{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line-strong);background:#ECECEC;box-shadow:var(--shadow)}
+.shot .bar{display:flex;gap:7px;padding:10px 12px;background:#E3E3E3;border-bottom:1px solid #D2D2D2}
+.shot .bar i{width:11px;height:11px;border-radius:50%;background:#FF5F57}.shot .bar i+i{background:#FEBC2E}.shot .bar i+i+i{background:#28C840}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:13.5px;color:#4E5E73;background:#F6F6F6;padding:10px 14px;border-top:1px solid #D2D2D2}
 body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-s="reelkar"]{transform:scale(1.7)}body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-s="reelkar"] .glow{opacity:.55}body:has(#grid li[data-s="warden"]:is(:hover,:focus-within)) .sky-svg .st[data-s="warden"]{transform:scale(1.7)}body:has(#grid li[data-s="warden"]:is(:hover,:focus-within)) .sky-svg .st[data-s="warden"] .glow{opacity:.55}body:has(#grid li[data-s="bachat"]:is(:hover,:focus-within)) .sky-svg .st[data-s="bachat"]{transform:scale(1.7)}body:has(#grid li[data-s="bachat"]:is(:hover,:focus-within)) .sky-svg .st[data-s="bachat"] .glow{opacity:.55}body:has(#grid li[data-s="istari"]:is(:hover,:focus-within)) .sky-svg .st[data-s="istari"]{transform:scale(1.7)}body:has(#grid li[data-s="istari"]:is(:hover,:focus-within)) .sky-svg .st[data-s="istari"] .glow{opacity:.55}</style>
 </head>
 <body>
@@ -321,8 +338,8 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
     <div class="t-body">
       <p class="t-kind"><span class="cat">Mac utilities</span> · Mac helper for developers</p>
       <h3 class="t-name" id="t-warden"><a class="stretch" href="/warden/">Warden</a></h3>
-      <p class="t-tag">Keeps your Mac fast and cool.</p>
-      <p class="t-pitch">A small Mac app that keeps your background services running, calms programs that run hot, and stops idle AI servers and simulators before they slow you down.</p>
+      <p class="t-tag">Run every agent. Keep a calm Mac.</p>
+      <p class="t-pitch">Warden watches memory, heat and disk on a Mac that runs many AI agents. It slows what&#39;s running away, tidies what finished sessions leave behind and frees space safely. It asks first, and never touches work in progress.</p>
     </div>
     <div class="t-side"><span class="go"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
     <div class="t-foot"><span class="chip" data-stage="live"><i aria-hidden="true"></i>Download for Mac</span></div>
@@ -358,6 +375,20 @@ body:has(#grid li[data-s="reelkar"]:is(:hover,:focus-within)) .sky-svg .st[data-
 </li>
     </ul>
     <p class="count" id="count" role="status" aria-live="polite"></p>
+  </section>
+
+  <section id="spotlight" aria-labelledby="sph">
+    <div class="sec-head"><div><h2 id="sph">Spotlight</h2><p>New this month, and running on our own Mac every day.</p></div></div>
+    <article class="tile spot" style="--pc-l:#2F8F68;--pc-d:#7BC8A4">
+      <div>
+        <p class="s-eyebrow"><i aria-hidden="true"></i>Warden 1.0 for Mac</p>
+        <h3>Run every agent. Keep a calm Mac.</h3>
+        <p class="s-body">Warden looks after a Mac running Claude Code, Codex, local models, simulators and tunnels all at once. It steps in early, tidies up after your agents and always says what you&#39;d lose before it stops anything.</p>
+        <ul><li><b>⌃⌥⌘F</b><span>Frees memory from anywhere, in one key press.</span></li><li><b>22 GB</b><span>Of finished-worktree packages cleared on our Mac in one night.</span></li><li><b>17 MB</b><span>What it uses in the background, at about 0.1% of one core.</span></li></ul>
+        <div class="cta"><a class="btn primary" href="/warden/">See how Warden works<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a class="btn ghost" href="/warden/#get">Download</a></div>
+      </div>
+      <figure class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="/warden/assets/free-memory-choices.png" alt="Warden&#39;s Memory card: memory is filling up, and Warden lists what you could stop, each with the memory it frees: two dev projects, an idle Claude Code session, Google Chrome and OrbStack." width="1520" height="594" loading="lazy" decoding="async"><figcaption>Free memory now: once the safe steps are done, you choose what else to stop.</figcaption></figure>
+    </article>
   </section>
 
   <section id="lab" aria-labelledby="lh">
