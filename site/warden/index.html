@@ -372,6 +372,36 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
 .w-with li{font-size:14px;font-weight:500;border:1px solid color-mix(in srgb,var(--pc) 35%,var(--line));background:color-mix(in srgb,var(--pc) 8%,var(--surface));border-radius:10px;padding:5px 10px}
 .w-with p{margin-top:12px;font-size:14.5px;color:var(--muted)}
 
+/* Memory card (drawn to match Warden 1.0's Overview banner) */
+.w-mem{border-radius:14px;padding:16px;background:color-mix(in srgb,#F2A93B 13%,var(--surface));border:1px solid color-mix(in srgb,#F2A93B 28%,var(--line));font-size:14px;line-height:1.35;color:var(--ink)}
+.w-mem .top{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:start}
+.w-mem .chipi{color:#E8862A}
+.w-mem .chipi svg{width:22px;height:22px}
+.w-mem .tt{font-weight:600;font-size:15px}
+.w-mem .st{color:var(--muted);font-size:13px;margin-top:2px}
+.w-mem .acts{display:flex;align-items:center;gap:8px}
+.w-mem .b{font:500 12.5px var(--sans);border:1px solid var(--line-strong);background:var(--surface);border-radius:7px;padding:4px 9px;white-space:nowrap}
+.w-mem .auto{position:relative;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:color-mix(in srgb,#34C759 22%,var(--surface));color:#2E9E4F}
+.w-mem .auto svg{width:17px;height:17px}
+.w-mem .auto i{position:absolute;right:-3px;bottom:-3px;width:13px;height:13px;border-radius:50%;background:#34C759;color:#fff;font:700 8.5px/13px var(--sans);font-style:normal;text-align:center}
+.w-mem .lead{font-weight:600;font-size:13.5px;margin:14px 0 6px 38px}
+.w-mem ul{list-style:none;margin:0 0 0 38px;padding:0;display:grid;gap:2px}
+.w-mem li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 6px;border-radius:8px}
+.w-mem li svg{width:16px;height:16px;color:var(--muted)}
+.w-mem .n{font-size:14px}
+.w-mem .d{display:block;font-size:12px;color:var(--muted)}
+.w-mem li.pick{background:color-mix(in srgb,#F2A93B 22%,transparent);animation:w-pick 7s ease-in-out infinite}
+@keyframes w-pick{0%,100%{background:color-mix(in srgb,#F2A93B 22%,transparent)}50%{background:color-mix(in srgb,#F2A93B 34%,transparent)}}
+.w-ask{margin:10px 0 0 38px;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line-strong);box-shadow:var(--shadow);animation:w-ask 7s ease-out infinite}
+.w-ask b{display:block;font-size:14px;margin-bottom:4px}
+.w-ask p{font-size:12.5px;color:var(--muted)}
+.w-ask .row2{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+.w-ask .row2 span{font:500 12.5px var(--sans);border:1px solid var(--line-strong);border-radius:7px;padding:4px 12px}
+.w-ask .row2 span.go2{background:#0A64D8;border-color:#0A64D8;color:#fff}
+@keyframes w-ask{0%,20%{opacity:.25;transform:translateY(4px)}30%,100%{opacity:1;transform:none}}
+@media (max-width:520px){.w-mem .lead,.w-mem ul,.w-ask{margin-left:0}.w-mem .top{grid-template-columns:24px minmax(0,1fr)}.w-mem .acts{grid-column:2}}
+@media (prefers-reduced-motion:reduce){.w-mem *,.w-ask{animation:none!important}}
+
 @media (prefers-reduced-motion:reduce){.w-chart *,.w-menu *,.w-log *,.w-checks *{animation:none!important}}
 </style>
 </head>
@@ -458,16 +488,28 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
       <article class="tile w-row">
         <div class="w-copy">
           <p class="w-tag">Free memory now</p>
-          <h3>One key press frees memory. Then you choose.</h3>
-          <p>Press <kbd>⌃⌥⌘F</kbd> anywhere and Warden does every safe step at once. If memory is still tight, it lists what else you could stop, biggest first, with how much each frees.</p>
+          <h3>One key press frees what's safe. The rest is your call.</h3>
+          <p>Press <kbd>⌃⌥⌘F</kbd> anywhere. Warden slows whatever is ballooning and stops idle AI servers and unused simulators. It never touches your work. If that isn't enough, it lists what else you could stop, with how much each frees.</p>
           <ul>
-            <li>Local AI servers, dev servers by project, idle sessions, then the biggest apps.</li>
+            <li>Local AI servers first, then dev servers by project, idle sessions and the biggest apps.</li>
             <li>Every Stop asks first and says what you'd lose.</li>
             <li>Apps are asked to quit the normal way, so they can ask to save.</li>
           </ul>
         </div>
         <div class="w-vis">
-          <figure class="w-shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="/warden/assets/free-memory-choices.png" alt="Warden's Memory card: memory is filling up and Warden has already done all it safely can. It lists what you could stop: two dev projects (12.6 GB and 1.8 GB), a Claude Code session idle for 5 hours, Google Chrome and OrbStack, each with a Stop or Quit button." width="1520" height="594" loading="lazy" decoding="async"><figcaption>A real screenshot from Warden 1.0.</figcaption></figure>
+          <div class="w-mem" role="img" aria-label="An illustration of Warden's Memory card. Memory is filling up; Warden frees what it safely can on its own, and Automatic is on. It has already done all it safely can, so it lists what else you could stop: llama-server, a local AI server idle 25 minutes holding 18.2 GB; a test run in my-app holding 6.1 GB; a Claude Code session idle 5 hours; and Google Chrome. Stopping llama-server asks first and says what you'd lose.">
+    <div aria-hidden="true">
+      <div class="top"><span class="chipi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='5' y='6' width='14' height='12' rx='2'/><path d='M9 3v3M15 3v3M9 18v3M15 18v3M2 10h3M2 14h3M19 10h3M19 14h3'/></svg></span><div><div class="tt">Memory is filling up</div><div class="st">Pressure warning · swap 6.4 GB. Warden frees what it safely can on its own.</div></div><div class="acts"><span class="b">Free memory now</span><span class="auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M20 11a8 8 0 0 0-14.3-4.3L4 8.5'/><path d='M4 4v4.5h4.5'/><path d='M4 13a8 8 0 0 0 14.3 4.3L20 15.5'/><path d='M20 20v-4.5h-4.5'/></svg><i>A</i></span></div></div>
+      <p class="lead">Warden has already done all it safely can. To free more, choose what to stop:</p>
+      <ul>
+        <li class="pick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z'/><path d='M19 15l.8 1.7 1.7.8-1.7.8L19 20l-.8-1.7-1.7-.8 1.7-.8z'/></svg><span><span class="n">llama-server</span><span class="d">llama.cpp · local AI server · idle 25 min · 18.2 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d='M14 6l4 4M3 21l9-9M12.5 4.5l3-1.5 5.5 5.5-1.5 3z'/></svg><span><span class="n">my-app › checkout</span><span class="d">node (vitest), node (vitest worker) · 2 processes · 6.1 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='3' y='4' width='18' height='16' rx='2'/><path d='M7 9l3 3-3 3M13 15h4'/></svg><span><span class="n">Claude Code in my-app › old-branch</span><span class="d">Idle 5 h · 1.4 GB</span></span><span class="b">Stop…</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x='4' y='4' width='16' height='16' rx='4' stroke-dasharray='3 3'/></svg><span><span class="n">Google Chrome</span><span class="d">69 processes · 8.2 GB</span></span><span class="b">Quit…</span></li>
+      </ul>
+      <div class="w-ask"><b>Stop llama-server?</b><p>Stops llama-server and frees the model it holds. Anything using it right now (a chat, an app, a script) loses the answer in progress. Warden won't start it again; start it again yourself when memory is fine.</p><div class="row2"><span>Cancel</span><span class="go2">Stop</span></div></div>
+    </div>
+  </div>
         </div>
       </article>
 
@@ -565,7 +607,7 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
         </div>
       </article>
     </div>
-    <p class="w-note">The menu, the file and Past work are drawn here as illustrations, with Warden's real wording and example names.</p>
+    <p class="w-note">The Memory card, the menu, the file and Past work are drawn here as illustrations of Warden 1.0, with its real wording and example names.</p>
   </section>
 
   <div class="tile" style="padding:0;border:0;background:none"><style>
@@ -662,9 +704,9 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
   <section aria-labelledby="mh">
     <div class="sec-head"><div><h2 id="mh">More from Istari AI</h2></div></div>
     <ul class="more">
-      <li><article class="tile lift" style="--pc-l:#E2543F;--pc-d:#FF8A73"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/reelkar/">Reelkar</a></h3><p>From an idea to a finished reel.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
       <li><article class="tile lift" style="--pc-l:#2F74C0;--pc-d:#82B8F2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M4 7h13a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z'/><path d='M4 7l10-3v3'/><circle cx='16' cy='14' r='1.3' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/bachat/">Bachat</a></h3><p>Every spend, counted once. On your phone.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
       <li><article class="tile lift" style="--pc-l:#B7701A;--pc-d:#F2A93B"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d='M12 3l7.5 18h-15z'/><circle cx='12' cy='14' r='1.6' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/istari/">Istari</a></h3><p>Memory and supervision for coding agents.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
+      <li><article class="tile lift" style="--pc-l:#E2543F;--pc-d:#FF8A73"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg></span><div class="mt"><h3><a class="stretch" href="/reelkar/">Reelkar</a></h3><p>From an idea to a finished reel.</p></div><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></article></li>
     </ul>
   </section>
 </main>
@@ -676,7 +718,7 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
     </div>
     <nav aria-label="Footer">
       <ul>
-        <li><a href="/reelkar/">Reelkar</a></li><li><a href="/warden/">Warden</a></li><li><a href="/bachat/">Bachat</a></li><li><a href="/istari/">Istari</a></li>
+        <li><a href="/bachat/">Bachat</a></li><li><a href="/warden/">Warden</a></li><li><a href="/istari/">Istari</a></li><li><a href="/reelkar/">Reelkar</a></li>
         <li><a href="https://github.com/rajnishh" rel="noopener">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/rajnishkumar88/" rel="noopener me">LinkedIn</a></li>
         <li><a href="mailto:security@istari-ai.dev">Report a security issue</a></li>
