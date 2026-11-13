@@ -403,6 +403,11 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
 @media (prefers-reduced-motion:reduce){.w-mem *,.w-ask{animation:none!important}}
 
 @media (prefers-reduced-motion:reduce){.w-chart *,.w-menu *,.w-log *,.w-checks *{animation:none!important}}
+
+.w-video{margin:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--night-line);background:#0A111D}
+.w-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0A111D}
+.w-video figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding:12px 18px;font-size:14.5px;color:#A3B2C5;border-top:1px solid #22304A}
+.w-video figcaption b{color:#E6ECF4;font-weight:600}
 </style>
 </head>
 <body>
@@ -452,7 +457,7 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
     </dl>
   </section>
 
-  <section class="w-sec" aria-labelledby="w-step">
+  <section class="w-sec" aria-labelledby="w-vid"><div class="sec-head"><div><h2 id="w-vid">Warden in 29 seconds</h2><p>What it does while you work, or while you step away.</p></div></div><figure class="w-video"><video data-auto autoplay muted loop playsinline controls preload="metadata" width="1920" height="1080" poster="/warden/assets/warden-explainer-poster.jpg" aria-label="Warden explained in 29 seconds, without sound. Many agents, models, simulators and servers fill memory. Warden steps in at the first sign of a freeze and slows what's ballooning. One key press frees what's safe; stopping anything else asks first and says what you'd lose. When a coding session ends, its leftover server is stopped and written to STOPPED-BY-WARDEN.md. Finished worktrees give back their space, with a memory card and a Reopen button."><source src="/warden/assets/warden-explainer.webm" type="video/webm"><source src="/warden/assets/warden-explainer.mp4" type="video/mp4"></video><figcaption><span><b>Warden in 29 seconds</b> · no sound needed</span><span>An animation of Warden 1.0, with its real wording and example names.</span></figcaption></figure><script>(function(){var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;document.querySelectorAll('video[data-auto]').forEach(function(v){if(reduce){v.removeAttribute('autoplay');v.pause();return;}if(!('IntersectionObserver' in window))return;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var r=v.play();if(r&&r.catch)r.catch(function(){});}else v.pause();});},{threshold:.4}).observe(v);});})();</script></section><section class="w-sec" aria-labelledby="w-step">
     <div class="tile night w-explain">
       <div>
         <p class="w-kicker">How it keeps the Mac from freezing</p>
