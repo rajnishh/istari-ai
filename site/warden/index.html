@@ -313,6 +313,7 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
 .w-checks li:nth-child(2) .ck{animation:w-ck 10s infinite;animation-delay:.6s}
 .w-checks li:nth-child(3) .ck{animation:w-ck 10s infinite;animation-delay:1.2s}
 .w-checks li:nth-child(4) .ck{animation:w-ck 10s infinite;animation-delay:1.8s}
+.w-checks li:nth-child(5) .ck{animation:w-ck 10s infinite;animation-delay:2.4s}
 .w-checks .res{margin-top:4px;padding-top:10px;border-top:1px dashed var(--line-strong);font-weight:600;color:var(--pc);animation:w-res 10s infinite}
 @keyframes w-ck{0%{transform:scale(.4);opacity:.2}6%,100%{transform:scale(1);opacity:1}}
 @keyframes w-res{0%,22%{opacity:.15}30%,100%{opacity:1}}
@@ -451,7 +452,7 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
   <section aria-label="At a glance">
     <dl class="stats">
       <div class="tile stat"><dt>Made for</dt><dd>Developers running AI agents</dd></div>
-      <div class="tile stat"><dt>In the background</dt><dd>About 0.1% of one core and 17 MB</dd></div>
+      <div class="tile stat"><dt>In the background</dt><dd>About 20–30 MB, a fraction of a percent of one core</dd></div>
       <div class="tile stat"><dt>Asks first</dt><dd>Anything that stops or deletes starts off</dd></div>
       <div class="tile stat"><dt>Platforms</dt><dd class="lst"><ul><li>macOS 14 and later</li></ul></dd></div>
     </dl>
@@ -583,18 +584,21 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
         <div class="w-copy">
           <p class="w-tag">Disk</p>
           <h3>Frees disk without losing the story</h3>
-          <p>Each agent's worktree installs its own packages, often 2 GB or more. When a worktree is truly finished, Warden clears them. Before it removes a folder, it saves a memory card: the PR, commits, files changed and the conversations that made it.</p>
+          <p>Each agent's worktree installs its own packages and build output, often 2 GB or more: <code>node_modules</code>, <code>target</code>, <code>.venv</code>, <code>Pods</code>, <code>build</code> and the rest, for every major language. When a worktree is truly finished, Warden clears them. Before it removes a folder, it saves a memory card: the PR, commits, files changed and the conversations that made it.</p>
           <ul>
-            <li>Kept if anything changed, is running, or could exist nowhere else (a <code>.env</code>, downloaded models).</li>
+            <li>Kept if anything changed, is running, is open in your editor, or could exist nowhere else (a <code>.env</code>, downloaded models).</li>
+            <li>A build folder is offered only when its tool's own file proves it, and version control ignores it or doesn't track it.</li>
+            <li>When git, Mercurial or Subversion can't answer, <b>it keeps everything.</b></li>
             <li><b>Reopen</b> makes the worktree again and continues its conversation.</li>
           </ul>
         </div>
         <div class="w-vis">
-          <div class="w-card" role="img" aria-label="An illustration of how Warden decides a worktree is finished: merged into main, nothing changed, nothing running inside, every Claude app session archived and quiet for an hour. Then packages are cleared and a memory card is saved. Below, a Past work entry for an example worktree with a Reopen button.">
+          <div class="w-card" role="img" aria-label="An illustration of how Warden decides a worktree is finished: merged into main, nothing changed, nothing running inside, not open in an editor, every Claude app session archived and quiet for an hour. Then packages are cleared and a memory card is saved. Below, a Past work entry for an example worktree with a Reopen button.">
             <ul class="w-checks" aria-hidden="true">
               <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Merged into main</li>
               <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Nothing changed, nothing new</li>
               <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Nothing running inside</li>
+              <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Not open in your editor</li>
               <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Sessions archived, quiet for an hour</li>
               <li class="res">Packages cleared · 2.1 GB · memory card saved</li>
             </ul>
@@ -648,11 +652,11 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
 </style><section class="ia-panel" id="get" aria-labelledby="get-title" style="--ia-pc-l:#2F8F68;--ia-pc-d:#7BC8A4">
     <h2 id="get-title">Download Warden for Mac</h2>
     <div class="ia-row"><a class="ia-btn" href="https://istari-ai.dev/downloads/warden/Warden.dmg" download>Download Warden.dmg</a></div>
-    <ul class="ia-meta"><li>Universal: Apple silicon and Intel</li><li>macOS 14 or later</li><li>4.1 MB</li></ul>
+    <ul class="ia-meta"><li>Universal: Apple silicon and Intel</li><li>macOS 14 or later</li><li>7.1 MB</li></ul>
     
     <div class="ia-safety">
       <div class="ia-badges"><span class="ia-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Notarized by Apple</span><span class="ia-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Signed with Developer ID</span><span class="ia-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>SHA-256 published</span></div>
-      <p class="ia-sum"><strong>SHA-256</strong> fd715743d5e923a6365a2e3c575a7c403bdf52da03f2d2f5cb62fa8321c5b7d8</p>
+      <p class="ia-sum"><strong>SHA-256</strong> b9d4d0868c375ed14871a1064f9160c7c7fdf8f1e083ddc802b4f5103ed1f46a</p>
       <div class="ia-code"><span>Check the checksum</span><pre class="" tabindex="0"><code>shasum -a 256 ~/Downloads/Warden.dmg</code></pre></div><div class="ia-code"><span>Check Apple notarization</span><pre class="" tabindex="0"><code>spctl -a -t open --context context:primary-signature -v ~/Downloads/Warden.dmg</code></pre></div>
     </div></section></div>
 
@@ -669,12 +673,12 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
   </section>
 
   <section class="w-sec" aria-labelledby="w-proof">
-    <div class="sec-head"><div><h2 id="w-proof">On our own Mac</h2><p>Warden runs every day on the 36 GB Mac we build these products on. From its own log, 12–13 November 2026.</p></div></div>
+    <div class="sec-head"><div><h2 id="w-proof">On our own Mac</h2><p>Warden runs every day on the 36 GB Mac we build these products on. From its own log (12–13 November 2026) and measurements on 14 November.</p></div></div>
     <dl class="w-proof">
       <div class="tile"><dt>of packages cleared from finished worktrees in one night</dt><dd>22 GB</dd></div>
       <div class="tile"><dt>merged worktrees removed, each with a memory card saved first</dt><dd>14</dd></div>
       <div class="tile"><dt>for the menu to open with every core busy and memory at warning</dt><dd>&lt;5 ms</dd></div>
-      <div class="tile"><dt>what Warden uses in the background, at about 0.1% of one core</dt><dd>17 MB</dd></div>
+      <div class="tile"><dt>what Warden uses in the background, at a fraction of a percent of one core</dt><dd>20–30 MB</dd></div>
     </dl>
   </section><section class="w-sec" aria-labelledby="w-safe">
     <div class="sec-head"><div><h2 id="w-safe">Safe by design</h2><p>The rules every part of Warden follows.</p></div></div>
@@ -703,6 +707,8 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
       <article class="tile"><h3>Local AI servers</h3><ul><li>Ollama</li><li>LM Studio</li><li>llama.cpp</li><li>vLLM</li><li>MLX</li><li>ComfyUI</li><li>Jan</li><li>LocalAI</li><li>Whisper</li></ul><p>Recognised with no setup. Ollama is protected by default.</p></article>
       <article class="tile"><h3>Simulators and builds</h3><ul><li>iOS Simulator</li><li>Android emulator</li><li>Xcode</li><li>Expo</li><li>Maestro</li><li>Appium</li></ul><p>A simulator counts as in use while its window is in front or a tool is driving it.</p></article>
       <article class="tile"><h3>Services and tunnels</h3><ul><li>cloudflared</li><li>ngrok</li><li>Tailscale Funnel</li><li>Docker</li><li>OrbStack</li><li>Colima</li><li>any command</li></ul><p>Runs in your login shell, so nvm, volta, asdf, pyenv and mise just work.</p></article>
+      <article class="tile"><h3>Editors</h3><ul><li>Cursor</li><li>VS Code</li><li>Windsurf</li><li>VSCodium</li><li>Kiro</li><li>Trae</li><li>Void</li><li>Positron</li><li>Antigravity</li><li>IntelliJ IDEA</li><li>PyCharm</li><li>WebStorm</li><li>GoLand</li><li>CLion</li><li>Rider</li><li>RubyMine</li><li>PhpStorm</li><li>Android Studio</li></ul><p>A folder open in an editor counts as in use. It is never cleared or removed.</p></article>
+      <article class="tile"><h3>Build output and version control</h3><ul><li>node_modules</li><li>target</li><li>.venv</li><li>build</li><li>.gradle</li><li>bin/obj</li><li>_build</li><li>Pods</li><li>.next</li><li>.terraform</li><li>git</li><li>Mercurial</li><li>Subversion</li></ul><p>Java, Kotlin, Rust, .NET, Python, Elixir, Haskell, Zig, CMake, Flutter, Ruby, PHP, Terraform, Unity, Unreal, iOS and web builds. Jujutsu repositories read as git.</p></article>
     </div>
   </section>
 
