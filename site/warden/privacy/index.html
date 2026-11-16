@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warden privacy · Istari AI</title>
+<meta name="description" content="What Warden for Mac sends (nothing about you), every connection it makes, what it keeps on your Mac, and how to check it yourself.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A111D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#FFFFFF;--text:#0E1726;--muted:#4A5A70;--line:#DDE3EC;--surface:#F4F6F9;--pc:#2F8F68;--code:#F4F6F9}
+@media (prefers-color-scheme:dark){:root{--bg:#0A111D;--text:#E6ECF4;--muted:#A3B2C5;--line:#22304A;--surface:#111B2B;--pc:#7BC8A4;--code:#111B2B}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+a{color:var(--pc)}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px 12px;border-radius:8px;z-index:9}
+.bar{max-width:960px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);z-index:5}
+.top .bar{min-height:60px}
+.brand{display:inline-flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;font-weight:600;font-size:18px}
+.brand svg{color:var(--pc)}
+.top nav{display:flex;gap:4px;flex-wrap:wrap}
+.top nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500}
+.top nav a:hover{color:var(--text);background:var(--surface)}
+.top nav a[aria-current]{color:var(--text);box-shadow:inset 0 -2px 0 var(--pc)}
+.top nav a.get{color:var(--pc)}
+.doc{max-width:960px;margin:0 auto;padding:40px 16px 64px}
+.eyebrow{margin:0;color:var(--pc);font-weight:600;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-size:clamp(32px,6vw,44px);line-height:1.15;margin:6px 0 20px;letter-spacing:-.01em}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px;scroll-margin-top:76px}
+h3{font-size:19px;margin:28px 0 8px;scroll-margin-top:76px}
+.anchor{margin-left:-1em;padding-right:.25em;color:var(--muted);opacity:0;text-decoration:none}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus{opacity:1}
+p,li{max-width:72ch}
+ul,ol{padding-left:1.3em}
+li{margin:4px 0}
+code{font:0.88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);border:1px solid var(--line);border-radius:6px;padding:1px 5px;overflow-wrap:anywhere}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--surface);font-weight:600}
+tr:last-child td{border-bottom:0}
+@media (min-width:760px){td:first-child{min-width:150px}}
+.code{border:1px solid var(--line);border-radius:12px;margin:12px 0 20px;overflow:hidden}
+.code-bar{display:flex;justify-content:space-between;align-items:center;padding:4px 6px 4px 12px;background:var(--surface);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.copy{font:inherit;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:6px;min-height:32px;padding:0 10px;cursor:pointer}
+.code pre{margin:0;padding:12px 14px;overflow-x:auto;background:var(--code)}
+.code pre code{border:0;padding:0;background:none;font-size:14px;white-space:pre}
+blockquote{margin:16px 0;padding:4px 16px;border-left:3px solid var(--pc);color:var(--muted)}
+.foot{border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+.foot .bar{min-height:64px;padding-top:12px;padding-bottom:12px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the text</a>
+<header class="top"><div class="bar">
+  <a class="brand" href="/warden/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>Warden</span></a>
+  <nav aria-label="Warden"><a href="/warden/privacy/" aria-current="page">Privacy</a><a href="/warden/security/">Security</a><a class="get" href="/warden/#get">Download</a></nav>
+</div></header>
+<main id="main"><article class="doc">
+<p class="eyebrow">Warden for Mac</p>
+<h1>Warden privacy</h1>
+<p>Updated 16 November 2026. This covers Warden for Mac (the app and its background helper), version 1.1.0 and later. Anything that&#39;s new in 1.1.1 says so.</p>
+<h2 id="the-short-version"><a class="anchor" href="#the-short-version" aria-hidden="true" tabindex="-1">#</a>The short version</h2>
+<ul><li><strong>Warden sends nothing about you or your Mac.</strong> It has no analytics, no crash reports, no ad or tracking code, no account and no device ID.</li><li><strong>What it reads stays on your Mac,</strong> in <code>~/Library/Application Support/Warden</code>.</li><li><strong>It connects to other computers in three ways only,</strong> all listed below: the update check, PR names from GitHub, and checks from outside that you add yourself. Offline mode (1.1.1 and later) turns off all three.</li><li><strong>You can check all of this yourself.</strong> See <a href="#check-it-yourself">Check it yourself</a>.</li></ul>
+<h2 id="every-connection-warden-makes"><a class="anchor" href="#every-connection-warden-makes" aria-hidden="true" tabindex="-1">#</a>Every connection Warden makes</h2>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">What</th><th scope="col">Where to</th><th scope="col">When</th><th scope="col">What&#39;s sent</th><th scope="col">To turn it off</th></tr></thead><tbody>
+<tr><td><strong>Update check</strong></td><td><code>istari-ai.dev</code> (the file <code>downloads/warden/appcast.xml</code>)</td><td>At most once a day, while Warden&#39;s window is open. The background helper never checks.</td><td>An ordinary HTTPS request. Like any web request it carries your IP address, plus Warden&#39;s and Sparkle&#39;s version numbers in the User-Agent.</td><td>Untick &quot;Check for updates once a day&quot; in Settings → Privacy (1.1.1 and later), say no when Sparkle first asks, or turn on Offline mode</td></tr>
+<tr><td><strong>Update download</strong> and <strong>release notes</strong></td><td><code>istari-ai.dev</code></td><td>Only when there&#39;s a new version</td><td>The same</td><td>The same</td></tr>
+<tr><td><strong>PR names for memory cards</strong></td><td><code>api.github.com</code>, through GitHub&#39;s own <code>gh</code> tool</td><td>Only if <code>gh</code> is installed and signed in, for a merged worktree whose repository is on GitHub, when git doesn&#39;t already have the PR&#39;s name</td><td>The repository (<code>owner/name</code>) and the branch or PR number, with your own <code>gh</code> sign-in. GitHub already hosts that repository.</td><td>Untick &quot;Look up PR names on GitHub&quot; in Settings → Privacy, or turn on Offline mode (both 1.1.1 and later)</td></tr>
+<tr><td><strong>Check from outside</strong></td><td>Only the address you type into a service&#39;s &quot;From outside&quot; field (or an &quot;On this Mac&quot; address that isn&#39;t on this Mac)</td><td>Every 30 seconds while that service runs</td><td>A plain request to that address with the User-Agent <code>Warden</code>, with no cookies and nothing else</td><td>Leave the field empty, or turn on Offline mode</td></tr>
+</tbody></table></div>
+<p>Checks of a server on this Mac (<code>localhost</code>, <code>127.0.0.1</code>) never leave it.</p>
+<p><strong>Who receives these requests:</strong></p>
+<ul><li><strong>istari-ai.dev</strong> is served by Cloudflare Pages. We keep no logs of these requests. Cloudflare&#39;s dashboard shows us only totals, such as requests per day and per country. Cloudflare&#39;s own privacy policy covers what it handles as the host.</li><li><strong>GitHub:</strong> your <code>gh</code> requests go to GitHub under your own GitHub account and GitHub&#39;s terms. We never see them.</li><li><strong>Checks from outside</strong> go only to the addresses you typed.</li></ul>
+<p><strong>Programs Warden runs for you</strong> (the services you add, such as a dev server or a <code>cloudflared</code> tunnel) make their own connections. Those are that program&#39;s connections, not Warden&#39;s.</p>
+<h2 id="what-warden-doesnt-do"><a class="anchor" href="#what-warden-doesnt-do" aria-hidden="true" tabindex="-1">#</a>What Warden doesn&#39;t do</h2>
+<ul><li><strong>No outside code that phones home.</strong> It has no analytics, telemetry, crash-reporting or ad code. The only outside code in it is <a href="https://sparkle-project.org" rel="noopener">Sparkle</a>, the open-source update framework many Mac apps use.</li><li><strong>Sparkle&#39;s system profile is off.</strong> Sparkle can send the Mac&#39;s model, macOS version and CPU type with each update check, but only when an app turns that on (<code>SUEnableSystemProfiling</code> in its Info.plist). Warden doesn&#39;t, and a test checks that it never does.</li><li><strong>Nothing it reads is ever sent:</strong> file and folder names, program names, window titles, coding sessions, logs and settings all stay on your Mac.</li><li><strong>It sends no crash reports itself.</strong> macOS can send crash reports to Apple for any app, if you allowed that in System Settings → Privacy &amp; Security → Analytics &amp; Improvements. That&#39;s a macOS setting, not Warden&#39;s.</li><li><strong>No account, sign-in or licence check.</strong></li><li><strong>Nothing is sold or shared.</strong> We have nothing to sell: Warden collects nothing.</li></ul>
+<h2 id="what-warden-reads-on-your-mac"><a class="anchor" href="#what-warden-reads-on-your-mac" aria-hidden="true" tabindex="-1">#</a>What Warden reads on your Mac</h2>
+<p>It needs these to do its job, and none of it leaves the Mac:</p>
+<ul><li>Running programs: their names, memory, CPU, what started them, and which folder they run in.</li><li>Disk usage: the sizes of folders it measures, git status of your repositories, and what version control ignores.</li><li>The files coding tools keep for their sessions (Claude Code, Codex, Gemini CLI and others): titles, folders and how to resume, for memory cards and Past work.</li><li>With the Accessibility permission (optional): which app and window are in front, and whether an app has stopped responding. Window titles can appear in &quot;Stale work&quot;.</li><li>Your Downloads folder, only if you turn on clearing installers you&#39;ve already used.</li></ul>
+<h2 id="what-it-keeps-and-where"><a class="anchor" href="#what-it-keeps-and-where" aria-hidden="true" tabindex="-1">#</a>What it keeps, and where</h2>
+<p>Everything is in <code>~/Library/Application Support/Warden</code>:</p>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">File</th><th scope="col">What&#39;s in it</th></tr></thead><tbody>
+<tr id="configjson"><td><code>config.json</code></td><td>Your settings</td></tr>
+<tr id="statusjson"><td><code>status.json</code></td><td>The latest reading: CPU, memory, swap, heat, disk, the busiest programs, your services, and stale work (app names, window titles and project folders)</td></tr>
+<tr><td><code>events.log</code>, <code>metrics.jsonl</code>, <code>disk-*.json</code></td><td>What happened, the minute-by-minute history, and disk sizes over time</td></tr>
+<tr id="logsservice-idlog"><td><code>logs/service-&lt;id&gt;.log</code></td><td>The output of services Warden runs for you</td></tr>
+<tr id="logsconnections-json"><td><code>logs/connections-*.json</code></td><td>Every connection Warden made (1.1.1 and later)</td></tr>
+<tr id="stopped-by-wardenmd"><td><code>STOPPED-BY-WARDEN.md</code></td><td>Every stop and clear, and why</td></tr>
+<tr><td><code>work-cards.json</code>, <code>WORK-LOG.md</code></td><td>Memory cards: the PR, commits, changed file names and conversation titles of merged worktrees</td></tr>
+<tr id="archive"><td><code>archive/</code></td><td>Coding sessions you archived, so you can restore them</td></tr>
+</tbody></table></div>
+<p>Settings → Uninstall → Delete Everything removes all of it, along with the app.</p>
+<h2 id="offline-mode-111-and-later"><a class="anchor" href="#offline-mode-111-and-later" aria-hidden="true" tabindex="-1">#</a>Offline mode (1.1.1 and later)</h2>
+<p>Settings → Privacy → <strong>Offline mode</strong>, also offered the first time Warden opens. While it&#39;s on:</p>
+<ul><li>No update checks on its own. Check for Updates… in the Warden menu still works when you choose it.</li><li>GitHub isn&#39;t asked for PR names. Memory cards keep the PR number and title git already has.</li><li>Checks from outside don&#39;t run, so a service is never counted as down, or restarted, because of them. Checks on this Mac carry on.</li></ul>
+<p>Everything else works the same.</p>
+<h2 id="check-it-yourself"><a class="anchor" href="#check-it-yourself" aria-hidden="true" tabindex="-1">#</a>Check it yourself</h2>
+<p><strong>The list Warden keeps (1.1.1 and later).</strong> Settings → Privacy → &quot;Connections Warden made&quot; shows every address it reached, why, how many times and when. The terminal prints the same list:</p>
+<div class="code"><div class="code-bar"><span>shell</span><button type="button" class="copy" hidden>Copy</button></div><pre tabindex="0"><code data-lang="bash">warden connections</code></pre></div>
+<p><strong>What&#39;s open right now.</strong> This normally prints nothing:</p>
+<div class="code"><div class="code-bar"><span>shell</span><button type="button" class="copy" hidden>Copy</button></div><pre tabindex="0"><code data-lang="bash">lsof -nP -i | grep -i warden</code></pre></div>
+<p><strong>Over days.</strong> A firewall such as <a href="https://objective-see.org/products/lulu.html" rel="noopener">LuLu</a> (free and open source) or Little Snitch shows every connection any app makes, and can block them. You&#39;ll see Warden reach <code>istari-ai.dev</code> about once a day, and nothing else unless you set up the other two.</p>
+<p><strong>The download itself.</strong> <a href="/warden/security/">SECURITY.md</a> shows how to check its SHA-256 and Apple&#39;s notarization.</p>
+<h2 id="on-a-work-mac"><a class="anchor" href="#on-a-work-mac" aria-hidden="true" tabindex="-1">#</a>On a work Mac</h2>
+<ul><li><strong>No admin rights needed.</strong> Warden installs into Applications and runs as you, and its helper is listed under System Settings → General → Login Items.</li><li><strong>Not sandboxed, and here&#39;s why:</strong> to see every program&#39;s memory, slow down or stop the ones you choose, and clear build folders, it has to see beyond its own folder. Anything that stops a program or deletes files starts off until you turn it on. For how Warden is signed and how its updates are checked, see <a href="/warden/security/">SECURITY.md</a>.</li><li><strong>To block updates across a network,</strong> block <code>istari-ai.dev/downloads/warden/appcast.xml</code>, or turn on Offline mode on each Mac.</li></ul>
+<h2 id="changes-to-this-policy"><a class="anchor" href="#changes-to-this-policy" aria-hidden="true" tabindex="-1">#</a>Changes to this policy</h2>
+<p>Any change is listed in Warden&#39;s changelog and release notes, and the date at the top changes with it. A new kind of connection would be listed here and in the release notes before the version that makes it ships. A test in Warden&#39;s code fails if one is added without that.</p>
+<h2 id="questions"><a class="anchor" href="#questions" aria-hidden="true" tabindex="-1">#</a>Questions</h2>
+<p>Write to <strong>security@istari-ai.dev</strong> about privacy or security.</p>
+</article></main>
+<footer class="foot"><div class="bar"><span><a href="/">Istari AI</a> · <a href="/warden/">Warden</a></span><span>Questions: <a href="mailto:security@istari-ai.dev">security@istari-ai.dev</a></span></div></footer>
+<script>document.querySelectorAll('.code').forEach(function(b){var btn=b.querySelector('.copy'),c=b.querySelector('code');if(!btn||!c||!navigator.clipboard)return;btn.hidden=false;btn.addEventListener('click',function(){navigator.clipboard.writeText(c.textContent.trim()).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1500)})})});</script>
+</body>
+</html>
