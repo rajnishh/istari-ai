@@ -219,6 +219,7 @@ section{scroll-margin-top:16px}
 .w-h{font-size:clamp(30px,4vw,44px)}
 .w-kicker{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--star)}
 .w-note{font-size:13.5px;color:var(--muted);margin:12px 0 56px}
+.w-new{margin-bottom:56px}
 .w-more{font-size:16px;margin:16px 0 56px}.w-more a{color:var(--pc);font-weight:600}
 .night .w-note{color:var(--dusk)}
 
@@ -618,7 +619,7 @@ kbd{font:500 13px var(--mono);border:1px solid var(--line-strong);border-bottom-
       </article>
     </div>
     <p class="w-note">The Memory card, the menu, the file and Past work are drawn here as illustrations of Warden 1.0, with its real wording and example names.</p>
-  </section>
+  </section><section class="w-sec w-new" aria-labelledby="w-new"><div class="sec-head"><div><h2 id="w-new">New in Warden 1.1</h2><p>It knows what your editor has open, cleans up after every major language, and makes memory cards for all your work.</p></div></div><figure class="w-video"><video data-auto autoplay muted loop playsinline controls preload="metadata" width="1920" height="1080" poster="/warden/assets/warden-whatsnew-poster.jpg" aria-label="What's new in Warden 1.1, in 19 seconds, without sound. One: a folder open in Cursor, VS Code, Windsurf or IntelliJ counts as in use and is never cleared, even with nothing running. Two: build folders of every major language, not just node_modules, each offered only when its tool's own file proves it and version control ignores it. Three: when git can't answer, Warden keeps everything and offers nothing. Four: memory cards for main checkouts, branches and plain folders too, never removed. Five: lighter, with 8 times fewer wakeups and 20 to 30 MB in the background."><source src="/warden/assets/warden-whatsnew.webm" type="video/webm"><source src="/warden/assets/warden-whatsnew.mp4" type="video/mp4"></video><figcaption><span><b>What's new in Warden 1.1</b> · no sound needed</span><span>An animation of Warden 1.1, with its real wording and example names.</span></figcaption></figure><script>(function(){var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;document.querySelectorAll('video[data-auto]:not([data-on])').forEach(function(v){v.setAttribute('data-on','');if(reduce){v.removeAttribute('autoplay');v.pause();return;}if(!('IntersectionObserver' in window))return;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var r=v.play();if(r&&r.catch)r.catch(function(){});}else v.pause();});},{threshold:.4}).observe(v);});})();</script></section>
 
   <div class="tile" style="padding:0;border:0;background:none"><style>
 .ia-panel{--pc:var(--ia-pc-l);border:1px solid color-mix(in srgb,currentColor 16%,transparent);border-radius:20px;padding:clamp(20px,4vw,32px);display:grid;gap:20px;text-align:left;font-size:16px;line-height:1.55}
