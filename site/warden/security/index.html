@@ -58,7 +58,7 @@ blockquote{margin:16px 0;padding:4px 16px;border-left:3px solid var(--pc);color:
 <a class="skip" href="#main">Skip to the text</a>
 <header class="top"><div class="bar">
   <a class="brand" href="/warden/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>Warden</span></a>
-  <nav aria-label="Warden"><a href="/warden/privacy/">Privacy</a><a href="/warden/security/" aria-current="page">Security</a><a class="get" href="/warden/#get">Download</a></nav>
+  <nav aria-label="Warden"><a href="/warden/changelog/">What&#39;s new</a><a href="/warden/privacy/">Privacy</a><a href="/warden/security/" aria-current="page">Security</a><a class="get" href="/warden/#get">Download</a></nav>
 </div></header>
 <main id="main"><article class="doc">
 <p class="eyebrow">Warden for Mac</p>
@@ -69,7 +69,7 @@ blockquote{margin:16px 0;padding:4px 16px;border-left:3px solid var(--pc);color:
 <ul><li>the Warden version (Warden → About Warden);</li><li>the macOS version;</li><li>the steps that show the problem.</li></ul>
 <p>Please don&#39;t post it publicly until a fixed version is out. Fixes for security problems ship as soon as they&#39;re ready, without waiting for the next planned release, and the changelog credits you if you&#39;d like.</p>
 <h2 id="supported-versions"><a class="anchor" href="#supported-versions" aria-hidden="true" tabindex="-1">#</a>Supported versions</h2>
-<p>Only the latest release gets fixes. Installed copies update themselves (see <a href="#updates">Updates</a>), so you&#39;re on the latest after the next check. Releases are listed in the changelog.</p>
+<p>Only the latest release gets fixes. Installed copies update themselves (see <a href="#updates">Updates</a>), so you&#39;re on the latest after the next check. Releases are listed in the <a href="/warden/changelog/">changelog</a>.</p>
 <h2 id="how-warden-is-signed"><a class="anchor" href="#how-warden-is-signed" aria-hidden="true" tabindex="-1">#</a>How Warden is signed</h2>
 <ul><li><strong>Developer ID.</strong> Every piece of code is signed as <code>Developer ID Application: Rajnish Kumar (23MPNLMYKW)</code>: the app, its helper and Sparkle.</li><li><strong>Hardened runtime.</strong> It&#39;s on for the app and the helper.</li><li><strong>Notarized by Apple.</strong> Apple scanned the app and the .dmg for malware before release, and the notarization ticket is stapled to both, so macOS can check it without going online.</li><li><strong>Checked before each release.</strong> <code>scripts/release-check.sh</code> checks every one of these before a version is published.</li></ul>
 <h2 id="updates"><a class="anchor" href="#updates" aria-hidden="true" tabindex="-1">#</a>Updates</h2>
