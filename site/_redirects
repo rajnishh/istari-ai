@@ -3,4 +3,4 @@
 /install.sh  https://github.com/rajnishh/istari-ai/releases/latest/download/install.sh  302
 
 # Warden: the download link always points at the newest release (Sparkle's feed links the versioned file).
-/downloads/warden/Warden.dmg  /downloads/warden/Warden-1.2.0.dmg  302
+/downloads/warden/Warden.dmg  /downloads/warden/Warden-1.2.1.dmg  302
