@@ -9,7 +9,7 @@ Notarized by Apple. A patch for 1.2.0. The full list is in [the changelog](https
 - **Folders on a network share** no longer hold up the list.
 
 ## Every Claude Code config folder
-- **Conversations in `~/.claude-work`, `~/.claude-alex` and the like are listed too**, next to `~/.claude`. So are those in any folder a shell alias sets `CLAUDE_CONFIG_DIR` to. Nothing to set up.
+- **Conversations in `~/.claude-work`, `~/.claude-home` and the like are listed too**, next to `~/.claude`. So are those in any folder a shell alias sets `CLAUDE_CONFIG_DIR` to. Nothing to set up.
 - **Resume uses the right folder**: `CLAUDE_CONFIG_DIR=~/.claude-work claude --resume …`.
 - **Claude Code's own cleanup is read per folder**, and "Keep conversations for a year" sets every folder.
 
