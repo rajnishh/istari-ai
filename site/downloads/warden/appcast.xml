@@ -3,6 +3,15 @@
     <channel>
         <title>Warden</title>
         <item>
+            <title>1.2.0</title>
+            <pubDate>Mon, 23 Nov 2026 21:15:26 +0400</pubDate>
+            <sparkle:version>202611232113</sparkle:version>
+            <sparkle:shortVersionString>1.2.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:releaseNotesLink>https://istari-ai.dev/downloads/warden/Warden-1.2.0.md</sparkle:releaseNotesLink>
+            <enclosure url="https://istari-ai.dev/downloads/warden/Warden-1.2.0.dmg" length="10136336" type="application/octet-stream" sparkle:edSignature="DtgEP7znk7RKCQzi+Pw1w4v/rBqQBWxYWY1Aj1uqzYXIiLqQeJgI5WLFmz8EBN6nJvOb34jAiCAfVi+PI4JKAA=="/>
+        </item>
+        <item>
             <title>1.1.0</title>
             <pubDate>Sat, 14 Nov 2026 18:22:17 +0400</pubDate>
             <sparkle:version>202611141820</sparkle:version>
