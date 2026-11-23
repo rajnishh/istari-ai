@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "xcode-device-support",
+      "path": "~/Library/Developer/Xcode/*OS DeviceSupport",
+      "app": "Xcode",
+      "level": "suggest",
+      "keep": "newest-version",
+      "why": "symbols Xcode copied from an iPhone (or Watch) for an iOS version it no longer runs",
+      "keptWhy": "symbols for the iOS version that device runs now: Xcode needs them to run and debug apps on it",
+      "cost": "Xcode copies them again (5–10 minutes) if a device on that version is connected."
+    },
+    {
+      "id": "browser-code-sign-clones",
+      "path": "$TMP/X/*.code_sign_clone",
+      "level": "suggest",
+      "keep": "newest-copy",
+      "whenAppQuit": true,
+      "why": "copies a browser makes of itself to check its own signature; old ones are left behind",
+      "keptWhy": "the copy the browser uses now",
+      "cost": "The browser makes a fresh copy the next time it starts."
+    },
+    {
+      "id": "cursor-snapshots",
+      "path": "~/Library/Application Support/Cursor/snapshots",
+      "app": "Cursor",
+      "level": "suggest",
+      "whenAppQuit": true,
+      "checkpoints": true,
+      "why": "Cursor's checkpoints of your files from its AI edits",
+      "cost": "Older checkpoints can't be restored from Cursor any more; your files aren't touched."
+    },
+    {
+      "id": "claude-vm-bundles",
+      "path": "~/Library/Application Support/Claude/vm_bundles",
+      "app": "Claude",
+      "level": "suggest",
+      "whenAppQuit": true,
+      "why": "the virtual machine the Claude app runs code in",
+      "cost": "The Claude app downloads it again (a few GB) the next time it needs it."
+    },
+    {
+      "id": "android-system-images",
+      "path": "~/Library/Android/sdk/system-images",
+      "app": "Android Studio",
+      "level": "suggest",
+      "whenAppQuit": true,
+      "why": "Android system images that emulators start from",
+      "cost": "An emulator that uses it won't start until Android Studio downloads it again (SDK Manager)."
+    },
+    {
+      "id": "xcode-derived-data",
+      "path": "~/Library/Developer/Xcode/DerivedData",
+      "app": "Xcode",
+      "level": "disposable",
+      "whenAppQuit": true,
+      "why": "Xcode's build files and indexes",
+      "cost": "The next build in Xcode is a full one (a few minutes)."
+    },
+    {
+      "id": "simulator-caches",
+      "path": "~/Library/Developer/CoreSimulator/Caches",
+      "app": "Simulator",
+      "level": "disposable",
+      "whenAppQuit": true,
+      "why": "the Simulator's caches",
+      "cost": "Simulators start a little slower the first time."
+    },
+    {
+      "id": "unity-cache",
+      "path": "~/Library/Unity/cache",
+      "app": "Unity",
+      "level": "disposable",
+      "whenAppQuit": true,
+      "why": "Unity's package and asset cache",
+      "cost": "Unity downloads or imports them again when a project opens."
+    },
+    {
+      "id": "adobe-media-cache",
+      "path": "~/Library/Application Support/Adobe/Common/Media Cache Files",
+      "app": "Adobe Premiere Pro",
+      "level": "disposable",
+      "whenAppQuit": true,
+      "why": "Premiere Pro and After Effects media cache (conformed audio, peak files)",
+      "cost": "Projects take longer to open while the cache is rebuilt."
+    },
+    {
+      "id": "adobe-media-cache-db",
+      "path": "~/Library/Application Support/Adobe/Common/Media Cache",
+      "app": "Adobe Premiere Pro",
+      "level": "disposable",
+      "whenAppQuit": true,
+      "why": "Premiere Pro and After Effects media cache index",
+      "cost": "Projects take longer to open while the cache is rebuilt."
+    },
+    {
+      "id": "steam-shader-cache",
+      "path": "~/Library/Application Support/Steam/steamapps/shadercache",
+      "app": "Steam",
+      "level": "disposable",
+      "whenAppQuit": true,
+      "why": "Steam's compiled shaders",
+      "cost": "Games stutter a little the first time while shaders are compiled again."
+    },
+    {
+      "id": "spotify-cache",
+      "path": "~/Library/Application Support/Spotify/PersistentCache",
+      "app": "Spotify",
+      "level": "disposable",
+      "whenAppQuit": true,
+      "why": "songs Spotify keeps to play them again without downloading",
+      "cost": "Spotify downloads songs again as you play them. Downloaded playlists stay."
+    },
+    {
+      "id": "docker-desktop",
+      "path": "~/Library/Containers/com.docker.docker",
+      "app": "Docker",
+      "level": "yours",
+      "why": "Docker's disk image: your containers, images and volumes",
+      "advice": "Run `docker system prune` for unused images and build cache, or Docker Desktop → Settings → Resources to shrink the disk."
+    },
+    {
+      "id": "orbstack",
+      "path": "~/.orbstack",
+      "app": "OrbStack",
+      "level": "yours",
+      "why": "OrbStack's disk image: your containers, images and machines",
+      "advice": "Run `docker system prune` for unused images and build cache; OrbStack gives the space back by itself."
+    },
+    {
+      "id": "messages",
+      "path": "~/Library/Messages",
+      "app": "Messages",
+      "level": "yours",
+      "why": "your messages and their attachments",
+      "advice": "Messages → Settings → General → Keep messages, or System Settings → General → Storage → Messages to review big attachments."
+    },
+    {
+      "id": "mail",
+      "path": "~/Library/Containers/com.apple.mail",
+      "app": "Mail",
+      "level": "yours",
+      "why": "your mail and its attachments",
+      "advice": "Mail → Settings → General → Remove unedited downloads."
+    },
+    {
+      "id": "photos",
+      "path": "~/Pictures/*.photoslibrary",
+      "app": "Photos",
+      "level": "yours",
+      "why": "your photo library",
+      "advice": "Photos → Settings → iCloud → Optimise Mac Storage keeps full-size originals in iCloud only."
+    },
+    {
+      "id": "iphone-backups",
+      "path": "~/Library/Application Support/MobileSync/Backup",
+      "app": "Finder",
+      "level": "yours",
+      "why": "backups of your iPhone or iPad",
+      "advice": "Finder → your iPhone → Manage Backups to delete old ones."
+    }
+  ]
+}
