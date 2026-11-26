@@ -64,6 +64,9 @@ blockquote{margin:16px 0;padding:4px 16px;border-left:3px solid var(--pc);color:
 <p class="eyebrow">Warden for Mac</p>
 <h1>Warden changelog</h1>
 <p>Every release, newest first. Download: <a href="https://istari-ai.dev/warden/" rel="noopener">istari-ai.dev/warden</a>. Installed copies update themselves.</p>
+<h2 id="unreleased-130"><a class="anchor" href="#unreleased-130" aria-hidden="true" tabindex="-1">#</a>Unreleased (1.3.0)</h2>
+<h2 id="122-26-november-2026"><a class="anchor" href="#122-26-november-2026" aria-hidden="true" tabindex="-1">#</a>1.2.2 · 26 November 2026</h2>
+<ul><li>Removing a merged worktree moves files git ignores, like .env or output/, to the Trash; its code stays in git.</li><li>Warden empties what it put in the Trash after 30 days (7 when the disk is nearly full), with a notice first.</li><li>A worktree a program has files open in, or one of Warden&#39;s services runs from, is never removed.</li></ul>
 <h2 id="121-23-november-2026"><a class="anchor" href="#121-23-november-2026" aria-hidden="true" tabindex="-1">#</a>1.2.1 · 23 November 2026</h2>
 <ul><li>AI Agents opens in seconds, even with tens of thousands of conversations.</li><li>Conversations in every Claude Code config folder are listed, not only <code>~/.claude</code>.</li><li>Resume uses the right config folder.</li><li>Claude Code&#39;s own cleanup setting is read per config folder.</li><li>Each tool&#39;s sessions appear as soon as they&#39;re read.</li><li>Big folders list the newest 300 conversations, with Show all and search.</li><li>Folders on a network share no longer hold up the session list.</li><li>Services: &quot;Nothing on watch yet&quot; is centred.</li></ul>
 <h2 id="120-23-november-2026"><a class="anchor" href="#120-23-november-2026" aria-hidden="true" tabindex="-1">#</a>1.2.0 · 23 November 2026</h2>
